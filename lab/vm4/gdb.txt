@@ -1,0 +1,84 @@
+Remote 'g' packet reply is too long: 0000000000000000606fd181ffffffff0000000000000001000000000000000000000000000000000000000000000000983ec081ffffffff983ec081ffffffff00000000000000000000000000000000c001c100fc68ffdf00000000000000000000000000000000edffffff00000000c082de81ffffffff0000c081ffffffff16500581ffffffff4602000010000000180000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007f03000000000000000000000000000000000000000000000000000000000000616b616e6b73686140766d343a7e2420ffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000696e636c75646500627974652d6f7269404040404040404040404040404040405b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b2020202020202020202020202020202000000000000000000000000000000000ffffffffffffffffffffffffffffffff00000000000000000000000000000000ff00000000000000ff00000000ff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000801f0000
+A debugging session is active.
+
+	Inferior 1 [Remote target] will be killed.
+
+Quit anyway? (y or n) Remote debugging using localhost:1234
+native_safe_halt () at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/arch/x86/include/asm/irqflags.h:50
+50	}
+Function "sys_ececve" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) Breakpoint 1 at 0xffffffff811d5910: file /home/akanksha/lab/kernel/host_sata/linux-3.16.2/fs/exec.c, line 1603.
+Breakpoint 2 at 0xffffffff811cd0e0: file /home/akanksha/lab/kernel/host_sata/linux-3.16.2/fs/open.c, line 992.
+Continuing.
+
+Breakpoint 1, SyS_execve (filename=7913224, argv=7912232, envp=7896584) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/fs/exec.c:1603
+1603	SYSCALL_DEFINE3(execve,
+$1 = 555
+$2 = "bash\000\000r/0\000\000\000\000\000\000"
+Continuing.
+
+Breakpoint 2, SyS_open (filename=139992711345572, flags=524288, mode=1) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/fs/open.c:992
+992	SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t, mode)
+$3 = 555
+$4 = "debugger\000\000\000\000\000\000\000"
+Breakpoint 3 at 0xffffffff81729289: file /home/akanksha/lab/kernel/host_sata/linux-3.16.2/arch/x86/include/asm/spinlock.h, line 86.
+Continuing.
+Error in testing breakpoint condition:
+Cannot access memory at address 0x3ec
+
+Breakpoint 3, _raw_spin_lock (lock=0xffff880007c0e160) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/locking/spinlock.c:151
+151		__raw_spin_lock(lock);
+#0  _raw_spin_lock (lock=0xffff880007c0e160) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/locking/spinlock.c:151
+#1  0xffffffff810933dd in hrtimer_interrupt (dev=<optimized out>) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/hrtimer.c:1303
+#2  0xffffffff81046c97 in local_apic_timer_interrupt () at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/arch/x86/kernel/apic/apic.c:920
+#3  0xffffffff8172c69f in smp_apic_timer_interrupt (regs=<optimized out>)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/arch/x86/kernel/apic/apic.c:944
+#4  <signal handler called>
+#5  0xffffffffffffff10 in ?? ()
+Cannot access memory at address 0x287
+Continuing.
+Error in testing breakpoint condition:
+Cannot access memory at address 0x3ec
+
+Breakpoint 3, _raw_spin_lock (lock=0xffffffff81c0c184 <jiffies_lock+4>)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/locking/spinlock.c:151
+151		__raw_spin_lock(lock);
+#0  _raw_spin_lock (lock=0xffffffff81c0c184 <jiffies_lock+4>)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/locking/spinlock.c:151
+#1  0xffffffff810de9c4 in spin_lock (lock=<optimized out>) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/include/linux/spinlock.h:303
+#2  write_seqlock (sl=<optimized out>) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/include/linux/seqlock.h:300
+#3  tick_do_update_jiffies64 (now=...) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/time/tick-sched.c:65
+#4  0xffffffff810dea95 in tick_sched_do_timer (now=...) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/time/tick-sched.c:131
+#5  0xffffffff810dedda in tick_sched_timer (timer=0xffff880007c0eb00)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/time/tick-sched.c:1077
+#6  0xffffffff81093097 in __run_hrtimer (timer=0xffffffff81c0c184 <jiffies_lock+4>, now=0xca9acacc)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/hrtimer.c:1268
+#7  0xffffffff8109347f in hrtimer_interrupt (dev=<optimized out>) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/hrtimer.c:1357
+#8  0xffffffff81046c97 in local_apic_timer_interrupt () at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/arch/x86/kernel/apic/apic.c:920
+#9  0xffffffff8172c69f in smp_apic_timer_interrupt (regs=<optimized out>)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/arch/x86/kernel/apic/apic.c:944
+#10 <signal handler called>
+#11 0xffffffffffffff10 in ?? ()
+Cannot access memory at address 0x287
+Continuing.
+Error in testing breakpoint condition:
+Cannot access memory at address 0x3ec
+
+Breakpoint 3, _raw_spin_lock (lock=0xffff880007c14380) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/locking/spinlock.c:151
+151		__raw_spin_lock(lock);
+#0  _raw_spin_lock (lock=0xffff880007c14380) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/locking/spinlock.c:151
+#1  0xffffffff8109e542 in scheduler_tick () at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/sched/core.c:2501
+#2  0xffffffff8107b070 in update_process_times (user_tick=0) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/timer.c:1389
+#3  0xffffffff810ded75 in tick_sched_handle (regs=0xe8778e894, ts=<optimized out>, ts=<optimized out>)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/time/tick-sched.c:151
+#4  0xffffffff810dedf1 in tick_sched_timer (timer=0xffff880007c0eb00)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/time/tick-sched.c:1084
+#5  0xffffffff81093097 in __run_hrtimer (timer=0xffff880007c14380, now=0xe89f131d9)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/hrtimer.c:1268
+#6  0xffffffff8109347f in hrtimer_interrupt (dev=<optimized out>) at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/kernel/hrtimer.c:1357
+#7  0xffffffff81046c97 in local_apic_timer_interrupt () at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/arch/x86/kernel/apic/apic.c:920
+#8  0xffffffff8172c69f in smp_apic_timer_interrupt (regs=<optimized out>)
+    at /home/akanksha/lab/kernel/host_sata/linux-3.16.2/arch/x86/kernel/apic/apic.c:944
+#9  <signal handler called>
+#10 0xffffffffffffff10 in ?? ()
+Cannot access memory at address 0x287
