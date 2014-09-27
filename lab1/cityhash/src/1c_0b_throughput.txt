@@ -1,0 +1,31 @@
+0
+time taken 2.90806
+Clone:14053 ended
+0
+time taken 2.89996
+Clone:14057 ended
+0
+time taken 2.92794
+Clone:14061 ended
+0
+time taken 2.91208
+Clone:14065 ended
+0
+time taken 2.92729
+Clone:14069 ended
+0
+time taken 2.90528
+Clone:14073 ended
+0
+time taken 2.90779
+Clone:14078 ended
+0
+time taken 2.87943
+Clone:14082 ended
+0
+time taken 2.89724
+Clone:14086 ended
+0
+time taken 2.89198
+Clone:14090 ended
+0

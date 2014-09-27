@@ -1,0 +1,60 @@
+time taken 3.08664
+time taken 2.88377
+time taken 2.94342
+time taken 3.33516
+time taken 2.94868
+time taken 3.23716
+time taken 2.94421
+time taken 2.90086
+time taken 3.25895
+time taken 2.95876
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 12.7831
+time taken 15.6727
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 20.3785
+time taken 20.6965
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 17.8397
+time taken 23.4314
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 19.4566
+time taken 21.1479
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 19.6064
+time taken 21.1172
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 18.2355
+time taken 22.3632
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 19.5918
+time taken 20.9883
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 18.543
+time taken 21.7861
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 18.4172
+time taken 21.9249
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 24.5444
+time taken 27.7731
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1

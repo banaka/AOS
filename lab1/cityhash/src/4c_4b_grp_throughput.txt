@@ -1,0 +1,704 @@
+
+echo 16597>> /sys/fs/cgroup/lab/tasks
+
+echo 16599>> /sys/fs/cgroup/lab/tasks
+
+echo 16601>> /sys/fs/cgroup/lab/tasks
+
+echo 16603>> /sys/fs/cgroup/lab/tasks
+
+echo 16611>> /sys/fs/cgroup/lab/tasks
+
+echo 16613>> /sys/fs/cgroup/lab/tasks
+
+echo 16615>> /sys/fs/cgroup/lab/tasks
+
+echo 16617>> /sys/fs/cgroup/lab/tasks
+
+echo 16625>> /sys/fs/cgroup/lab/tasks
+
+echo 16627>> /sys/fs/cgroup/lab/tasks
+
+echo 16629>> /sys/fs/cgroup/lab/tasks
+
+echo 16631>> /sys/fs/cgroup/lab/tasks
+
+echo 16639>> /sys/fs/cgroup/lab/tasks
+
+echo 16641>> /sys/fs/cgroup/lab/tasks
+
+echo 16643>> /sys/fs/cgroup/lab/tasks
+
+echo 16645>> /sys/fs/cgroup/lab/tasks
+
+echo 16653>> /sys/fs/cgroup/lab/tasks
+
+echo 16655>> /sys/fs/cgroup/lab/tasks
+
+echo 16657>> /sys/fs/cgroup/lab/tasks
+
+echo 16659>> /sys/fs/cgroup/lab/tasks
+
+echo 16667>> /sys/fs/cgroup/lab/tasks
+
+echo 16669>> /sys/fs/cgroup/lab/tasks
+
+echo 16671>> /sys/fs/cgroup/lab/tasks
+
+echo 16673>> /sys/fs/cgroup/lab/tasks
+
+echo 16681>> /sys/fs/cgroup/lab/tasks
+
+echo 16683>> /sys/fs/cgroup/lab/tasks
+
+echo 16685>> /sys/fs/cgroup/lab/tasks
+
+echo 16687>> /sys/fs/cgroup/lab/tasks
+
+echo 16695>> /sys/fs/cgroup/lab/tasks
+
+echo 16697>> /sys/fs/cgroup/lab/tasks
+
+echo 16699>> /sys/fs/cgroup/lab/tasks
+
+echo 16701>> /sys/fs/cgroup/lab/tasks
+
+echo 16709>> /sys/fs/cgroup/lab/tasks
+
+echo 16711>> /sys/fs/cgroup/lab/tasks
+
+echo 16713>> /sys/fs/cgroup/lab/tasks
+
+echo 16715>> /sys/fs/cgroup/lab/tasks
+time taken 6.13437
+time taken 6.16504
+time taken 6.30344
+time taken 6.3165
+
+echo 16722>> /sys/fs/cgroup/lab/tasks
+
+echo 16724>> /sys/fs/cgroup/lab/tasks
+
+echo 16726>> /sys/fs/cgroup/lab/tasks
+
+echo 16728>> /sys/fs/cgroup/lab/tasks
+
+echo 16736>> /sys/fs/cgroup/lab/tasks
+
+echo 16738>> /sys/fs/cgroup/lab/tasks
+
+echo 16740>> /sys/fs/cgroup/lab/tasks
+
+echo 16742>> /sys/fs/cgroup/lab/tasks
+
+echo 16750>> /sys/fs/cgroup/lab/tasks
+
+echo 16752>> /sys/fs/cgroup/lab/tasks
+
+echo 16754>> /sys/fs/cgroup/lab/tasks
+
+echo 16756>> /sys/fs/cgroup/lab/tasks
+
+echo 16764>> /sys/fs/cgroup/lab/tasks
+
+echo 16766>> /sys/fs/cgroup/lab/tasks
+
+echo 16768>> /sys/fs/cgroup/lab/tasks
+
+echo 16770>> /sys/fs/cgroup/lab/tasks
+
+echo 16778>> /sys/fs/cgroup/lab/tasks
+
+echo 16780>> /sys/fs/cgroup/lab/tasks
+
+echo 16782>> /sys/fs/cgroup/lab/tasks
+
+echo 16784>> /sys/fs/cgroup/lab/tasks
+
+echo 16792>> /sys/fs/cgroup/lab/tasks
+
+echo 16794>> /sys/fs/cgroup/lab/tasks
+
+echo 16796>> /sys/fs/cgroup/lab/tasks
+
+echo 16798>> /sys/fs/cgroup/lab/tasks
+
+echo 16806>> /sys/fs/cgroup/lab/tasks
+
+echo 16808>> /sys/fs/cgroup/lab/tasks
+
+echo 16810>> /sys/fs/cgroup/lab/tasks
+
+echo 16812>> /sys/fs/cgroup/lab/tasks
+
+echo 16820>> /sys/fs/cgroup/lab/tasks
+
+echo 16822>> /sys/fs/cgroup/lab/tasks
+
+echo 16824>> /sys/fs/cgroup/lab/tasks
+
+echo 16826>> /sys/fs/cgroup/lab/tasks
+
+echo 16834>> /sys/fs/cgroup/lab/tasks
+
+echo 16836>> /sys/fs/cgroup/lab/tasks
+
+echo 16838>> /sys/fs/cgroup/lab/tasks
+
+echo 16840>> /sys/fs/cgroup/lab/tasks
+
+echo 16848>> /sys/fs/cgroup/lab/tasks
+
+echo 16850>> /sys/fs/cgroup/lab/tasks
+
+echo 16852>> /sys/fs/cgroup/lab/tasks
+
+echo 16854>> /sys/fs/cgroup/lab/tasks
+
+echo 16862>> /sys/fs/cgroup/lab/tasks
+
+echo 16864>> /sys/fs/cgroup/lab/tasks
+
+echo 16866>> /sys/fs/cgroup/lab/tasks
+
+echo 16868>> /sys/fs/cgroup/lab/tasks
+
+echo 16876>> /sys/fs/cgroup/lab/tasks
+
+echo 16878>> /sys/fs/cgroup/lab/tasks
+
+echo 16880>> /sys/fs/cgroup/lab/tasks
+
+echo 16882>> /sys/fs/cgroup/lab/tasks
+
+echo 16890>> /sys/fs/cgroup/lab/tasks
+
+echo 16892>> /sys/fs/cgroup/lab/tasks
+
+echo 16894>> /sys/fs/cgroup/lab/tasks
+
+echo 16896>> /sys/fs/cgroup/lab/tasks
+
+echo 16904>> /sys/fs/cgroup/lab/tasks
+
+echo 16906>> /sys/fs/cgroup/lab/tasks
+
+echo 16908>> /sys/fs/cgroup/lab/tasks
+
+echo 16910>> /sys/fs/cgroup/lab/tasks
+
+echo 16918>> /sys/fs/cgroup/lab/tasks
+
+echo 16920>> /sys/fs/cgroup/lab/tasks
+
+echo 16922>> /sys/fs/cgroup/lab/tasks
+
+echo 16924>> /sys/fs/cgroup/lab/tasks
+
+echo 16932>> /sys/fs/cgroup/lab/tasks
+
+echo 16934>> /sys/fs/cgroup/lab/tasks
+
+echo 16936>> /sys/fs/cgroup/lab/tasks
+
+echo 16938>> /sys/fs/cgroup/lab/tasks
+
+echo 16946>> /sys/fs/cgroup/lab/tasks
+
+echo 16948>> /sys/fs/cgroup/lab/tasks
+
+echo 16950>> /sys/fs/cgroup/lab/tasks
+
+echo 16952>> /sys/fs/cgroup/lab/tasks
+
+echo 16960>> /sys/fs/cgroup/lab/tasks
+
+echo 16962>> /sys/fs/cgroup/lab/tasks
+
+echo 16964>> /sys/fs/cgroup/lab/tasks
+
+echo 16966>> /sys/fs/cgroup/lab/tasks
+
+echo 16974>> /sys/fs/cgroup/lab/tasks
+
+echo 16976>> /sys/fs/cgroup/lab/tasks
+
+echo 16978>> /sys/fs/cgroup/lab/tasks
+
+echo 16980>> /sys/fs/cgroup/lab/tasks
+
+echo 16988>> /sys/fs/cgroup/lab/tasks
+
+echo 16990>> /sys/fs/cgroup/lab/tasks
+
+echo 16992>> /sys/fs/cgroup/lab/tasks
+
+echo 16994>> /sys/fs/cgroup/lab/tasks
+
+echo 17002>> /sys/fs/cgroup/lab/tasks
+
+echo 17004>> /sys/fs/cgroup/lab/tasks
+
+echo 17006>> /sys/fs/cgroup/lab/tasks
+
+echo 17008>> /sys/fs/cgroup/lab/tasks
+
+echo 17016>> /sys/fs/cgroup/lab/tasks
+
+echo 17018>> /sys/fs/cgroup/lab/tasks
+
+echo 17020>> /sys/fs/cgroup/lab/tasks
+
+echo 17022>> /sys/fs/cgroup/lab/tasks
+
+echo 17030>> /sys/fs/cgroup/lab/tasks
+
+echo 17032>> /sys/fs/cgroup/lab/tasks
+
+echo 17034>> /sys/fs/cgroup/lab/tasks
+
+echo 17036>> /sys/fs/cgroup/lab/tasks
+
+echo 17044>> /sys/fs/cgroup/lab/tasks
+
+echo 17046>> /sys/fs/cgroup/lab/tasks
+
+echo 17048>> /sys/fs/cgroup/lab/tasks
+
+echo 17050>> /sys/fs/cgroup/lab/tasks
+
+echo 17058>> /sys/fs/cgroup/lab/tasks
+
+echo 17060>> /sys/fs/cgroup/lab/tasks
+
+echo 17062>> /sys/fs/cgroup/lab/tasks
+
+echo 17064>> /sys/fs/cgroup/lab/tasks
+
+echo 17072>> /sys/fs/cgroup/lab/tasks
+
+echo 17074>> /sys/fs/cgroup/lab/tasks
+
+echo 17076>> /sys/fs/cgroup/lab/tasks
+
+echo 17078>> /sys/fs/cgroup/lab/tasks
+time taken 6.12967
+time taken 6.12341
+time taken 6.48176
+time taken 6.48668
+
+echo 17085>> /sys/fs/cgroup/lab/tasks
+
+echo 17087>> /sys/fs/cgroup/lab/tasks
+
+echo 17089>> /sys/fs/cgroup/lab/tasks
+
+echo 17091>> /sys/fs/cgroup/lab/tasks
+
+echo 17099>> /sys/fs/cgroup/lab/tasks
+
+echo 17101>> /sys/fs/cgroup/lab/tasks
+
+echo 17103>> /sys/fs/cgroup/lab/tasks
+
+echo 17105>> /sys/fs/cgroup/lab/tasks
+time taken 6.23575
+time taken 6.22946
+time taken 6.41564
+time taken 6.41192
+
+echo 17112>> /sys/fs/cgroup/lab/tasks
+
+echo 17114>> /sys/fs/cgroup/lab/tasks
+
+echo 17116>> /sys/fs/cgroup/lab/tasks
+
+echo 17118>> /sys/fs/cgroup/lab/tasks
+
+echo 17126>> /sys/fs/cgroup/lab/tasks
+
+echo 17128>> /sys/fs/cgroup/lab/tasks
+
+echo 17130>> /sys/fs/cgroup/lab/tasks
+
+echo 17132>> /sys/fs/cgroup/lab/tasks
+
+echo 17140>> /sys/fs/cgroup/lab/tasks
+
+echo 17142>> /sys/fs/cgroup/lab/tasks
+
+echo 17144>> /sys/fs/cgroup/lab/tasks
+
+echo 17146>> /sys/fs/cgroup/lab/tasks
+
+echo 17154>> /sys/fs/cgroup/lab/tasks
+
+echo 17156>> /sys/fs/cgroup/lab/tasks
+
+echo 17158>> /sys/fs/cgroup/lab/tasks
+
+echo 17160>> /sys/fs/cgroup/lab/tasks
+
+echo 17168>> /sys/fs/cgroup/lab/tasks
+
+echo 17170>> /sys/fs/cgroup/lab/tasks
+
+echo 17172>> /sys/fs/cgroup/lab/tasks
+
+echo 17174>> /sys/fs/cgroup/lab/tasks
+
+echo 17182>> /sys/fs/cgroup/lab/tasks
+
+echo 17184>> /sys/fs/cgroup/lab/tasks
+
+echo 17186>> /sys/fs/cgroup/lab/tasks
+
+echo 17188>> /sys/fs/cgroup/lab/tasks
+
+echo 17196>> /sys/fs/cgroup/lab/tasks
+
+echo 17198>> /sys/fs/cgroup/lab/tasks
+
+echo 17200>> /sys/fs/cgroup/lab/tasks
+
+echo 17202>> /sys/fs/cgroup/lab/tasks
+
+echo 17210>> /sys/fs/cgroup/lab/tasks
+
+echo 17212>> /sys/fs/cgroup/lab/tasks
+
+echo 17214>> /sys/fs/cgroup/lab/tasks
+
+echo 17216>> /sys/fs/cgroup/lab/tasks
+
+echo 17224>> /sys/fs/cgroup/lab/tasks
+
+echo 17226>> /sys/fs/cgroup/lab/tasks
+
+echo 17228>> /sys/fs/cgroup/lab/tasks
+
+echo 17230>> /sys/fs/cgroup/lab/tasks
+
+echo 17238>> /sys/fs/cgroup/lab/tasks
+
+echo 17240>> /sys/fs/cgroup/lab/tasks
+
+echo 17242>> /sys/fs/cgroup/lab/tasks
+
+echo 17244>> /sys/fs/cgroup/lab/tasks
+
+echo 17252>> /sys/fs/cgroup/lab/tasks
+
+echo 17254>> /sys/fs/cgroup/lab/tasks
+
+echo 17256>> /sys/fs/cgroup/lab/tasks
+
+echo 17258>> /sys/fs/cgroup/lab/tasks
+
+echo 17266>> /sys/fs/cgroup/lab/tasks
+
+echo 17268>> /sys/fs/cgroup/lab/tasks
+
+echo 17270>> /sys/fs/cgroup/lab/tasks
+
+echo 17272>> /sys/fs/cgroup/lab/tasks
+
+echo 17280>> /sys/fs/cgroup/lab/tasks
+
+echo 17282>> /sys/fs/cgroup/lab/tasks
+
+echo 17284>> /sys/fs/cgroup/lab/tasks
+
+echo 17286>> /sys/fs/cgroup/lab/tasks
+
+echo 17294>> /sys/fs/cgroup/lab/tasks
+
+echo 17296>> /sys/fs/cgroup/lab/tasks
+
+echo 17298>> /sys/fs/cgroup/lab/tasks
+
+echo 17300>> /sys/fs/cgroup/lab/tasks
+
+echo 17308>> /sys/fs/cgroup/lab/tasks
+
+echo 17310>> /sys/fs/cgroup/lab/tasks
+
+echo 17312>> /sys/fs/cgroup/lab/tasks
+
+echo 17314>> /sys/fs/cgroup/lab/tasks
+
+echo 17322>> /sys/fs/cgroup/lab/tasks
+
+echo 17324>> /sys/fs/cgroup/lab/tasks
+
+echo 17326>> /sys/fs/cgroup/lab/tasks
+
+echo 17328>> /sys/fs/cgroup/lab/tasks
+
+echo 17336>> /sys/fs/cgroup/lab/tasks
+
+echo 17338>> /sys/fs/cgroup/lab/tasks
+
+echo 17340>> /sys/fs/cgroup/lab/tasks
+
+echo 17342>> /sys/fs/cgroup/lab/tasks
+
+echo 17350>> /sys/fs/cgroup/lab/tasks
+
+echo 17352>> /sys/fs/cgroup/lab/tasks
+
+echo 17354>> /sys/fs/cgroup/lab/tasks
+
+echo 17356>> /sys/fs/cgroup/lab/tasks
+
+echo 17364>> /sys/fs/cgroup/lab/tasks
+
+echo 17366>> /sys/fs/cgroup/lab/tasks
+
+echo 17368>> /sys/fs/cgroup/lab/tasks
+
+echo 17370>> /sys/fs/cgroup/lab/tasks
+
+echo 17378>> /sys/fs/cgroup/lab/tasks
+
+echo 17380>> /sys/fs/cgroup/lab/tasks
+
+echo 17382>> /sys/fs/cgroup/lab/tasks
+
+echo 17384>> /sys/fs/cgroup/lab/tasks
+
+echo 17392>> /sys/fs/cgroup/lab/tasks
+
+echo 17394>> /sys/fs/cgroup/lab/tasks
+
+echo 17396>> /sys/fs/cgroup/lab/tasks
+
+echo 17398>> /sys/fs/cgroup/lab/tasks
+
+echo 17406>> /sys/fs/cgroup/lab/tasks
+
+echo 17408>> /sys/fs/cgroup/lab/tasks
+
+echo 17410>> /sys/fs/cgroup/lab/tasks
+
+echo 17412>> /sys/fs/cgroup/lab/tasks
+time taken 5.91527
+time taken 5.92095
+time taken 6.58612
+time taken 6.59339
+
+echo 17419>> /sys/fs/cgroup/lab/tasks
+
+echo 17421>> /sys/fs/cgroup/lab/tasks
+
+echo 17423>> /sys/fs/cgroup/lab/tasks
+
+echo 17425>> /sys/fs/cgroup/lab/tasks
+
+echo 17433>> /sys/fs/cgroup/lab/tasks
+
+echo 17435>> /sys/fs/cgroup/lab/tasks
+
+echo 17437>> /sys/fs/cgroup/lab/tasks
+
+echo 17439>> /sys/fs/cgroup/lab/tasks
+
+echo 17448>> /sys/fs/cgroup/lab/tasks
+
+echo 17450>> /sys/fs/cgroup/lab/tasks
+
+echo 17452>> /sys/fs/cgroup/lab/tasks
+
+echo 17454>> /sys/fs/cgroup/lab/tasks
+
+echo 17462>> /sys/fs/cgroup/lab/tasks
+
+echo 17464>> /sys/fs/cgroup/lab/tasks
+
+echo 17466>> /sys/fs/cgroup/lab/tasks
+
+echo 17468>> /sys/fs/cgroup/lab/tasks
+time taken 5.80808
+time taken 5.8134
+time taken 6.45156
+time taken 6.49777
+
+echo 17475>> /sys/fs/cgroup/lab/tasks
+
+echo 17477>> /sys/fs/cgroup/lab/tasks
+
+echo 17479>> /sys/fs/cgroup/lab/tasks
+
+echo 17481>> /sys/fs/cgroup/lab/tasks
+
+echo 17489>> /sys/fs/cgroup/lab/tasks
+
+echo 17491>> /sys/fs/cgroup/lab/tasks
+
+echo 17493>> /sys/fs/cgroup/lab/tasks
+
+echo 17495>> /sys/fs/cgroup/lab/tasks
+
+echo 17503>> /sys/fs/cgroup/lab/tasks
+
+echo 17505>> /sys/fs/cgroup/lab/tasks
+
+echo 17507>> /sys/fs/cgroup/lab/tasks
+
+echo 17509>> /sys/fs/cgroup/lab/tasks
+
+echo 17517>> /sys/fs/cgroup/lab/tasks
+
+echo 17519>> /sys/fs/cgroup/lab/tasks
+
+echo 17521>> /sys/fs/cgroup/lab/tasks
+
+echo 17523>> /sys/fs/cgroup/lab/tasks
+
+echo 17531>> /sys/fs/cgroup/lab/tasks
+
+echo 17533>> /sys/fs/cgroup/lab/tasks
+
+echo 17535>> /sys/fs/cgroup/lab/tasks
+
+echo 17537>> /sys/fs/cgroup/lab/tasks
+time taken 5.92665
+time taken 6.00045
+time taken 6.44515
+time taken 6.45244
+
+echo 17544>> /sys/fs/cgroup/lab/tasks
+
+echo 17546>> /sys/fs/cgroup/lab/tasks
+
+echo 17548>> /sys/fs/cgroup/lab/tasks
+
+echo 17550>> /sys/fs/cgroup/lab/tasks
+
+echo 17558>> /sys/fs/cgroup/lab/tasks
+
+echo 17560>> /sys/fs/cgroup/lab/tasks
+
+echo 17562>> /sys/fs/cgroup/lab/tasks
+
+echo 17564>> /sys/fs/cgroup/lab/tasks
+
+echo 17572>> /sys/fs/cgroup/lab/tasks
+
+echo 17574>> /sys/fs/cgroup/lab/tasks
+
+echo 17576>> /sys/fs/cgroup/lab/tasks
+
+echo 17578>> /sys/fs/cgroup/lab/tasks
+
+echo 17587>> /sys/fs/cgroup/lab/tasks
+
+echo 17589>> /sys/fs/cgroup/lab/tasks
+
+echo 17591>> /sys/fs/cgroup/lab/tasks
+
+echo 17593>> /sys/fs/cgroup/lab/tasks
+
+echo 17601>> /sys/fs/cgroup/lab/tasks
+
+echo 17603>> /sys/fs/cgroup/lab/tasks
+
+echo 17605>> /sys/fs/cgroup/lab/tasks
+
+echo 17607>> /sys/fs/cgroup/lab/tasks
+
+echo 17615>> /sys/fs/cgroup/lab/tasks
+
+echo 17617>> /sys/fs/cgroup/lab/tasks
+
+echo 17619>> /sys/fs/cgroup/lab/tasks
+
+echo 17621>> /sys/fs/cgroup/lab/tasks
+
+echo 17629>> /sys/fs/cgroup/lab/tasks
+
+echo 17631>> /sys/fs/cgroup/lab/tasks
+
+echo 17633>> /sys/fs/cgroup/lab/tasks
+
+echo 17635>> /sys/fs/cgroup/lab/tasks
+
+echo 17643>> /sys/fs/cgroup/lab/tasks
+
+echo 17645>> /sys/fs/cgroup/lab/tasks
+
+echo 17647>> /sys/fs/cgroup/lab/tasks
+
+echo 17649>> /sys/fs/cgroup/lab/tasks
+
+echo 17657>> /sys/fs/cgroup/lab/tasks
+
+echo 17659>> /sys/fs/cgroup/lab/tasks
+
+echo 17661>> /sys/fs/cgroup/lab/tasks
+
+echo 17663>> /sys/fs/cgroup/lab/tasks
+
+echo 17671>> /sys/fs/cgroup/lab/tasks
+
+echo 17673>> /sys/fs/cgroup/lab/tasks
+
+echo 17675>> /sys/fs/cgroup/lab/tasks
+
+echo 17677>> /sys/fs/cgroup/lab/tasks
+
+echo 17685>> /sys/fs/cgroup/lab/tasks
+
+echo 17687>> /sys/fs/cgroup/lab/tasks
+
+echo 17689>> /sys/fs/cgroup/lab/tasks
+
+echo 17691>> /sys/fs/cgroup/lab/tasks
+
+echo 17699>> /sys/fs/cgroup/lab/tasks
+
+echo 17701>> /sys/fs/cgroup/lab/tasks
+
+echo 17703>> /sys/fs/cgroup/lab/tasks
+
+echo 17705>> /sys/fs/cgroup/lab/tasks
+
+echo 17713>> /sys/fs/cgroup/lab/tasks
+
+echo 17715>> /sys/fs/cgroup/lab/tasks
+
+echo 17717>> /sys/fs/cgroup/lab/tasks
+
+echo 17719>> /sys/fs/cgroup/lab/tasks
+
+echo 17727>> /sys/fs/cgroup/lab/tasks
+
+echo 17729>> /sys/fs/cgroup/lab/tasks
+
+echo 17731>> /sys/fs/cgroup/lab/tasks
+
+echo 17733>> /sys/fs/cgroup/lab/tasks
+
+echo 17741>> /sys/fs/cgroup/lab/tasks
+
+echo 17743>> /sys/fs/cgroup/lab/tasks
+
+echo 17745>> /sys/fs/cgroup/lab/tasks
+
+echo 17747>> /sys/fs/cgroup/lab/tasks
+
+echo 17755>> /sys/fs/cgroup/lab/tasks
+
+echo 17757>> /sys/fs/cgroup/lab/tasks
+
+echo 17759>> /sys/fs/cgroup/lab/tasks
+
+echo 17761>> /sys/fs/cgroup/lab/tasks
+
+echo 17769>> /sys/fs/cgroup/lab/tasks
+
+echo 17771>> /sys/fs/cgroup/lab/tasks
+
+echo 17773>> /sys/fs/cgroup/lab/tasks
+
+echo 17775>> /sys/fs/cgroup/lab/tasks

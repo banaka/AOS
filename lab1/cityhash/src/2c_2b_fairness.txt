@@ -1,0 +1,134 @@
+created background 14371
+created background 14372
+0
+Count of Cycles 107616
+Clone:14373 ended
+Count of Cycles 109889
+Clone:14374 ended
+
+Killed background : 0
+Killed background : 1created background 14378
+created background 14379
+0
+Count of Cycles 134539
+Count of Cycles 134539
+Count of Cycles 139071
+Clone:14380 ended
+Clone:14381 ended
+
+Killed background : 0
+Killed background : 1created background 14385
+created background 14386
+0
+Count of Cycles 136697
+Count of Cycles 136595
+Clone:14387 ended
+Clone:14388 ended
+
+Killed background : 0
+Killed background : 1created background 14392
+created background 14393
+0
+Count of Cycles 134741
+Clone:14394 ended
+Count of Cycles 136113
+Clone:14395 ended
+
+Killed background : 0
+Killed background : 1created background 14399
+created background 14400
+0
+Count of Cycles 136138
+Count of Cycles 134909
+Clone:14401 ended
+Clone:14402 ended
+
+Killed background : 0
+Killed background : 1created background 14406
+created background 14407
+0
+Count of Cycles 129192
+Count of Cycles 138145
+Clone:14408 ended
+Clone:14409 ended
+
+Killed background : 0
+Killed background : 1created background 14414
+created background 14415
+0
+Count of Cycles 138873
+Count of Cycles 137832
+Clone:14416 ended
+Clone:14417 ended
+
+Killed background : 0
+Killed background : 1created background 14421
+created background 14422
+0
+Count of Cycles 124936
+Count of Cycles 124614
+Clone:14423 ended
+Clone:14424 ended
+
+Killed background : 0
+Killed background : 1created background 14428
+created background 14429
+0
+Count of Cycles 148427
+Count of Cycles 140175
+Clone:14430 ended
+Clone:14431 ended
+
+Killed background : 0
+Killed background : 1created background 14435
+created background 14436
+0
+Count of Cycles Count of Cycles 144650
+created background 14443
+created background 14444
+0
+Count of Cycles 84107
+Count of Cycles 100382
+Clone:14445 ended
+Clone:14446 ended
+
+Killed background : 0
+Killed background : 1created background 14450
+created background 14451
+0
+Count of Cycles 90101
+Count of Cycles 90106
+Clone:14452 ended
+Clone:14453 ended
+
+Killed background : 0
+Killed background : 1created background 14457
+created background 14458
+0
+Count of Cycles 91051
+Count of Cycles 108221
+Clone:14459 ended
+Clone:14460 ended
+
+Killed background : 0
+Killed background : 1created background 14464
+created background 14465
+0
+Count of Cycles 87643
+Count of Cycles 91710
+Clone:14466 ended
+Clone:14467 ended
+
+Killed background : 0
+Killed background : 1created background 14471
+created background 14472
+0
+Count of Cycles 110162
+Clone:14473 ended
+Count of Cycles 108216
+Clone:14474 ended
+
+Killed background : 0
+Killed background : 1created background 14478
+created background 14479
+0

@@ -1,0 +1,12 @@
+time taken 12.8825
+time taken 15.5682
+time taken 14.229
+time taken 15.48
+time taken 14.2219
+time taken 14.7051
+time taken 14.6249
+time taken 14.9676
+time taken 13.6142
+time taken 14.9312
+time taken 12.4499
+time taken 15.6879

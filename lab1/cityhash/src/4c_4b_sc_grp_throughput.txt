@@ -1,0 +1,1596 @@
+sched_affinity: 0 set for Core 0
+
+echo 18715>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18717>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18719>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18721>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18729>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18731>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18733>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18735>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18743>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18745>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18747>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18749>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18757>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18759>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18761>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18763>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18771>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18773>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18775>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18777>> /sys/fs/cgroup/lab/tasks
+time taken 5.80351
+time taken 5.80785
+time taken 6.65498
+time taken 6.66886
+sched_affinity: 0 set for Core 0
+
+echo 18784>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18786>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18788>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18790>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18798>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18800>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18802>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18804>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18812>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18814>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18816>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18818>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18826>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18828>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18830>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18832>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18840>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18842>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18844>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18846>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18854>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18856>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18858>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18860>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18868>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18870>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18872>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18874>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18882>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18884>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18886>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18888>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18896>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18898>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18900>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18902>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18910>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18912>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18914>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18916>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18924>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18926>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18928>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18930>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18938>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18940>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18942>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18944>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18952>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18954>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18956>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18958>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18966>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18968>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18970>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18972>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18980>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18982>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18984>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18986>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18994>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 18996>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 18998>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19000>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19009>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19011>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19013>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19015>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19023>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19025>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19027>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19029>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19037>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19039>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19041>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19043>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19051>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19053>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19055>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19057>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19065>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19067>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19069>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19071>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19079>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19081>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19083>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19085>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19093>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19095>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19097>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19099>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19107>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19109>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19111>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19113>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19121>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19123>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19125>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19127>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19135>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19137>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19139>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19141>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19149>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19151>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19153>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19155>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19163>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19165>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19167>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19169>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19177>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19179>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19181>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19183>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19191>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19193>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19195>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19197>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19205>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19207>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19209>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19211>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19219>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19221>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19223>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19225>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19233>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19235>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19237>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19239>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19247>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19249>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19251>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19253>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19261>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19263>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19265>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19267>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19275>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19277>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19279>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19281>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19289>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19291>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19293>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19295>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19303>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19305>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19307>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19309>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19317>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19319>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19321>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19323>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19331>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19333>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19335>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19337>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19345>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19347>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19349>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19351>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19359>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19361>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19363>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19365>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19373>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19375>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19377>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19379>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19387>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19389>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19391>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19393>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19401>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19403>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19405>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19407>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19415>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19417>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19419>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19421>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19429>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19431>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19433>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19435>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19443>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19445>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19447>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19449>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19457>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19459>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19461>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19463>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19471>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19473>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19475>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19477>> /sys/fs/cgroup/lab/tasks
+time taken 6.14177
+time taken 6.1505
+time taken 6.48187
+time taken 6.49514
+sched_affinity: 0 set for Core 0
+
+echo 19484>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19486>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19488>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19490>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19498>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19500>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19502>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19504>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19512>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19514>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19516>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19518>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19526>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19528>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19530>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19532>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19540>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19542>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19544>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19546>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19554>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19556>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19558>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19560>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19568>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19570>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19572>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19574>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19582>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19584>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19586>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19588>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19596>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19598>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19600>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19602>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19610>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19612>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19614>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19616>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19624>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19626>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19628>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19630>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19638>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19640>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19642>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19644>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19652>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19654>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19656>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19658>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19666>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19668>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19670>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19672>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19680>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19683>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19685>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19687>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19696>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19698>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19700>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19702>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19710>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19712>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19714>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19716>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19725>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19728>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19730>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19732>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19740>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19742>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19744>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19746>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19754>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19756>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19758>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19760>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19768>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19770>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19772>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19774>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19782>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19784>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19786>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19788>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19796>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19798>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19800>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19802>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19810>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19812>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19814>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19816>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19824>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19826>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19828>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19830>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19838>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19840>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19842>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19844>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19852>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19854>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19856>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19858>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19866>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19868>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19870>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19872>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19880>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19882>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19884>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19886>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19894>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19896>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19898>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19900>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19908>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19910>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19912>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19914>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19922>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19924>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19926>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19928>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19936>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19938>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19940>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19942>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19950>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19952>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19954>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19956>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19964>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19966>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19968>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19970>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19978>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19980>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19982>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19984>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19992>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19994>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 19996>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 19998>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20006>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20008>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20010>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20012>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20020>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20022>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20024>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20026>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20034>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20036>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20038>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20040>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20048>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20050>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20052>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20054>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20062>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20064>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20066>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20068>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20076>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20078>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20080>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20082>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20090>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20092>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20094>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20096>> /sys/fs/cgroup/lab/tasks
+time taken 5.73883
+time taken 5.74583
+time taken 6.76371
+time taken 6.78735
+sched_affinity: 0 set for Core 0
+
+echo 20103>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20105>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20107>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20109>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20117>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20119>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20121>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20123>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20131>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20133>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20135>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20137>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20146>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20148>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20150>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20152>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20160>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20162>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20164>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20166>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20174>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20176>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20178>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20180>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20188>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20190>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20192>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20194>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20202>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20204>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20206>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20208>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20216>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20218>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20220>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20222>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20230>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20232>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20234>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20236>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20244>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20246>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20248>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20250>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20258>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20260>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20262>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20264>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20272>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20274>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20276>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20278>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20286>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20288>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20291>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20293>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20301>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20303>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20305>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20307>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20315>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20317>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20319>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20321>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20329>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20331>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20333>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20335>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20343>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20345>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20347>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20349>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20357>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20359>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20361>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20363>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20371>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20373>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20375>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20377>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20385>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20387>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20389>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20391>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20399>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20401>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20403>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20405>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20413>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20415>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20417>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20419>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20427>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20429>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20431>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20433>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20441>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20443>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20445>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20447>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20455>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20457>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20459>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20461>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20469>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20471>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20473>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20475>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20483>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20485>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20487>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20489>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20497>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20499>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20501>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20503>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20511>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20513>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20515>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20517>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20525>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20527>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20529>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20531>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20540>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20542>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20544>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20546>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20554>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20556>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 0
+
+echo 20558>> /sys/fs/cgroup/lab/tasks
+sched_affinity: 0 set for Core 1
+
+echo 20560>> /sys/fs/cgroup/lab/tasks

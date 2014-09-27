@@ -1,0 +1,102 @@
+created background 14178
+created background 14179
+0
+time taken 6.64865
+time taken 8.14205
+Clone:14180 ended
+Clone:14181 ended
+
+Killed background : 0
+Killed background : 1created background 14185
+created background 14186
+0
+time taken 7.44204
+time taken 7.67365
+Clone:14187 ended
+Clone:14188 ended
+
+Killed background : 0
+Killed background : 1created background 14192
+created background 14193
+0
+time taken 6.99928
+time taken 7.42075
+Clone:14194 ended
+Clone:14195 ended
+
+Killed background : 0
+Killed background : 1created background 14199
+created background 14200
+0
+time taken 7.48098
+time taken 7.50818
+Clone:14201 ended
+Clone:14202 ended
+
+Killed background : 0
+Killed background : 1created background 14206
+created background 14207
+0
+time taken 6.13694
+time taken 6.24115
+Clone:14208 ended
+Clone:14209 ended
+
+Killed background : 0
+Killed background : 1created background 14213
+created background 14214
+0
+time taken 7.15077
+time taken 7.21291
+Clone:14215 ended
+Clone:14216 ended
+
+Killed background : 0
+Killed background : 1created background 14220
+created background 14221
+0
+time taken 7.19051
+time taken 7.71793
+Clone:14222 ended
+Clone:14223 ended
+
+Killed background : 0
+Killed background : 1created background 14227
+created background 14228
+0
+time taken 7.50635
+time taken 8.05994
+Clone:14229 ended
+Clone:14230 ended
+
+Killed background : 0
+Killed background : 1created background 14234
+created background 14235
+0
+time taken 6.53999
+time taken 6.84321
+Clone:14236 ended
+Clone:14237 ended
+
+Killed background : 0
+Killed background : 1created background 14241
+created background 14242
+0
+time taken 7.2305
+time taken 7.37093
+Clone:14243 ended
+Clone:14244 ended
+
+Killed background : 0
+Killed background : 1created background 14248
+created background 14249
+0
+time taken 6.51231
+Clone:14250 ended
+time taken 7.16635
+Clone:14251 ended
+
+Killed background : 0
+Killed background : 1created background 14255
+created background 14256
+0

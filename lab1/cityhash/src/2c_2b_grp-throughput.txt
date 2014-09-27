@@ -1,0 +1,859 @@
+created background 14639
+created background 14640
+
+echo 14641>> /sys/fs/cgroup/lab/tasks
+
+echo 14643>> /sys/fs/cgroup/lab/tasks
+14641
+14643
+0
+created background 14649
+created background 14650
+
+echo 14651>> /sys/fs/cgroup/lab/tasks
+
+echo 14653>> /sys/fs/cgroup/lab/tasks
+14651
+14653
+0
+created background 14659
+created background 14660
+
+echo 14661>> /sys/fs/cgroup/lab/tasks
+
+echo 14663>> /sys/fs/cgroup/lab/tasks
+14661
+14663
+0
+created background 14669
+created background 14670
+
+echo 14671>> /sys/fs/cgroup/lab/tasks
+
+echo 14673>> /sys/fs/cgroup/lab/tasks
+14671
+14673
+0
+created background 14679
+created background 14680
+
+echo 14681>> /sys/fs/cgroup/lab/tasks
+
+echo 14683>> /sys/fs/cgroup/lab/tasks
+14681
+14683
+0
+created background 14689
+created background 14690
+
+echo 14691>> /sys/fs/cgroup/lab/tasks
+
+echo 14693>> /sys/fs/cgroup/lab/tasks
+14691
+14693
+0
+created background 14699
+created background 14700
+
+echo 14701>> /sys/fs/cgroup/lab/tasks
+
+echo 14703>> /sys/fs/cgroup/lab/tasks
+14701
+14703
+0
+created background 14709
+created background 14710
+
+echo 14711>> /sys/fs/cgroup/lab/tasks
+
+echo 14713>> /sys/fs/cgroup/lab/tasks
+14711
+14713
+0
+created background 14719
+created background 14720
+
+echo 14721>> /sys/fs/cgroup/lab/tasks
+
+echo 14723>> /sys/fs/cgroup/lab/tasks
+14721
+14723
+0
+created background 14729
+created background 14730
+
+echo 14731>> /sys/fs/cgroup/lab/tasks
+
+echo 14733>> /sys/fs/cgroup/lab/tasks
+14731
+14733
+0
+created background 14739
+created background 14740
+
+echo 14741>> /sys/fs/cgroup/lab/tasks
+
+echo 14743>> /sys/fs/cgroup/lab/tasks
+14741
+14743
+0
+created background 14749
+created background 14750
+
+echo 14751>> /sys/fs/cgroup/lab/tasks
+
+echo 14753>> /sys/fs/cgroup/lab/tasks
+14751
+14753
+0
+created background 14759
+created background 14760
+
+echo 14761>> /sys/fs/cgroup/lab/tasks
+
+echo 14763>> /sys/fs/cgroup/lab/tasks
+14761
+14763
+0
+created background 14769
+created background 14770
+
+echo 14771>> /sys/fs/cgroup/lab/tasks
+
+echo 14773>> /sys/fs/cgroup/lab/tasks
+14771
+14773
+0
+created background 14779
+created background 14780
+
+echo 14781>> /sys/fs/cgroup/lab/tasks
+
+echo 14783>> /sys/fs/cgroup/lab/tasks
+14781
+14783
+0
+time taken 2.93451
+Clone:14781 ended
+time taken 3.35135
+Clone:14783 ended
+
+Killed background : 0
+Killed background : 1created background 14788
+created background 14789
+
+echo 14790>> /sys/fs/cgroup/lab/tasks
+
+echo 14792>> /sys/fs/cgroup/lab/tasks
+14790
+14792
+0
+created background 14798
+created background 14799
+
+echo 14800>> /sys/fs/cgroup/lab/tasks
+
+echo 14802>> /sys/fs/cgroup/lab/tasks
+14800
+14802
+0
+created background 14808
+created background 14809
+
+echo 14810>> /sys/fs/cgroup/lab/tasks
+
+echo 14812>> /sys/fs/cgroup/lab/tasks
+14810
+14812
+0
+created background 14818
+created background 14819
+
+echo 14820>> /sys/fs/cgroup/lab/tasks
+
+echo 14822>> /sys/fs/cgroup/lab/tasks
+14820
+14822
+0
+created background 14828
+created background 14829
+
+echo 14830>> /sys/fs/cgroup/lab/tasks
+
+echo 14832>> /sys/fs/cgroup/lab/tasks
+14830
+14832
+0
+created background 14838
+created background 14839
+
+echo 14840>> /sys/fs/cgroup/lab/tasks
+
+echo 14842>> /sys/fs/cgroup/lab/tasks
+14840
+14842
+0
+created background 14848
+created background 14849
+
+echo 14850>> /sys/fs/cgroup/lab/tasks
+
+echo 14852>> /sys/fs/cgroup/lab/tasks
+14850
+14852
+0
+created background 14858
+created background 14859
+
+echo 14860>> /sys/fs/cgroup/lab/tasks
+
+echo 14862>> /sys/fs/cgroup/lab/tasks
+14860
+14862
+0
+time taken 2.89101
+Clone:14860 ended
+time taken 3.37846
+Clone:14862 ended
+
+Killed background : 0
+Killed background : 1created background 14867
+created background 14868
+
+echo 14869>> /sys/fs/cgroup/lab/tasks
+
+echo 14871>> /sys/fs/cgroup/lab/tasks
+14869
+14871
+0
+created background 14877
+created background 14878
+
+echo 14879>> /sys/fs/cgroup/lab/tasks
+
+echo 14881>> /sys/fs/cgroup/lab/tasks
+14879
+14881
+0
+created background 14887
+created background 14888
+
+echo 14889>> /sys/fs/cgroup/lab/tasks
+
+echo 14891>> /sys/fs/cgroup/lab/tasks
+14889
+14891
+0
+created background 14897
+created background 14898
+
+echo 14899>> /sys/fs/cgroup/lab/tasks
+
+echo 14901>> /sys/fs/cgroup/lab/tasks
+14899
+14901
+0
+created background 14907
+created background 14908
+
+echo 14909>> /sys/fs/cgroup/lab/tasks
+
+echo 14911>> /sys/fs/cgroup/lab/tasks
+14909
+14911
+0
+created background 14917
+created background 14918
+
+echo 14919>> /sys/fs/cgroup/lab/tasks
+
+echo 14921>> /sys/fs/cgroup/lab/tasks
+14919
+14921
+0
+created background 14927
+created background 14928
+
+echo 14929>> /sys/fs/cgroup/lab/tasks
+
+echo 14931>> /sys/fs/cgroup/lab/tasks
+14929
+14931
+0
+created background 14937
+created background 14938
+
+echo 14939>> /sys/fs/cgroup/lab/tasks
+
+echo 14941>> /sys/fs/cgroup/lab/tasks
+14939
+14941
+0
+time taken 2.89262
+Clone:14939 ended
+time taken 3.382
+Clone:14941 ended
+
+Killed background : 0
+Killed background : 1created background 14946
+created background 14947
+
+echo 14948>> /sys/fs/cgroup/lab/tasks
+
+echo 14950>> /sys/fs/cgroup/lab/tasks
+14948
+14950
+0
+created background 14956
+created background 14957
+
+echo 14958>> /sys/fs/cgroup/lab/tasks
+
+echo 14961>> /sys/fs/cgroup/lab/tasks
+14958
+14961
+0
+time taken 3.15427
+time taken 3.2012
+Clone:14958 ended
+Clone:14961 ended
+
+Killed background : 0
+Killed background : 1created background 14966
+created background 14967
+
+echo 14968>> /sys/fs/cgroup/lab/tasks
+
+echo 14970>> /sys/fs/cgroup/lab/tasks
+14968
+14970
+0
+created background 14976
+created background 14977
+
+echo 14978>> /sys/fs/cgroup/lab/tasks
+
+echo 14980>> /sys/fs/cgroup/lab/tasks
+14978
+14980
+0
+created background 14986
+created background 14987
+
+echo 14988>> /sys/fs/cgroup/lab/tasks
+
+echo 14990>> /sys/fs/cgroup/lab/tasks
+14988
+14990
+0
+created background 14996
+created background 14997
+
+echo 14998>> /sys/fs/cgroup/lab/tasks
+
+echo 15000>> /sys/fs/cgroup/lab/tasks
+14998
+15000
+0
+created background 15006
+created background 15007
+
+echo 15008>> /sys/fs/cgroup/lab/tasks
+
+echo 15010>> /sys/fs/cgroup/lab/tasks
+15008
+15010
+0
+created background 15016
+created background 15017
+
+echo 15018>> /sys/fs/cgroup/lab/tasks
+
+echo 15020>> /sys/fs/cgroup/lab/tasks
+15018
+15020
+0
+created background 15026
+created background 15027
+
+echo 15028>> /sys/fs/cgroup/lab/tasks
+
+echo 15030>> /sys/fs/cgroup/lab/tasks
+15028
+15030
+0
+created background 15036
+created background 15037
+
+echo 15038>> /sys/fs/cgroup/lab/tasks
+
+echo 15040>> /sys/fs/cgroup/lab/tasks
+15038
+15040
+0
+created background 15047
+created background 15048
+
+echo 15049>> /sys/fs/cgroup/lab/tasks
+
+echo 15051>> /sys/fs/cgroup/lab/tasks
+15049
+15051
+0
+created background 15057
+created background 15058
+
+echo 15059>> /sys/fs/cgroup/lab/tasks
+
+echo 15061>> /sys/fs/cgroup/lab/tasks
+15059
+15061
+0
+created background 15067
+created background 15068
+
+echo 15069>> /sys/fs/cgroup/lab/tasks
+
+echo 15071>> /sys/fs/cgroup/lab/tasks
+15069
+15071
+0
+created background 15077
+created background 15078
+
+echo 15079>> /sys/fs/cgroup/lab/tasks
+
+echo 15081>> /sys/fs/cgroup/lab/tasks
+15079
+15081
+0
+created background 15087
+created background 15088
+
+echo 15089>> /sys/fs/cgroup/lab/tasks
+
+echo 15091>> /sys/fs/cgroup/lab/tasks
+15089
+15091
+0
+created background 15097
+created background 15098
+
+echo 15099>> /sys/fs/cgroup/lab/tasks
+
+echo 15101>> /sys/fs/cgroup/lab/tasks
+15099
+15101
+0
+created background 15107
+created background 15108
+
+echo 15109>> /sys/fs/cgroup/lab/tasks
+
+echo 15111>> /sys/fs/cgroup/lab/tasks
+15109
+15111
+0
+created background 15117
+created background 15118
+
+echo 15119>> /sys/fs/cgroup/lab/tasks
+
+echo 15121>> /sys/fs/cgroup/lab/tasks
+2
+Clone:15119 ended
+Clone:15121 ended
+
+Killed background : 0
+Killed background : 1
+echo 15193>> /sys/fs/cgroup/lab/tasks
+
+echo 15195>> /sys/fs/cgroup/lab/tasks
+
+echo 15201>> /sys/fs/cgroup/lab/tasks
+
+echo 15203>> /sys/fs/cgroup/lab/tasks
+
+echo 15209>> /sys/fs/cgroup/lab/tasks
+
+echo 15211>> /sys/fs/cgroup/lab/tasks
+
+echo 15217>> /sys/fs/cgroup/lab/tasks
+
+echo 15219>> /sys/fs/cgroup/lab/tasks
+
+echo 15225>> /sys/fs/cgroup/lab/tasks
+
+echo 15227>> /sys/fs/cgroup/lab/tasks
+time taken 3.14298
+time taken 3.22748
+
+Killed background : 0
+Killed background : 1
+echo 15232>> /sys/fs/cgroup/lab/tasks
+
+echo 15234>> /sys/fs/cgroup/lab/tasks
+
+echo 15240>> /sys/fs/cgroup/lab/tasks
+
+echo 15242>> /sys/fs/cgroup/lab/tasks
+
+echo 15248>> /sys/fs/cgroup/lab/tasks
+
+echo 15250>> /sys/fs/cgroup/lab/tasks
+
+echo 15256>> /sys/fs/cgroup/lab/tasks
+
+echo 15258>> /sys/fs/cgroup/lab/tasks
+
+echo 15265>> /sys/fs/cgroup/lab/tasks
+
+echo 15267>> /sys/fs/cgroup/lab/tasks
+
+echo 15273>> /sys/fs/cgroup/lab/tasks
+
+echo 15275>> /sys/fs/cgroup/lab/tasks
+
+echo 15281>> /sys/fs/cgroup/lab/tasks
+
+echo 15284>> /sys/fs/cgroup/lab/tasks
+
+echo 15290>> /sys/fs/cgroup/lab/tasks
+
+echo 15292>> /sys/fs/cgroup/lab/tasks
+time taken 3.1037
+time taken 3.24431
+
+Killed background : 0
+Killed background : 1
+echo 15297>> /sys/fs/cgroup/lab/tasks
+
+echo 15299>> /sys/fs/cgroup/lab/tasks
+
+echo 15305>> /sys/fs/cgroup/lab/tasks
+
+echo 15307>> /sys/fs/cgroup/lab/tasks
+
+echo 15313>> /sys/fs/cgroup/lab/tasks
+
+echo 15315>> /sys/fs/cgroup/lab/tasks
+
+echo 15321>> /sys/fs/cgroup/lab/tasks
+
+echo 15323>> /sys/fs/cgroup/lab/tasks
+
+echo 15329>> /sys/fs/cgroup/lab/tasks
+
+echo 15331>> /sys/fs/cgroup/lab/tasks
+
+echo 15337>> /sys/fs/cgroup/lab/tasks
+
+echo 15339>> /sys/fs/cgroup/lab/tasks
+
+echo 15345>> /sys/fs/cgroup/lab/tasks
+
+echo 15347>> /sys/fs/cgroup/lab/tasks
+
+echo 15353>> /sys/fs/cgroup/lab/tasks
+
+echo 15355>> /sys/fs/cgroup/lab/tasks
+
+echo 15361>> /sys/fs/cgroup/lab/tasks
+
+echo 15363>> /sys/fs/cgroup/lab/tasks
+time taken 2.90775
+time taken 3.35601
+
+Killed background : 0
+Killed background : 1
+echo 15368>> /sys/fs/cgroup/lab/tasks
+
+echo 15370>> /sys/fs/cgroup/lab/tasks
+
+echo 15376>> /sys/fs/cgroup/lab/tasks
+
+echo 15378>> /sys/fs/cgroup/lab/tasks
+
+echo 15384>> /sys/fs/cgroup/lab/tasks
+
+echo 15386>> /sys/fs/cgroup/lab/tasks
+
+echo 15392>> /sys/fs/cgroup/lab/tasks
+
+echo 15394>> /sys/fs/cgroup/lab/tasks
+
+echo 15400>> /sys/fs/cgroup/lab/tasks
+
+echo 15402>> /sys/fs/cgroup/lab/tasks
+
+echo 15408>> /sys/fs/cgroup/lab/tasks
+
+echo 15410>> /sys/fs/cgroup/lab/tasks
+time taken 2.89691
+time taken 3.36429
+
+Killed background : 0
+Killed background : 1
+echo 15415>> /sys/fs/cgroup/lab/tasks
+
+echo 15417>> /sys/fs/cgroup/lab/tasks
+
+echo 15423>> /sys/fs/cgroup/lab/tasks
+
+echo 15425>> /sys/fs/cgroup/lab/tasks
+
+echo 15431>> /sys/fs/cgroup/lab/tasks
+
+echo 15433>> /sys/fs/cgroup/lab/tasks
+
+echo 15439>> /sys/fs/cgroup/lab/tasks
+
+echo 15441>> /sys/fs/cgroup/lab/tasks
+
+echo 15447>> /sys/fs/cgroup/lab/tasks
+
+echo 15449>> /sys/fs/cgroup/lab/tasks
+
+echo 15455>> /sys/fs/cgroup/lab/tasks
+
+echo 15457>> /sys/fs/cgroup/lab/tasks
+
+echo 15463>> /sys/fs/cgroup/lab/tasks
+
+echo 15465>> /sys/fs/cgroup/lab/tasks
+
+echo 15471>> /sys/fs/cgroup/lab/tasks
+
+echo 15473>> /sys/fs/cgroup/lab/tasks
+
+echo 15479>> /sys/fs/cgroup/lab/tasks
+
+echo 15481>> /sys/fs/cgroup/lab/tasks
+time taken 3.1137
+time taken 3.23348
+
+Killed background : 0
+Killed background : 1
+echo 15486>> /sys/fs/cgroup/lab/tasks
+
+echo 15488>> /sys/fs/cgroup/lab/tasks
+
+echo 15494>> /sys/fs/cgroup/lab/tasks
+
+echo 15496>> /sys/fs/cgroup/lab/tasks
+
+echo 15502>> /sys/fs/cgroup/lab/tasks
+
+echo 15504>> /sys/fs/cgroup/lab/tasks
+
+echo 15510>> /sys/fs/cgroup/lab/tasks
+
+echo 15512>> /sys/fs/cgroup/lab/tasks
+
+echo 15518>> /sys/fs/cgroup/lab/tasks
+
+echo 15520>> /sys/fs/cgroup/lab/tasks
+
+echo 15526>> /sys/fs/cgroup/lab/tasks
+
+echo 15528>> /sys/fs/cgroup/lab/tasks
+
+echo 15534>> /sys/fs/cgroup/lab/tasks
+
+echo 15536>> /sys/fs/cgroup/lab/tasks
+
+echo 15542>> /sys/fs/cgroup/lab/tasks
+
+echo 15544>> /sys/fs/cgroup/lab/tasks
+
+echo 15550>> /sys/fs/cgroup/lab/tasks
+
+echo 15552>> /sys/fs/cgroup/lab/tasks
+
+echo 15558>> /sys/fs/cgroup/lab/tasks
+
+echo 15560>> /sys/fs/cgroup/lab/tasks
+
+echo 15566>> /sys/fs/cgroup/lab/tasks
+
+echo 15568>> /sys/fs/cgroup/lab/tasks
+
+echo 15574>> /sys/fs/cgroup/lab/tasks
+
+echo 15576>> /sys/fs/cgroup/lab/tasks
+
+echo 15582>> /sys/fs/cgroup/lab/tasks
+
+echo 15584>> /sys/fs/cgroup/lab/tasks
+
+echo 15590>> /sys/fs/cgroup/lab/tasks
+
+echo 15592>> /sys/fs/cgroup/lab/tasks
+
+echo 15598>> /sys/fs/cgroup/lab/tasks
+
+echo 15600>> /sys/fs/cgroup/lab/tasks
+time taken 3.01947
+time taken 3.31463
+
+Killed background : 0
+Killed background : 1
+echo 15605>> /sys/fs/cgroup/lab/tasks
+
+echo 15607>> /sys/fs/cgroup/lab/tasks
+
+echo 15613>> /sys/fs/cgroup/lab/tasks
+
+echo 15615>> /sys/fs/cgroup/lab/tasks
+
+echo 15621>> /sys/fs/cgroup/lab/tasks
+
+echo 15623>> /sys/fs/cgroup/lab/tasks
+
+echo 15629>> /sys/fs/cgroup/lab/tasks
+
+echo 15631>> /sys/fs/cgroup/lab/tasks
+
+echo 15637>> /sys/fs/cgroup/lab/tasks
+
+echo 15639>> /sys/fs/cgroup/lab/tasks
+
+echo 15645>> /sys/fs/cgroup/lab/tasks
+
+echo 15647>> /sys/fs/cgroup/lab/tasks
+
+echo 15653>> /sys/fs/cgroup/lab/tasks
+
+echo 15655>> /sys/fs/cgroup/lab/tasks
+time taken 3.16313
+time taken 3.18921
+
+Killed background : 0
+Killed background : 1
+echo 15660>> /sys/fs/cgroup/lab/tasks
+
+echo 15662>> /sys/fs/cgroup/lab/tasks
+
+echo 15668>> /sys/fs/cgroup/lab/tasks
+
+echo 15670>> /sys/fs/cgroup/lab/tasks
+
+echo 15676>> /sys/fs/cgroup/lab/tasks
+
+echo 15678>> /sys/fs/cgroup/lab/tasks
+
+echo 15684>> /sys/fs/cgroup/lab/tasks
+
+echo 15686>> /sys/fs/cgroup/lab/tasks
+
+echo 15692>> /sys/fs/cgroup/lab/tasks
+
+echo 15694>> /sys/fs/cgroup/lab/tasks
+
+echo 15700>> /sys/fs/cgroup/lab/tasks
+
+echo 15702>> /sys/fs/cgroup/lab/tasks
+
+echo 15708>> /sys/fs/cgroup/lab/tasks
+
+echo 15710>> /sys/fs/cgroup/lab/tasks
+
+echo 15716>> /sys/fs/cgroup/lab/tasks
+
+echo 15718>> /sys/fs/cgroup/lab/tasks
+
+echo 15724>> /sys/fs/cgroup/lab/tasks
+
+echo 15726>> /sys/fs/cgroup/lab/tasks
+
+echo 15732>> /sys/fs/cgroup/lab/tasks
+
+echo 15734>> /sys/fs/cgroup/lab/tasks
+
+echo 15740>> /sys/fs/cgroup/lab/tasks
+
+echo 15742>> /sys/fs/cgroup/lab/tasks
+
+echo 15748>> /sys/fs/cgroup/lab/tasks
+
+echo 15750>> /sys/fs/cgroup/lab/tasks
+
+echo 15756>> /sys/fs/cgroup/lab/tasks
+
+echo 15758>> /sys/fs/cgroup/lab/tasks
+time taken 3.16424
+time taken 3.20675
+
+Killed background : 0
+Killed background : 1
+echo 15763>> /sys/fs/cgroup/lab/tasks
+
+echo 15765>> /sys/fs/cgroup/lab/tasks
+
+echo 15771>> /sys/fs/cgroup/lab/tasks
+
+echo 15773>> /sys/fs/cgroup/lab/tasks
+
+echo 15779>> /sys/fs/cgroup/lab/tasks
+
+echo 15781>> /sys/fs/cgroup/lab/tasks
+
+echo 15787>> /sys/fs/cgroup/lab/tasks
+
+echo 15789>> /sys/fs/cgroup/lab/tasks
+
+echo 15795>> /sys/fs/cgroup/lab/tasks
+
+echo 15797>> /sys/fs/cgroup/lab/tasks
+
+echo 15803>> /sys/fs/cgroup/lab/tasks
+
+echo 15805>> /sys/fs/cgroup/lab/tasks
+
+echo 15811>> /sys/fs/cgroup/lab/tasks
+
+echo 15813>> /sys/fs/cgroup/lab/tasks
+
+echo 15819>> /sys/fs/cgroup/lab/tasks
+
+echo 15821>> /sys/fs/cgroup/lab/tasks
+
+echo 15827>> /sys/fs/cgroup/lab/tasks
+
+echo 15829>> /sys/fs/cgroup/lab/tasks
+time taken 3.17168
+time taken 3.18547
+
+Killed background : 0
+Killed background : 1
+echo 15834>> /sys/fs/cgroup/lab/tasks
+
+echo 15836>> /sys/fs/cgroup/lab/tasks
+
+echo 15842>> /sys/fs/cgroup/lab/tasks
+
+echo 15844>> /sys/fs/cgroup/lab/tasks
+
+echo 15850>> /sys/fs/cgroup/lab/tasks
+
+echo 15852>> /sys/fs/cgroup/lab/tasks
+
+echo 15858>> /sys/fs/cgroup/lab/tasks
+
+echo 15860>> /sys/fs/cgroup/lab/tasks
+
+echo 15866>> /sys/fs/cgroup/lab/tasks
+
+echo 15868>> /sys/fs/cgroup/lab/tasks
+
+echo 15874>> /sys/fs/cgroup/lab/tasks
+
+echo 15876>> /sys/fs/cgroup/lab/tasks
+
+echo 15882>> /sys/fs/cgroup/lab/tasks
+
+echo 15884>> /sys/fs/cgroup/lab/tasks
+
+echo 15890>> /sys/fs/cgroup/lab/tasks
+
+echo 15892>> /sys/fs/cgroup/lab/tasks

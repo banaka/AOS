@@ -1,0 +1,166 @@
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 12.0624
+time taken 12.0747
+time taken 13.628
+time taken 13.65
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 19.758
+time taken 19.7935
+time taken 20.0681
+time taken 20.1013
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 18.9993
+time taken 19.0419
+time taken 20.0738
+time taken 20.1013
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 20.1133
+time taken 20.1425
+time taken 20.2517
+time taken 20.2935
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 19.6239
+time taken 19.6584
+time taken 20.0043
+time taken 20.0225
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 20.3101
+time taken 20.3561
+time taken 21.008
+time taken 21.0377
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 20.2018
+time taken 20.2522
+time taken 21.0333
+time taken 21.0708
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 19.901
+time taken 19.9321
+time taken 20.1771
+time taken 20.2207
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 18.395
+time taken 18.415
+time taken 20.0154
+time taken 20.0668
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 18.0274
+time taken 18.0708
+time taken 19.9256
+time taken 19.9724
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 18.1826
+time taken 18.2325
+time taken 19.8035
+time taken 19.8274
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 17.3892
+time taken 17.4298
+time taken 19.7925
+time taken 19.8115
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 17.4683
+time taken 17.4751
+time taken 19.8122
+time taken 19.843
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+time taken 17.4738
+time taken 17.5131

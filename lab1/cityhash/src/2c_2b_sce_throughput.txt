@@ -1,0 +1,92 @@
+created background 14501
+created background 14502
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0
+time taken 6.87511
+Clone:14503 ended
+time taken 7.05737
+Clone:14504 ended
+
+Killed background : 0
+Killed background : 1created background 14508
+created background 14509
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0
+created background 14516
+created background 14517
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0
+time taken 10.024
+time taken 10.5113
+Clone:14518 ended
+Clone:14519 ended
+
+Killed background : 0
+Killed background : 1created background 14523
+created background 14524
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0
+time taken 9.95319
+time taken 10.3553
+Clone:14525 ended
+Clone:14526 ended
+
+Killed background : 0
+Killed background : 1created background 14530
+created background 14531
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0
+time taken 8.8675
+Clone:14532 ended
+time taken 10.6238
+Clone:14533 ended
+
+Killed background : 0
+Killed background : 1created background 14537
+created background 14538
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0
+time taken 9.05337
+Clone:14539 ended
+time taken 10.6058
+Clone:14540 ended
+
+Killed background : 0
+Killed background : 1created background 14544
+created background 14545
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0
+time taken 9.56461
+time taken 10.2119
+Clone:14546 ended
+Clone:14547 ended
+
+Killed background : 0
+Killed background : 1created background 14551
+created background 14552
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0
+created background 14559
+created background 14560
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0
+time taken 12.5149
+Clone:14561 ended
+time taken 13.1653
+Clone:14562 ended
+
+Killed background : 0
+Killed background : 1created background 14566
+created background 14567
+sched_affinity: 0 set for Core 0
+sched_affinity: 0 set for Core 1
+0

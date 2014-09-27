@@ -1,0 +1,105 @@
+time taken 11.9278
+time taken 11.9535
+time taken 14.0099
+time taken 14.0362
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 14.3353
+time taken 14.3894
+time taken 14.4577
+time taken 14.5005
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 14.4699
+time taken 14.481
+time taken 14.569
+time taken 15.0787
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 15.3526
+time taken 15.361
+time taken 15.3682
+time taken 15.3812
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 14.4708
+time taken 15.3224
+time taken 15.3267
+time taken 15.3326
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 14.1425
+time taken 14.1666
+time taken 14.4398
+time taken 14.4559
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 12.3127
+time taken 12.3308
+time taken 13.991
+time taken 13.9967
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 12.4369
+time taken 12.4413
+time taken 12.44
+time taken 13.5756
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 12.6659
+time taken 12.675
+time taken 12.6753
+time taken 13.8615
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 12.3031
+time taken 12.3348
+time taken 12.3528
+time taken 13.6471
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 11.6666
+time taken 11.6879
+time taken 11.7026
+time taken 13.3862
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 11.6821
+time taken 11.7067
+time taken 11.7006
+time taken 13.3791
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3time taken 11.6533
+time taken 11.6667
+time taken 11.7343
+time taken 13.5027
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3

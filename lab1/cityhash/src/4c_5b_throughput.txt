@@ -1,0 +1,82 @@
+time taken 14.6203
+time taken 14.6354
+time taken 14.6494
+time taken 14.6812
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3
+Killed background : 4time taken 14.4715
+time taken 14.4947
+time taken 14.8585
+time taken 14.8745
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3
+Killed background : 4time taken 14.7656
+time taken 14.777
+time taken 14.8008
+time taken 14.8134
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3
+Killed background : 4time taken 14.4522
+time taken 14.4514
+time taken 14.7052
+time taken 14.8131
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3
+Killed background : 4time taken 14.5466
+time taken 14.547
+time taken 14.7738
+time taken 14.8089
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3
+Killed background : 4time taken 14.709
+time taken 15.4365
+time taken 15.4424
+time taken 15.6429
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3
+Killed background : 4time taken 15.8156
+time taken 15.8417
+time taken 15.8549
+time taken 15.858
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3
+Killed background : 4time taken 16.4272
+time taken 16.4444
+time taken 16.4444
+time taken 16.4519
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3
+Killed background : 4time taken 14.9848
+time taken 14.9822
+time taken 16.6184
+time taken 16.6815
+
+Killed background : 0
+Killed background : 1
+Killed background : 2
+Killed background : 3
+Killed background : 4

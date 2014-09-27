@@ -1,0 +1,29 @@
+0
+Count of Cycles 330694
+Clone:14108 ended
+0
+Count of Cycles 344211
+Clone:14112 ended
+0
+Count of Cycles 338038
+Clone:14118 ended
+0
+0
+Count of Cycles 325035
+Clone:14129 ended
+0
+Count of Cycles 346711
+Clone:14134 ended
+0
+Count of Cycles 342625
+Clone:14138 ended
+0
+Count of Cycles 342243
+Clone:14142 ended
+0
+Count of Cycles 346304
+Clone:14146 ended
+0
+Count of Cycles 341646
+Clone:14151 ended
+0
