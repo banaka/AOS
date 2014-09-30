@@ -53,40 +53,16 @@ struct session_details {
 static char* get_remotefilelocation(char *path){
         char *filePath = (char *) malloc(PATH_MAX);
         strcpy(filePath, con.mountpath);
-        //strcat(filePath, "/");
         strcat(filePath, path);
         return filePath;
-
-	/*int i = 0;
-	int len = strlen(path);
-	for ( i=0; i< len; i++){
-		if (path[i] != con.mountpath[i])
-			break;
-	}
-	char *str = (char *) malloc( 1 + strlen(con.mountpath) - strlen(path));
-	int j = 0;
-	for( ; i < len ; i++, j++){
-		str[j] = con.mountpath[i];
-	}
-	str[j] = 0;
-	return str;*/
 }
 
 static char* get_localfilelocation(char *path){
 	char *filePath = (char *) malloc(PATH_MAX);
   	strcpy(filePath, con.localpath);
-  	//strcat(filePath, "/");
   	strcat(filePath, path);
 	return filePath;
 }
-
-/*static char* get_remote_path(char *path){
-      char *str = (char *) malloc(1 + strlen(&path) + strlen(&con.mountpath) );
-      strcpy(str, con.mountpath);
-      strcat(str, path + 1);
-      fprintf(stderr, " remote path : %s \n ", str);
-      return str;
-}*/
 
 static sftp_session create_sftp_session(){
        perror("Inside getattr");
@@ -135,7 +111,7 @@ static int xmp_getattr(const char *path, struct stat *stbuf)
         } else{
 		res = SSH_ERROR;
 	}
-	return res;
+	return EXIT_SUCCESS;
 /*	int res;
 	res = lstat(path, stbuf);
 	if (res == -1)
@@ -154,11 +130,11 @@ static int xmp_readlink(const char *path, char *buf, size_t size)
 		return -errno;
 
 	buf[res] = '\0';
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 static int xmp_opendir(const char *path, struct fuse_file_info *fi){
-        umask(0);
+        //umask(0);
         const char *remotepath = get_remotefilelocation(path); //get_remote_path(path);
         fprintf(stderr,"path %s \n", remotepath);
         sftp_dir dir;
@@ -172,13 +148,13 @@ static int xmp_opendir(const char *path, struct fuse_file_info *fi){
 	}
 	fi->fh = (intptr_t) dir;
   	 
-    	return SSH_OK;
+    	return EXIT_SUCCESS;
 }
 
 static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 		       off_t offset, struct fuse_file_info *fi)
 {
-        umask(0);
+        //umask(0);
         int res = 0;
 
 	const char *remotepath = get_remotefilelocation(path); //get_remote_path(path);
@@ -213,31 +189,12 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 		res = SSH_ERROR;
 	}
 
-        return res;
-
+        return EXIT_SUCCESS;
 }
-/*
-static int xmp_mknod(const char *path, mode_t mode, dev_t rdev)
-{
-	int res;
-	if (S_ISREG(mode)) {
-		res = open(path, O_CREAT | O_EXCL | O_WRONLY, mode);
-		if (res >= 0)
-			res = close(res);
-	} else if (S_ISFIFO(mode))
-		res = mkfifo(path, mode);
-	else
-		res = mknod(path, mode, rdev);
-	if (res == -1)
-		return -errno;
-
-	return 0;
-}
-*/
 
 static int xmp_mkdir(const char *path, mode_t mode)
 {
-	umask(0);
+	//umask(0);
 	int res;
 	const char *remotepath = get_remotefilelocation(path);
 	fprintf(stderr, "Dir name %s\n", remotepath); 	
@@ -248,7 +205,7 @@ static int xmp_mkdir(const char *path, mode_t mode)
 		fprintf(stderr,"Cannot Create dir\n"); 
 		return SSH_ERROR;
 	}
-	return SSH_OK;
+	return EXIT_SUCCESS;
 }
 
 static int xmp_unlink(const char *path)
@@ -261,7 +218,7 @@ static int xmp_unlink(const char *path)
 	if (res == -1)
 		return -errno;
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 static int xmp_rmdir(const char *path)
@@ -274,7 +231,7 @@ static int xmp_rmdir(const char *path)
 	if (res == -1)
 		return -errno;
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 static int xmp_symlink(const char *from, const char *to)
@@ -288,7 +245,7 @@ static int xmp_symlink(const char *from, const char *to)
 	if (res == -1)
 		return -errno;
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 static int xmp_rename(const char *from, const char *to)
@@ -302,7 +259,7 @@ static int xmp_rename(const char *from, const char *to)
 	if (res == -1)
 		return -errno;
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 static int xmp_chmod(const char *path, mode_t mode)
@@ -315,7 +272,7 @@ static int xmp_chmod(const char *path, mode_t mode)
 	if (res == -1)
 		return -errno;
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 static int xmp_chown(const char *path, uid_t uid, gid_t gid)
@@ -328,7 +285,7 @@ static int xmp_chown(const char *path, uid_t uid, gid_t gid)
 	if (res == -1)
 		return -errno;
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 
@@ -339,7 +296,6 @@ static int sftp_read_sync(const char* path, int access_type, mode_t mode)
         char buffer[MAX_XFER_BUF_SIZE];
         int nbytes, nwritten, rc;
         int fd;
-	//int access_type = O_CREAT | O_RDONLY; 
 	
 	const char *remotepath = get_remotefilelocation(path);
 	fprintf(stderr, "Open: Remote path %s\n", remotepath);
@@ -381,32 +337,32 @@ static int sftp_read_sync(const char* path, int access_type, mode_t mode)
                 ssh_get_error(con.ssh));
                 return res;
         }
-  return SSH_OK;
+  return EXIT_SUCCESS;
 }
 
 
 static int xmp_open(const char *path, struct fuse_file_info *fi)
 {
-	int res;
-	
-	return sftp_read_sync( path, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-        /*sftp_file file;
+    int res;
+        sftp_file file;
         char buffer[MAX_XFER_BUF_SIZE];
         int nbytes, nwritten, rc;
         int fd;
-        int access_type = O_RDONLY;
+	int access_type = O_CREAT | O_RDWR ;
+	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH ;
 
-	const char *remotepath = get_remotefilelocation(path);
-	fprintf(stderr, "Open: Remote path %s\n", remotepath);
-        file = sftp_open(con.sftp, remotepath, access_type, 0);
-        if (file == NULL) {
+        const char *remotepath = get_remotefilelocation(path);
+        fprintf(stderr, "Open: Remote path %s\n", remotepath);
+
+        file = sftp_open(con.sftp, remotepath, access_type, mode);
+        if (file == NULL ) {
                 fprintf(stderr, "Can't open file for reading: %s\n",
                 ssh_get_error(con.ssh));
                 return SSH_ERROR;
         }
 
         const char *localpath = get_localfilelocation(path);
-        fd = open(localpath, O_CREAT | O_RDWR , S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
+        fd = open(localpath, access_type, mode); //O_CREAT | O_RDWR , S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
         if (fd < 0) {
                 fprintf(stderr, "Can't open file for writing: %s\n", strerror(errno));
                 return SSH_ERROR;
@@ -420,71 +376,59 @@ static int xmp_open(const char *path, struct fuse_file_info *fi)
                         ssh_get_error(con.ssh));
                         sftp_close(file);
                 return SSH_ERROR;
-        }
-        nwritten = write(fd, buffer, nbytes);
-        if (nwritten != nbytes) {
-                fprintf(stderr, "Error writing: %s\n",
-                strerror(errno));
-                sftp_close(file);
-                return SSH_ERROR;
-        }
+        	}
+       	 	nwritten = write(fd, buffer, nbytes);
+        	if (nwritten != nbytes) {
+                	fprintf(stderr, "Error writing: %s\n",
+                	strerror(errno));
+                	sftp_close(file);
+                	return SSH_ERROR;
+        	}
         }
         res = sftp_close(file);
+	fi->fh = fd;
         if (res != SSH_OK) {
                 fprintf(stderr, "Can't close the read file: %s\n",
                 ssh_get_error(con.ssh));
                 return res;
         }
-  return SSH_OK;*/
+  return EXIT_SUCCESS;
+
+	//return sftp_read_sync( path, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 }
 
 static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 		    struct fuse_file_info *fi)
 {
-	int fd;
 	int res;
 	
-	const char *localpath = get_localfilelocation(path);
-	fd = open(localpath, O_RDONLY);
-	if (fd == -1)
-		return -errno;
-
-	res = pread(fd, buf, size, offset);
+	res = pread(fi->fh, buf, size, offset);
 	if (res == -1)
 		res = -errno;
 
-	close(fd);
-	return res;
+	return EXIT_SUCCESS;
 }
 
 static int xmp_write(const char *path, const char *buf, size_t size,
 		     off_t offset, struct fuse_file_info *fi)
 {
-	int fd;
 	int res;
 
-	(void) fi;
-	const char *localpath = get_localfilelocation(path);
-
-	fd = open(localpath, O_WRONLY);
-	if (fd == -1)
-		return -errno;
-
-	res = pwrite(fd, buf, size, offset);
+	res = pwrite(fi->fh, buf, size, offset);
 	if (res == -1)
 		res = -errno;
 
-	close(fd);
-	return res;
+	return EXIT_SUCCESS;
 }
 
-static int sftp_write_sync(const char* path, int access_type, mode_t mode)
-{
+static int xmp_release (const char *path, struct fuse_file_info *fi){
   	int res; 
   	sftp_file file;
   	char buffer[MAX_XFER_BUF_SIZE];
   	int nbytes, nwritten, rc;
-  	int fd;
+  	//int fd;
+	int access_type = O_WRONLY;
+	mode_t mode = fi->flags; //S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH ;
 
 	const char *remotepath = get_remotefilelocation(path);
 
@@ -495,15 +439,14 @@ static int sftp_write_sync(const char* path, int access_type, mode_t mode)
       		return SSH_ERROR;
   	}
   	
-	const char *localpath = get_localfilelocation(path);
-
+	/*const char *localpath = get_localfilelocation(path);
 	fd = open(localpath, O_RDONLY);
 	if (fd < 0) {
                 fprintf(stderr, "Can't open localfile for writing: %s\n", strerror(errno));
                 return -errno;
-        }
+        }*/
   	for (;;) {
-      		nbytes = read(fd, buffer, sizeof(buffer));
+      		nbytes = read(fi->fh, buffer, sizeof(buffer));
       		if (nbytes == 0) {
           		break; // EOF
       		} else if (nbytes < 0) {
@@ -525,16 +468,17 @@ static int sftp_write_sync(const char* path, int access_type, mode_t mode)
               	ssh_get_error(con.ssh));
       		return res;
   	}
-	res = close(file);
+	
+	res = close(fi->fh);
 
-  return SSH_OK;
+  return EXIT_SUCCESS;
 }
 
-static int xmp_release (const char *path, struct fuse_file_info *fi){
+//static int xmp_release (const char *path, struct fuse_file_info *fi){
 
-	return sftp_write_sync(path, O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
+//	return sftp_write_sync(path, O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
 
-}
+//}
 
 
 static struct fuse_operations xmp_oper = {
