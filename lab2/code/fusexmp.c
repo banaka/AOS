@@ -102,7 +102,6 @@ static int xmp_getattr(const char *path, struct stat *stbuf)
         fprintf(stderr,"path %s \n", remotepath);
         
         sftp_attributes attr = sftp_lstat(con.sftp, remotepath);
-        perror("after lstat");
         if( attr !=NULL){
                 fprintf(stderr, "attr size %d", sizeof(attr));
                 memset(stbuf, 0, sizeof(struct stat));
@@ -167,7 +166,7 @@ static int xmp_opendir(const char *path, struct fuse_file_info *fi){
 		return SSH_ERROR;
 	}
 	fi->fh = (intptr_t) dir;
-   
+  	 
     	return SSH_OK;
 }
 
@@ -200,9 +199,7 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
                 	stbuf.st_mtime = attr->mtime;
                 	stbuf.st_size = attr->size;
                 	stbuf.st_mode = attr->permissions;
-                	perror("after assignment to stbuf");
                 	fprintf(stderr, "stbuf size %d", sizeof(stbuf));
-                	perror("after stbuf initialization");
                 	res = SSH_OK;
 			if (filler(buf, attr->name, &stbuf, 0))
 				break;
@@ -330,14 +327,14 @@ static int xmp_chown(const char *path, uid_t uid, gid_t gid)
 }
 
 
-static int sftp_read_sync(const char* path)
+static int sftp_read_sync(const char* path, int access_type)
 {
-  int access_type;
+  //int access_type;
   sftp_file file;
   char buffer[MAX_XFER_BUF_SIZE];
   int nbytes, nwritten, rc;
   int fd;
-  access_type = O_RDONLY;
+  //access_type = O_RDONLY;
   file = sftp_open(con.sftp, path, access_type, 0);
   if (file == NULL) {
       fprintf(stderr, "Can't open file for reading: %s\n",
@@ -380,7 +377,7 @@ static int sftp_read_sync(const char* path)
 static int xmp_open(const char *path, struct fuse_file_info *fi)
 {
 	int res;
-	sftp_read_sync(path);
+	sftp_read_sync(path, fi->flags);
 	//res = open(path, fi->flags);
 	if (res == -1)
 		return -errno;
@@ -445,7 +442,7 @@ static struct fuse_operations xmp_oper = {
 	//.access		= xmp_access,
 	.readlink	= xmp_readlink,
 	.readdir	= xmp_readdir,
-	.opendir	= xmp_opendir,
+	//.opendir	= xmp_opendir,
 	//.mknod		= xmp_mknod,
 	.mkdir		= xmp_mkdir,
 	.symlink	= xmp_symlink,
