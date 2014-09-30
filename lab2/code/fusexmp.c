@@ -35,6 +35,7 @@ gcc -Wall fusexmp.c `pkg-config fuse --cflags --libs` -o fusexmp
 
 
 static struct session_details con;
+#define PATH_MAX 128
 
 struct session_details {
   ssh_session ssh;
@@ -45,10 +46,18 @@ struct session_details {
   char *user;
   char *host;
   char *mountpath;
+  char localpath[PATH_MAX];
 };
+
 //Extract the Dir or File exact name 
-static char* get_dirlocation(char *path){
-	int i = 0;
+static char* get_remotefilelocation(char *path){
+        char *filePath = (char *) malloc(PATH_MAX);
+        strcpy(filePath, con.mountpath);
+        //strcat(filePath, "/");
+        strcat(filePath, path);
+        return filePath;
+
+	/*int i = 0;
 	int len = strlen(path);
 	for ( i=0; i< len; i++){
 		if (path[i] != con.mountpath[i])
@@ -60,16 +69,24 @@ static char* get_dirlocation(char *path){
 		str[j] = con.mountpath[i];
 	}
 	str[j] = 0;
-	return str;
+	return str;*/
 }
 
-static char* get_remote_path(char *path){
+static char* get_localfilelocation(char *path){
+	char *filePath = (char *) malloc(PATH_MAX);
+  	strcpy(filePath, con.localpath);
+  	//strcat(filePath, "/");
+  	strcat(filePath, path);
+	return filePath;
+}
+
+/*static char* get_remote_path(char *path){
       char *str = (char *) malloc(1 + strlen(&path) + strlen(&con.mountpath) );
       strcpy(str, con.mountpath);
       strcat(str, path + 1);
       fprintf(stderr, " remote path : %s \n ", str);
       return str;
-}
+}*/
 
 static sftp_session create_sftp_session(){
        perror("Inside getattr");
@@ -98,14 +115,13 @@ static int xmp_getattr(const char *path, struct stat *stbuf)
 {
 	umask(0);
         int res = 0;
-	const char *remotepath = path;//get_remote_path(path);
+	const char *remotepath = get_remotefilelocation(path);//get_remote_path(path);
         fprintf(stderr,"path %s \n", remotepath);
         
         sftp_attributes attr = sftp_lstat(con.sftp, remotepath);
         if( attr !=NULL){
-                fprintf(stderr, "attr size %d", sizeof(attr));
+                fprintf(stderr, "Attr size %d", sizeof(attr));
                 memset(stbuf, 0, sizeof(struct stat));
-                perror("after stbuf memset");
                 stbuf->st_uid = attr->uid;
                 stbuf->st_gid = attr->gid;
                 stbuf->st_atime = attr->atime;
@@ -113,14 +129,12 @@ static int xmp_getattr(const char *path, struct stat *stbuf)
                 stbuf->st_mtime = attr->mtime;
                 stbuf->st_size = attr->size;
                 stbuf->st_mode = attr->permissions;
-                perror("after assignment to stbuf");
-                fprintf(stderr, "stbuf size %d", sizeof(stbuf));
-                perror("after stbuf initialization");
-                res = SSH_OK;
+                fprintf(stderr, "stbuf created ");
+                sftp_attributes_free(attr);
+		res = SSH_OK;
         } else{
 		res = SSH_ERROR;
 	}
-
 	return res;
 /*	int res;
 	res = lstat(path, stbuf);
@@ -129,22 +143,13 @@ static int xmp_getattr(const char *path, struct stat *stbuf)
 */
 }
 
-static int xmp_access(const char *path, int mask)
-{
-	int res;
-
-	res = access(path, mask);
-	if (res == -1)
-		return -errno;
-
-	return 0;
-}
-
 static int xmp_readlink(const char *path, char *buf, size_t size)
 {
 	int res;
+	const char *remotepath = get_remotefilelocation(path); //get_remote_path(path);
+        fprintf(stderr,"path %s \n", remotepath);
 
-	res = readlink(path, buf, size - 1);
+	res = sftp_readlink(con.sftp, remotepath);
 	if (res == -1)
 		return -errno;
 
@@ -154,7 +159,7 @@ static int xmp_readlink(const char *path, char *buf, size_t size)
 
 static int xmp_opendir(const char *path, struct fuse_file_info *fi){
         umask(0);
-        const char *remotepath = path; //get_remote_path(path);
+        const char *remotepath = get_remotefilelocation(path); //get_remote_path(path);
         fprintf(stderr,"path %s \n", remotepath);
         sftp_dir dir;
       
@@ -176,7 +181,7 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
         umask(0);
         int res = 0;
 
-	const char *remotepath = path; //get_remote_path(path);
+	const char *remotepath = get_remotefilelocation(path); //get_remote_path(path);
         fprintf(stderr,"path %s \n", remotepath);
 	sftp_dir dir;
 
@@ -184,14 +189,12 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
         (void) fi;
 
         dir = sftp_opendir(con.sftp, remotepath);
-	perror("after opendir");
         if(dir != NULL){
 		sftp_attributes attr;
 		perror("readdir loop ");
         	while ( ( attr = sftp_readdir(con.sftp, dir) ) !=NULL){
-                	fprintf(stderr, "attr size %d", sizeof(attr));
+                	fprintf(stderr, "Attr created");
                 	struct stat stbuf;
-                	perror("after stbuf memset");
                 	stbuf.st_uid = attr->uid;
                 	stbuf.st_gid = attr->gid;
                 	stbuf.st_atime = attr->atime;
@@ -199,8 +202,9 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
                 	stbuf.st_mtime = attr->mtime;
                 	stbuf.st_size = attr->size;
                 	stbuf.st_mode = attr->permissions;
-                	fprintf(stderr, "stbuf size %d", sizeof(stbuf));
-                	res = SSH_OK;
+                	fprintf(stderr, "stbuf created \n");
+			//sftp_attributes_free(attr);
+               		res = SSH_OK;
 			if (filler(buf, attr->name, &stbuf, 0))
 				break;
         	}
@@ -212,13 +216,10 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
         return res;
 
 }
-
+/*
 static int xmp_mknod(const char *path, mode_t mode, dev_t rdev)
 {
 	int res;
-
-	/* On Linux this could just be 'mknod(path, mode, rdev)' but this
-	   is more portable */
 	if (S_ISREG(mode)) {
 		res = open(path, O_CREAT | O_EXCL | O_WRONLY, mode);
 		if (res >= 0)
@@ -232,15 +233,16 @@ static int xmp_mknod(const char *path, mode_t mode, dev_t rdev)
 
 	return 0;
 }
+*/
 
 static int xmp_mkdir(const char *path, mode_t mode)
 {
 	umask(0);
 	int res;
-	const char *remotepath = get_dirlocation(path);
+	const char *remotepath = get_remotefilelocation(path);
 	fprintf(stderr, "Dir name %s\n", remotepath); 	
-	res = sftp_mkdir(con.sftp, path, mode);
-	perror("calling mkdir");
+	res = sftp_mkdir(con.sftp, remotepath, mode);
+	perror("Called mkdir");
 	//res = mkdir(path, mode);
 	if (res == -1)
 		return -errno;
@@ -251,7 +253,9 @@ static int xmp_mkdir(const char *path, mode_t mode)
 static int xmp_unlink(const char *path)
 {
 	int res;
-	res = sftp_unlink(con.sftp, path);
+	const char *remotepath = get_remotefilelocation(path);
+
+	res = sftp_unlink(con.sftp, remotepath);
 	//res = unlink(path);
 	if (res == -1)
 		return -errno;
@@ -262,7 +266,9 @@ static int xmp_unlink(const char *path)
 static int xmp_rmdir(const char *path)
 {
 	int res;
-	res = sftp_rmdir(con.sftp, path);
+        const char *remotepath = get_remotefilelocation(path); //get_remote_path(path);
+        fprintf(stderr,"path %s \n", remotepath);
+	res = sftp_rmdir(con.sftp, remotepath);
 	//res = rmdir(path);
 	if (res == -1)
 		return -errno;
@@ -273,7 +279,10 @@ static int xmp_rmdir(const char *path)
 static int xmp_symlink(const char *from, const char *to)
 {
 	int res;
-	res = sftp_symlink(con.sftp, from, to);
+        const char *remotefrom = get_remotefilelocation(from);
+        const char *remoteto = get_remotefilelocation(to);
+
+	res = sftp_symlink(con.sftp, remotefrom, remoteto);
 	//res = symlink(from, to);
 	if (res == -1)
 		return -errno;
@@ -284,19 +293,11 @@ static int xmp_symlink(const char *from, const char *to)
 static int xmp_rename(const char *from, const char *to)
 {
 	int res;
-	res = sftp_rename(con.sftp, from, to);
+        const char *remotefrom = get_remotefilelocation(from);
+        const char *remoteto = get_remotefilelocation(to); 
+
+	res = sftp_rename(con.sftp, remotefrom, remoteto);
 	//res = rename(from, to);
-	if (res == -1)
-		return -errno;
-
-	return 0;
-}
-
-static int xmp_link(const char *from, const char *to)
-{
-	int res;
-
-	res = link(from, to);
 	if (res == -1)
 		return -errno;
 
@@ -306,8 +307,9 @@ static int xmp_link(const char *from, const char *to)
 static int xmp_chmod(const char *path, mode_t mode)
 {
 	int res;
-	//const char *remotepath = get_remote_path(path);
-	res = sftp_chmod(con.sftp, path, mode);
+        const char *remotepath = get_remotefilelocation(path);
+	
+	res = sftp_chmod(con.sftp, remotepath, mode);
 	//res = chmod(path, mode);
 	if (res == -1)
 		return -errno;
@@ -318,7 +320,9 @@ static int xmp_chmod(const char *path, mode_t mode)
 static int xmp_chown(const char *path, uid_t uid, gid_t gid)
 {
 	int res;
-	res = sftp_chown(con.sftp, path, uid, gid);
+	const char *remotepath = get_remotefilelocation(path);
+
+	res = sftp_chown(con.sftp, remotepath, uid, gid);
 	//res = lchown(path, uid, gid);
 	if (res == -1)
 		return -errno;
@@ -329,47 +333,51 @@ static int xmp_chown(const char *path, uid_t uid, gid_t gid)
 
 static int sftp_read_sync(const char* path, int access_type)
 {
-  //int access_type;
-  sftp_file file;
-  char buffer[MAX_XFER_BUF_SIZE];
-  int nbytes, nwritten, rc;
-  int fd;
-  //access_type = O_RDONLY;
-  file = sftp_open(con.sftp, path, access_type, 0);
-  if (file == NULL) {
-      fprintf(stderr, "Can't open file for reading: %s\n",
-              ssh_get_error(con.ssh));
-      return SSH_ERROR;
-  }
-  fd = open(path, O_CREAT);
-  if (fd < 0) {
-      fprintf(stderr, "Can't open file for writing: %s\n", strerror(errno));
-      return SSH_ERROR;
-  }
-  for (;;) {
-      nbytes = sftp_read(file, buffer, sizeof(buffer));
-      if (nbytes == 0) {
-          break; // EOF
-      } else if (nbytes < 0) {
-          fprintf(stderr, "Error while reading file: %s\n",
-                  ssh_get_error(con.ssh));
-          sftp_close(file);
-          return SSH_ERROR;
-      }
-      nwritten = write(fd, buffer, nbytes);
-      if (nwritten != nbytes) {
-          fprintf(stderr, "Error writing: %s\n",
-                  strerror(errno));
-          sftp_close(file);
-          return SSH_ERROR;
-      }
-  }
-  rc = sftp_close(file);
-  if (rc != SSH_OK) {
-      fprintf(stderr, "Can't close the read file: %s\n",
-              ssh_get_error(con.ssh));
-      return rc;
-  }
+  	//int access_type;
+  	sftp_file file;
+  	char buffer[MAX_XFER_BUF_SIZE];
+  	int nbytes, nwritten, rc;
+  	int fd;
+ 	//access_type = O_RDONLY;
+
+	const char *remotepath = get_remotefilelocation(path);
+
+  	file = sftp_open(con.sftp, remotepath, access_type, 0);
+  	if (file == NULL) {
+      		fprintf(stderr, "Can't open file for reading: %s\n",
+              	ssh_get_error(con.ssh));
+      		return SSH_ERROR;
+  	}
+  	const char *localpath = get_localfilelocation(path);
+	fd = open(localpath, O_CREAT);
+  	if (fd < 0) {
+      		fprintf(stderr, "Can't open file for writing: %s\n", strerror(errno));
+      		return SSH_ERROR;
+  	}
+  	for (;;) {
+      		nbytes = sftp_read(file, buffer, sizeof(buffer));
+      		if (nbytes == 0) {
+          		break; // EOF
+      		} else if (nbytes < 0) {
+          		fprintf(stderr, "Error while reading file: %s\n",
+                  	ssh_get_error(con.ssh));
+          		sftp_close(file);
+          	return SSH_ERROR;
+      	}
+     	nwritten = write(fd, buffer, nbytes);
+      	if (nwritten != nbytes) {
+         	fprintf(stderr, "Error writing: %s\n",
+                strerror(errno));
+          	sftp_close(file);
+         	return SSH_ERROR;
+      	}
+  	}
+  	rc = sftp_close(file);
+  	if (rc != SSH_OK) {
+      		fprintf(stderr, "Can't close the read file: %s\n",
+              	ssh_get_error(con.ssh));
+      		return rc;
+  	}
   return SSH_OK;
 }
 
@@ -393,7 +401,8 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 	int res;
 
 	(void) fi;
-	fd = open(path, O_RDONLY);
+	sftp_read_sync(path, O_RDONLY);
+	//fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return -errno;
 
@@ -424,38 +433,22 @@ static int xmp_write(const char *path, const char *buf, size_t size,
 	return res;
 }
 
-static int xmp_statfs(const char *path, struct statvfs *stbuf)
-{
-	int res;
-	
-	//res = statvfs(path, stbuf);
-	if (res == -1)
-		return -errno;
-
-	return 0;
-}
-
-
 
 static struct fuse_operations xmp_oper = {
 	.getattr	= xmp_getattr,
-	//.access		= xmp_access,
 	.readlink	= xmp_readlink,
 	.readdir	= xmp_readdir,
-	//.opendir	= xmp_opendir,
-	//.mknod		= xmp_mknod,
+	.opendir	= xmp_opendir,
 	.mkdir		= xmp_mkdir,
 	.symlink	= xmp_symlink,
 	.unlink		= xmp_unlink,
 	.rmdir		= xmp_rmdir,
 	.rename		= xmp_rename,
-	//.link		= xmp_link,
 	.chmod		= xmp_chmod,
 	.chown		= xmp_chown,
 	.open		= xmp_open,
 	.read		= xmp_read,
 	.write		= xmp_write,
-	//.statfs		= xmp_statfs,
 };
 
 
@@ -511,8 +504,14 @@ int main(int argc, char *argv[])
 	con.sftp = create_sftp_session(); 
 
 	struct stat st = {0};
-	if (stat(con.mountpath, &st) == -1) {
-    		mkdir(con.mountpath, 0700);
+	char *tmp ="/tmp";
+	strcpy(con.localpath, tmp);
+  	strcat(con.localpath, con.mountpath);
+
+	if (stat(con.localpath, &st) == -1) {
+    		//mkdir(con.localpath, 0700);
+		fprintf(stderr, "Create the local mount dir %s\n", con.localpath);
+		exit(1);
 	}
 
         res = fuse_main(argc, argv, &xmp_oper, NULL);
