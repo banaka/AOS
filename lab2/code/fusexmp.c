@@ -332,63 +332,65 @@ static int xmp_chown(const char *path, uid_t uid, gid_t gid)
 }
 
 
-static int sftp_read_sync(const char* path, int access_type)
+static int sftp_read_sync(const char* path, int access_type, mode_t mode)
 {
-  	//int access_type;
-  	sftp_file file;
-  	char buffer[MAX_XFER_BUF_SIZE];
-  	int nbytes, nwritten, rc;
-  	int fd;
- 	//access_type = O_RDONLY;
-
+	int res;
+        sftp_file file;
+        char buffer[MAX_XFER_BUF_SIZE];
+        int nbytes, nwritten, rc;
+        int fd;
+	//int access_type = O_CREAT | O_RDONLY; 
+	
 	const char *remotepath = get_remotefilelocation(path);
+	fprintf(stderr, "Open: Remote path %s\n", remotepath);
+        
+	file = sftp_open(con.sftp, remotepath, access_type, mode);
+        if (file == NULL ) {
+                fprintf(stderr, "Can't open file for reading: %s\n",
+                ssh_get_error(con.ssh));
+                return SSH_ERROR;
+        } 
 
-  	file = sftp_open(con.sftp, remotepath, access_type, 0);
-  	if (file == NULL) {
-      		fprintf(stderr, "Can't open file for reading: %s\n",
-              	ssh_get_error(con.ssh));
-      		return SSH_ERROR;
-  	}
-  	const char *localpath = get_localfilelocation(path);
-	fd = open(localpath, O_CREAT);
-  	if (fd < 0) {
-      		fprintf(stderr, "Can't open file for writing: %s\n", strerror(errno));
-      		return SSH_ERROR;
-  	}
-  	for (;;) {
-      		nbytes = sftp_read(file, buffer, sizeof(buffer));
-      		if (nbytes == 0) {
-          		break; // EOF
-      		} else if (nbytes < 0) {
-          		fprintf(stderr, "Error while reading file: %s\n",
-                  	ssh_get_error(con.ssh));
-          		sftp_close(file);
-          	return SSH_ERROR;
-      	}
-     	nwritten = write(fd, buffer, nbytes);
-      	if (nwritten != nbytes) {
-         	fprintf(stderr, "Error writing: %s\n",
+        const char *localpath = get_localfilelocation(path);
+        fd = open(localpath, access_type, mode); //O_CREAT | O_RDWR , S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
+        if (fd < 0) {
+                fprintf(stderr, "Can't open file for writing: %s\n", strerror(errno));
+                return SSH_ERROR;
+        }
+        for (;;) {
+                nbytes = sftp_read(file, buffer, sizeof(buffer));
+                if (nbytes == 0) {
+                        break; // EOF
+                } else if (nbytes < 0) {
+                        fprintf(stderr, "Error while reading file: %s\n",
+                        ssh_get_error(con.ssh));
+                        sftp_close(file);
+                return SSH_ERROR;
+        }
+        nwritten = write(fd, buffer, nbytes);
+        if (nwritten != nbytes) {
+                fprintf(stderr, "Error writing: %s\n",
                 strerror(errno));
-          	sftp_close(file);
-         	return SSH_ERROR;
-      	}
-  	}
-  	rc = sftp_close(file);
-  	if (rc != SSH_OK) {
-      		fprintf(stderr, "Can't close the read file: %s\n",
-              	ssh_get_error(con.ssh));
-      		return rc;
-  	}
+                sftp_close(file);
+                return SSH_ERROR;
+        }
+        }
+        res = sftp_close(file);
+        if (res != SSH_OK) {
+                fprintf(stderr, "Can't close the read file: %s\n",
+                ssh_get_error(con.ssh));
+                return res;
+        }
   return SSH_OK;
 }
 
 
 static int xmp_open(const char *path, struct fuse_file_info *fi)
 {
-	umask(0);
 	int res;
 	
-        sftp_file file;
+	return sftp_read_sync( path, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+        /*sftp_file file;
         char buffer[MAX_XFER_BUF_SIZE];
         int nbytes, nwritten, rc;
         int fd;
@@ -433,60 +435,15 @@ static int xmp_open(const char *path, struct fuse_file_info *fi)
                 ssh_get_error(con.ssh));
                 return res;
         }
-  return SSH_OK;
-/*res = open(path, fi->flags);
-	if (res == -1)
-		return -errno;
-
-	close(res);
-	return 0;
-*/}
+  return SSH_OK;*/
+}
 
 static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 		    struct fuse_file_info *fi)
 {
 	int fd;
 	int res;
-
-	//(void) fi;
 	
-	/*int access_type, nbytes;
-  	sftp_file file;
-  	access_type = O_RDONLY;
-	const char *remotepath = get_remotefilelocation(path);
-  	fprintf(stderr, "Read : Remote path %s\n", remotepath);
-	file = sftp_open(con.sftp, remotepath, access_type, 0);
-
-	if (file == NULL) {
-      		fprintf(stderr, "Can't open file for reading: %s\n",
-              	ssh_get_error(con.ssh));
-      		return SSH_ERROR;
-	}
-
-	for (;;) {
-      		nbytes = sftp_read(file, buf, sizeof(buf));
-      		if (nbytes == 0) {
-          		break; // EOF
-      		} else if (nbytes < 0) {
-          		fprintf(stderr, "Error while reading file: %s\n",
-                	ssh_get_error(con.ssh));
-          		sftp_close(file);
-          		return SSH_ERROR;
-      		}
-  	}
-  	res = sftp_close(file);
-  	if (res != SSH_OK) {
-      		fprintf(stderr, "Can't close the read file: %s\n",
-              	ssh_get_error(con.ssh));
-      		return res;
-  	}
-  	return SSH_OK;*/
-
-	res = xmp_open(path, fi);
-	if ( res != SSH_OK ){
-		fprintf(stderr, "Unable to open the file \n" );
-		return SSH_ERROR;
-	}
 	const char *localpath = get_localfilelocation(path);
 	fd = open(localpath, O_RDONLY);
 	if (fd == -1)
@@ -503,43 +460,13 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 static int xmp_write(const char *path, const char *buf, size_t size,
 		     off_t offset, struct fuse_file_info *fi)
 {
-	int access_type = O_WRONLY | O_CREAT | O_TRUNC;
-  	sftp_file file;
-  	const char *helloworld = "Hello, World!\n";
-  	int length = strlen(helloworld);
-  	int rc, nwritten;
-  	file = sftp_open(sftp, "helloworld/helloworld.txt", access_type, S_IRWXU);
-  	if (file == NULL)
-  		{
-    		fprintf(stderr, "Can't open file for writing: %s\n",
-            	ssh_get_error(session));
-    		return SSH_ERROR;
-  	}
-	//read from the file and then write 
-  	nwritten = sftp_write(file, helloworld, length);
-  	if (nwritten != length)
-  	{
-    		fprintf(stderr, "Can't write data to file: %s\n",
-            	ssh_get_error(session));
-    		sftp_close(file);
-    		return SSH_ERROR;
-  	}
-  	res = sftp_close(file);
-  	if (res != SSH_OK)
-  		{
-    		fprintf(stderr, "Can't close the written file: %s\n",
-            	ssh_get_error(session));
-    		return res;
-  	}
-  	return SSH_OK;
-
-	
-
-	/*int fd;
+	int fd;
 	int res;
 
 	(void) fi;
-	fd = open(path, O_WRONLY);
+	const char *localpath = get_localfilelocation(path);
+
+	fd = open(localpath, O_WRONLY);
 	if (fd == -1)
 		return -errno;
 
@@ -548,7 +475,65 @@ static int xmp_write(const char *path, const char *buf, size_t size,
 		res = -errno;
 
 	close(fd);
-	return res;*/
+	return res;
+}
+
+static int sftp_write_sync(const char* path, int access_type, mode_t mode)
+{
+  	int res; 
+  	sftp_file file;
+  	char buffer[MAX_XFER_BUF_SIZE];
+  	int nbytes, nwritten, rc;
+  	int fd;
+
+	const char *remotepath = get_remotefilelocation(path);
+
+  	file = sftp_open(con.sftp, remotepath, access_type, mode);
+  	if (file == NULL) {
+      		fprintf(stderr, "Can't open file for writing: %s\n",
+              	ssh_get_error(con.ssh));
+      		return SSH_ERROR;
+  	}
+  	
+	const char *localpath = get_localfilelocation(path);
+
+	fd = open(localpath, O_RDONLY);
+	if (fd < 0) {
+                fprintf(stderr, "Can't open localfile for writing: %s\n", strerror(errno));
+                return -errno;
+        }
+  	for (;;) {
+      		nbytes = read(fd, buffer, sizeof(buffer));
+      		if (nbytes == 0) {
+          		break; // EOF
+      		} else if (nbytes < 0) {
+          		fprintf(stderr, "Error while reading local file %s\n", strerror(errno));
+          		sftp_close(file);
+          	return SSH_ERROR;
+      		}
+     		nwritten = sftp_write(file, buffer, nbytes);
+      		if (nwritten != nbytes) {
+         		fprintf(stderr, "Error writing in remote: %s\n",
+                	ssh_get_error(con.ssh));
+          		sftp_close(file);
+         		return SSH_ERROR;
+      		}
+  	}
+  	res = sftp_close(file);
+  	if (res != SSH_OK) {
+      		fprintf(stderr, "Can't close the read file: %s\n",
+              	ssh_get_error(con.ssh));
+      		return res;
+  	}
+	res = close(file);
+
+  return SSH_OK;
+}
+
+static int xmp_release (const char *path, struct fuse_file_info *fi){
+
+	return sftp_write_sync(path, O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
+
 }
 
 
@@ -567,6 +552,7 @@ static struct fuse_operations xmp_oper = {
 	.open		= xmp_open,
 	.read		= xmp_read,
 	.write		= xmp_write,
+	.release	= xmp_release,
 };
 
 
