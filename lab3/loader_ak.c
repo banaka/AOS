@@ -6,42 +6,25 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/ptrace.h>
+#include <gelf.h>
+#include <fcntl.h>
 
 #define STACK_SIZE (1024 * 1024)    /* Stack size for test process */
 #define BUF_SIZE 1048576
 
+
+#define PAGE_SIZE getpagesize()
+//Could use bitwise XOR TOO
+#define ELF_PAGESTART(_v) ((_v) & ~(unsigned long)(PAGE_SIZE-1))
+#define ELF_PAGEOFFSET(_v) ((_v) & (PAGE_SIZE-1))
+#define ELF_PAGEALIGN(_v) (((_v) + PAGE_SIZE -1) & ~(PAGE_SIZE - 1))
+
+
 void* entry_point;
 
-int is_image_valid(Elf32_Ehdr *hdr)
-{
-    return 1;
-}
+unsigned int auxv_phnum, auxv_phdr, auxv_entry, auxv_phent, pHdr_count;
 
-void *resolve(const char* sym)
-{
-    static void *handle = NULL;
-    if (handle == NULL) {
-        handle = dlopen("libc.so", RTLD_NOW);
-    }
-    return dlsym(handle, sym);
-}
-
-void relocate(Elf32_Shdr* sectionHdr, const Elf32_Sym* syms, const char* strings, const char* src, char* dst)
-{
-    Elf32_Rel* rel = (Elf32_Rel*)(src + sectionHdr->sh_offset);
-    int j;
-    for(j = 0; j < sectionHdr->sh_size / sizeof(Elf32_Rel); j += 1) {
-        const char* sym = strings + syms[ELF32_R_SYM(rel[j].r_info)].st_name;
-        switch(ELF32_R_TYPE(rel[j].r_info)) {
-            case R_386_JMP_SLOT:
-            case R_386_GLOB_DAT:
-                *(Elf32_Word*)(dst + rel[j].r_offset) = (Elf32_Word)resolve(sym);
-                break;
-        }
-    }
-}
-
-
+//USE TO FIND BSS
 void* find_sym(const char* name, Elf32_Shdr* sectionHdr, const char* strings, const char* src, char* dst)
 {
     Elf32_Sym* syms = (Elf32_Sym*)(src + sectionHdr->sh_offset);
@@ -54,13 +37,12 @@ void* find_sym(const char* name, Elf32_Shdr* sectionHdr, const char* strings, co
     return NULL;
 }
 
-void *load_image(char *file, void* stack)
-{
+void* load_image(char *file, void* stack) {
     Elf* elf;
-    GElf_Ehdr *elfHdr        = NULL;
-    GElf_Phdr *programHdr    = NULL;
-    GElf_Shdr *sectionHdr    = NULL;
-    GElf_Sym  *syms          = NULL;
+    GElf_Ehdr elfHdr;
+    GElf_Phdr pHdr;
+    GElf_Shdr sHdr;
+    GElf_Sym  *syms;
     char *strings      = NULL;
     char *start_addr   = NULL;
     char *dest_addr    = NULL;
@@ -73,132 +55,58 @@ void *load_image(char *file, void* stack)
 
     //Read the ELF Structure
     //1. Create the file descriptor 
-    if((fd = open(file, O_RDWR, 0) < 0){
+    printf("Exce given as argument : %s\n", file);
+    if(fd = open(file, O_RDWR, 0) < 0){
 	fprintf(stderr, "Unable to open the executable\n");
-}
-    if ((elf = elf_begin(fd, ELF_C_READ, NULL)) != NULL){
-	 fprintf(stderr, "Unable to create Elf \n");
-}
-    if (gelf_getehdr(e, elfHdr) != NULL){
+    }
+    if ((elf = elf_begin(fd, ELF_C_READ, NULL)) == NULL){
+	 fprintf(stderr, "Unable to create Elf: %s\n", elf_errmsg(-1));
+    }
+    if (gelf_getehdr(elf, &elfHdr) != NULL){
          fprintf(stderr, "Unable to create Elf Header \n");
-}
-
-    if (elf_getphdr(e, i, phdr) != NULL){
-         fprintf(stderr, "Unable to get program Header no %d \n", i);
-}
-
-    elfhdr = (Elf32_Ehdr *) buffer;
-    fprintf(stderr, "Created ELF header\n");
-    if(!is_image_valid(elfhdr)) {
-        fprintf(stderr, "image_load:: invalid ELF image\n");
-        return 0;
     }
 
-    //Allocate memory for the Program 
-    exec_mem = mmap(NULL, size, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
-	//Protection Permissions: The allocated memory should be allowed READ, WRITE, EXECUTE permissions
-	//MAP_PRIVATE: Changes made in this memory do not need to be written back to the disk
-	//MAP_ANONYMOUS: The memory is not backed by a file on the disk 
-    fprintf(stderr, "Allocated memory for the text and data segment..\n");
-    if(!exec_mem) {
-        fprintf(stderr, "image_load:: error allocating memory\n");
-        return 0;
-    }
+    pHdr_count = elfHdr.e_phnum;
+    auxv_phent = elfHdr.e_phentsize;
+    auxv_entry = elfHdr.e_entry;
+    entry_addr = elfHdr.e_entry;
 
-    entry_point = elfhdr->e_entry + exec_mem;
-
-    // Start with clean memory.(would be needed for the BSS section) 
-    memset(exec_mem, 0x0, size);
-
-    programHdr = (Elf32_Phdr *)(buffer + elfhdr->e_phoff);
-    
-    
-    Elf32_auxv_t *stackTop = (Elf32_auxv_t *) stack;
-
-    printf("Changing the Test auxv values\n");
-    fprintf(stderr, "StackTop : 0x%08x\n", stackTop);
-    for ( ; stackTop->a_type != AT_NULL; stackTop++) {
-        fprintf(stderr, "Stack value : 0x%08x\n", getauxval(stackTop->a_type));
-        if(stackTop->a_type == AT_PHDR){
-	    stackTop->a_un.a_val = programHdr;
-	    fprintf(stderr, "Programheader found : 0x%08x\n", programHdr);
+    for( i=0; i < pHdr_count ; i++){
+	if (gelf_getphdr(elf, i, &pHdr) != &pHdr){
+            fprintf(stderr, "Unable to get program Header no %d \n", i);
+	return 0;
 	}
-    }
+	if(pHdr.p_type != PT_LOAD){
+	   continue;
+	}
 
-    fprintf(stderr, "Extracted Program header \n"); 
-    for(i=0; i < elfhdr->e_phnum; ++i) {
-        /*Program header LOAD section contains the details of the location 
-        from where the virtual addresses of the child program are supposed to start 
-        And if the Filesize increases the memory size return with error code*/
-        if(programHdr[i].p_type != PT_LOAD) {
+	printf("PageStart : %x, offset : %x, filesize : %d\n", pHdr.p_vaddr, pHdr.p_offset , pHdr.p_filesz);
+        printf("pageEnd : %x, Endoffset :%x", (void*)ELF_PAGESTART(pHdr.p_vaddr), (pHdr.p_offset - ELF_PAGEOFFSET(pHdr.p_vaddr)));
+
+        if(!pHdr.p_filesz)
             continue;
-        }
-        if(programHdr[i].p_filesz > programHdr[i].p_memsz) {
-            fprintf(stderr, "image_load:: p_filesz > p_memsz\n");
-            munmap(exec_mem, size);
-            return 0;
-        }
-        if(!programHdr[i].p_filesz) {
-            continue;
-        }
 
-        // p_filesz can be smaller than p_memsz,
-        // the difference is zeroe'd out.
-        start_addr = buffer + programHdr[i].p_offset;
-        dest_addr = programHdr[i].p_vaddr + exec_mem;
-        fprintf(stderr, "Loading the instrcutions into the allocated memory...\n");
-        memmove(dest_addr, start_addr, programHdr[i].p_filesz);
-        //Setting the permissions of the memeory based on the permissions in program header 
-        if(!(programHdr[i].p_flags & PF_W)) {
-            // Setting permissions to Read-only
-            mprotect((unsigned char *) dest_addr,
-                         programHdr[i].p_memsz,
-                         PROT_READ);
-        }
+        int prot = PROT_READ;
+        if (pHdr.p_flags & PF_W)
+            prot |= PROT_WRITE;
 
-        if(programHdr[i].p_flags & PF_X) {
-            // Setting permissions to be Exec
-            mprotect((unsigned char *) dest_addr,
-                            programHdr[i].p_memsz,
-                            PROT_EXEC);
-        }
-	fprintf(stderr, "Done with mem copy\n");
-    }
+        if (pHdr.p_flags & PF_X)
+          prot |= PROT_EXEC;
 
-    fprintf(stderr, "Starting with dynamic loading...\n");
-    entry_addr = elfhdr->e_entry + exec_mem;
-    
-    sectionHdr = (Elf32_Shdr *)(buffer + elfhdr->e_shoff);
+      if((unsigned long)(ELF_PAGESTART(pHdr.p_vaddr)^(unsigned long) (PAGE_SIZE-1)) == 0)
+          printf("WARNING: NOT ALIGNED\n");
 
-    //The entry for the main function needs to be determined from the symbol table and then call libc with it... 
-    for(i=0; i < elfhdr->e_shnum; ++i) {
-        if (sectionHdr[i].sh_type == SHT_DYNSYM) {
-            syms = (Elf32_Sym*)(buffer + sectionHdr[i].sh_offset);
-            strings = buffer + sectionHdr[sectionHdr[i].sh_link].sh_offset;
-            entry_addr = find_sym("main", sectionHdr + i, strings, buffer, exec_mem);
-            break;
-        }
-    }
+      char* map = mmap((void*)ELF_PAGESTART(pHdr.p_vaddr), (pHdr.p_filesz + ELF_PAGEOFFSET(pHdr.p_vaddr)), prot,
+                        MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - ELF_PAGEOFFSET(pHdr.p_vaddr)));
+        printf("mapping = %x\n", map);
+        if(map == MAP_FAILED)
+          strerror("Mapping failed");
 
-    for(i=0; i < elfhdr->e_shnum; ++i) {
-        if (sectionHdr[i].sh_type == SHT_REL) {
-            relocate(sectionHdr + i, syms, strings, buffer, exec_mem);
-        }
-    }
-
-    /*//Code to traverse through the Section 
-    for(i=0; i < elfhdr->e_shnum; ++i) {
-        if (sectionHdr[i].sh_type == SHT_NOBITS) {
-            if (sectionHrd[i].sh_name == ".bss"){
-	         bss = sectionHrd[i].sh_addr +sectionHrd[i].sh_offset;
-                 printf("bss : %s", bss);
-	    }
-        }
-    }*/
-   fprintf(stderr, "Main address: %x\n",entry_addr );
+   }
+   fprintf(stderr, "Main address: %x\n", entry_addr );
    return entry_addr;
 
-}/* image_load */
+}
 
 void* create_auxv(char** envp, void* stack){
     Elf32_auxv_t *auxv;
@@ -254,10 +162,10 @@ int main(int argc, char** argv, char** envp)
         fprintf(stderr, "No File provided in as argument\n");
 	return 0;
     }
-    fprintf(stderr, "Opening the File\n");
-    FILE* elf = fopen(argv[1], "rb");
-    fread(buffer, BUF_SIZE, 1, elf);
-    fprintf(stderr, "Starting Loading.. \n");
+    //fprintf(stderr, "Opening the File\n");
+    //FILE* elf = fopen(argv[1], "rb");
+    //fread(buffer, BUF_SIZE, 1, elf);
+    //fprintf(stderr, "Starting Loading.. \n");
     //Create the stack 
     //char *stack;                    /* Start of stack buffer */
     //char *stackTop;                 /* End of stack buffer */
@@ -268,15 +176,15 @@ int main(int argc, char** argv, char** envp)
     //stackTop = stack + STACK_SIZE;  /* Assume stack grows downward */
     fprintf(stderr, "Stack top : 0x%08x\n", stack);
     stack = create_auxv(envp, stack);
-    ptr=image_load(buffer, BUF_SIZE, stack);
+    ptr=load_image(argv[1], stack);
     argc = argc -1;
     //fprintf(stderr, "Main starting with test program at 0x%08x\n", ptr);
     fprintf(stderr,"ENTRY POINT:0x%08x\n",entry_point); 
     pid_t pid = getpid();
     ptrace(PTRACE_DETACH, pid, 0, 0);
     //dump_stack();
-    //__asm__("movq %0, %%rsp;": :"r"(stack):"%rsp");
-    __asm__("movl %0, %%esp;": :"r"(stack):"%esp"); // For 32 Bit compilation 
+    __asm__("movq %0, %%rsp;": :"r"(stack):"%rsp");
+    //__asm__("movl %0, %%esp;": :"r"(stack):"%esp"); // For 32 Bit compilation 
     //__asm__("jmp *entry_point");
     return ptr(argc, argv+1, envp);
 }
