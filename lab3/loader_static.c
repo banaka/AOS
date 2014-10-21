@@ -3,6 +3,11 @@
 #include <libelf.h>
 #include <sys/mman.h>
 #include <dlfcn.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/ptrace.h>
+
+//#include <linux/printk.h>
 
 #define STACK_SIZE (1024 * 1024)    /* Stack size for test process */
 #define BUF_SIZE 1048576
@@ -72,7 +77,6 @@ void *image_load (char *buffer, unsigned int size, void* stack)
         fprintf(stderr, "image_load:: invalid ELF image\n");
         return 0;
     }
-    entry_point = (Elf32_Addr*) elfhdr->e_entry;
 
     //Allocate memory for the Program 
     exec_mem = mmap(NULL, size, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANONYMOUS, 0, 0);
@@ -84,6 +88,8 @@ void *image_load (char *buffer, unsigned int size, void* stack)
         fprintf(stderr, "image_load:: error allocating memory\n");
         return 0;
     }
+
+    entry_point = elfhdr->e_entry + exec_mem;
 
     // Start with clean memory.(would be needed for the BSS section) 
     memset(exec_mem, 0x0, size);
@@ -140,6 +146,7 @@ void *image_load (char *buffer, unsigned int size, void* stack)
                             programHdr[i].p_memsz,
                             PROT_EXEC);
         }
+	fprintf(stderr, "Done with mem copy\n");
     }
 
     fprintf(stderr, "Starting with dynamic loading...\n");
@@ -172,7 +179,7 @@ void *image_load (char *buffer, unsigned int size, void* stack)
 	    }
         }
     }*/
-
+   fprintf(stderr, "Main address: %x\n",entry_addr );
    return entry_addr;
 
 }/* image_load */
@@ -238,7 +245,7 @@ int main(int argc, char** argv, char** envp)
     //Create the stack 
     //char *stack;                    /* Start of stack buffer */
     //char *stackTop;                 /* End of stack buffer */
-    void *stack = mmap(0,STACK_SIZE,PROT_WRITE|PROT_READ,MAP_PRIVATE|MAP_GROWSDOWN|MAP_ANONYMOUS,0,0);
+    void *stack = mmap(0, STACK_SIZE, PROT_WRITE|PROT_READ, MAP_PRIVATE|MAP_GROWSDOWN|MAP_ANONYMOUS, 0, 0);
     //stack = malloc(STACK_SIZE);
     if (stack == NULL)
         fprintf(stderr, "unable to allocate memeory for the stack using malloc");
@@ -247,9 +254,13 @@ int main(int argc, char** argv, char** envp)
     stack = create_auxv(envp, stack);
     ptr=image_load(buffer, BUF_SIZE, stack);
     argc = argc -1;
-    fprintf(stderr, "Starting with test program at 0x%08x\n", ptr);
+    //fprintf(stderr, "Main starting with test program at 0x%08x\n", ptr);
     fprintf(stderr,"ENTRY POINT:0x%08x\n",entry_point); 
-    __asm__("movl %0, %%esp;": :"r"(stack):"%esp");
-    //__asm__("jmp 0x000004d0");
+    pid_t pid = getpid();
+    ptrace(PTRACE_DETACH, pid, 0, 0);
+    //dump_stack();
+    //__asm__("movq %0, %%rsp;": :"r"(stack):"%rsp");
+    __asm__("movl %0, %%esp;": :"r"(stack):"%esp"); // For 32 Bit compilation 
+    //__asm__("jmp *entry_point");
     return ptr(argc, argv+1, envp);
 }
