@@ -100,6 +100,9 @@ void* load_image(char *file_exe, void* stack) {
 		else
 	    	printf("Succesful mapping 0x%x", exev_mem);
    }
+	
+	//Create BSS Mmap 
+
    fprintf(stderr, "Entry Point address: %x\n", entry_addr );
    return entry_addr;
 }
@@ -134,8 +137,6 @@ void* create_auxv(char** envp, void* stack, char **argv, int argc){
     auxv = (Elf64_auxv_t *) envp;
     stackTopChar++;
 	Elf64_auxv_t *stackTop = (Elf64_auxv_t *) stackTopChar;
-    stackTop->a_type = AT_NULL;
-    stackTop->a_un.a_val = NULL;
 
     printf("\nCreating auxv\n");
     for ( ; auxv->a_type != AT_NULL; auxv++) {
@@ -158,7 +159,10 @@ void* create_auxv(char** envp, void* stack, char **argv, int argc){
 		}
 
     }
-    return stackTop;
+	stackTop++;
+    stackTop->a_type = AT_NULL;
+    stackTop->a_un.a_val = NULL;
+	return stackTop;
 }
 
 int main(int argc, char** argv, char** envp)
@@ -177,11 +181,22 @@ int main(int argc, char** argv, char** envp)
     printf("argv_1 : %s\n", argv[1]);
     char* ptr=load_image(argv[1], stack);
 	argc = argc-1;
-    stack = create_auxv(envp, stack, argv, argc);
+    char *stack_bottom = create_auxv(envp, stack, argv, argc);
     //fprintf(stderr, "Main starting with test program at 0x%08x\n", ptr);
     fprintf(stderr,"ENTRY POINT:0x%08x\n",ptr); 
    
 	__asm__("xor %%rdx, %%rdx" : : :"%rdx"); 
+	__asm__("xor %%rax, %%rax" : : :"%rax"); 
+	__asm__("xor %%rbx, %%rbx" : : :"%rbx"); 
+	__asm__("xor %%rcx, %%rcx" : : :"%rcx");
+    __asm__("xor %%r8, %%r8" : : :"%r8"); 
+	__asm__("xor %%r9, %%r9" : : :"%r9"); 
+	__asm__("xor %%r10, %%r10" : : :"%r10"); 
+	__asm__("xor %%r11, %%r11" : : :"%r11"); 
+	__asm__("xor %%r12, %%r12" : : :"%r12"); 
+	__asm__("xor %%r13, %%r13" : : :"%r13"); 
+	__asm__("xor %%r14, %%r14" : : :"%r14"); 
+	__asm__("xor %%r15, %%r15" : : :"%r15"); 
 	__asm__("xor %%rdi, %%rdi" : : :"%rdi"); 
     __asm__("movq %0, %%rsp;": :"r"(stack):"%rsp");
     //__asm__("movl %0, %%esp;": :"r"(stack):"%esp"); // For 32 Bit compilation 
