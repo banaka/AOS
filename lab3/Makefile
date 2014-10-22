@@ -1,4 +1,8 @@
-all: test loader
+all: clean test loader
+
+clean:
+	rm test
+	rm loader
 
 test: test3.c
 	gcc -static -Wl,-Ttext-segment=2000000 -o test test3.c
