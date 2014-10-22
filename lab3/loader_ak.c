@@ -27,11 +27,11 @@ void* base;
 
 unsigned int auxv_phnum, auxv_phdr, auxv_entry, auxv_phent, pHdr_count;
 
-static int padzero(unsigned long elf_bss){
-	unsigned long nbyte;
-	nbyte = ELF_PAGEOFFSET(elf_bss);
+static int padzero(unsigned long elf_bss, unsigned long nbyte){
+	//unsigned long nbyte;
+	//nbyte = ELF_PAGEOFFSET(elf_bss);
 	if (nbyte) {
-		nbyte = ELF_MIN_ALIGN - nbyte;
+		//nbyte = ELF_MIN_ALIGN - nbyte;
 		//if (clear_user((void __user *) elf_bss, nbyte))
 		//	return -EFAULT;
 		memset((void*)elf_bss, 0x0, nbyte);
@@ -81,6 +81,11 @@ void* load_image(char *file_exe, void* stack) {
 		if (gelf_getphdr(elf, i, &pHdr) != &pHdr){
             fprintf(stderr, "Unable to get program Header no %d \n", i);
 		}
+		
+		if(pHdr.p_type == PT_NOTE){
+			//Check the build id matches the build Id of the loader
+			fprintf(stderr,"Can be used to get the build Id of the process.... \n");
+		}
 		if(pHdr.p_type != PT_LOAD){
 	   		continue;
 		}
@@ -118,21 +123,19 @@ void* load_image(char *file_exe, void* stack) {
 
         if (pHdr.p_memsz > pHdr.p_filesz) {
             // We have a .bss segment
-            void *bss_vaddr = pHdr.p_vaddr + pHdr.p_filesz;
+            dest_addr = pHdr.p_vaddr + pHdr.p_filesz;
+			dest_addr = ELF_PAGESTART((unsigned long )( dest_addr + PAGE_SIZE - 1));
+			char *bss_mem = mmap(dest_addr, (pHdr.p_memsz - pHdr.p_filesz), pbits, MAP_PRIVATE | MAP_ANONYMOUS, -1 , 0);
+			if(bss_mem == MAP_FAILED)
+				fprintf(stderr, "Mapping for bss segment failed\n");
+		    else{
+				printf("Succesful mapping of bss 0x%x\n", bss_mem);
+				padzero(bss_mem, (pHdr.p_memsz - pHdr.p_filesz));
+				//memset(bss_mem, 0x0, (pHdr.p_memsz - pHdr.p_filesz));
+			}
 			//Maybe the allocation needs to be done for the whole of memzize and not for filesz.. 
-            //bss_vaddr = ELF_PAGESTART((unsigned long)(bss_vaddr + PAGE_SIZE - 1)); 
-            size_t bss_size = (pHdr.p_memsz - pHdr.p_filesz);
-            //char *bss_map = mmap((void*)bss_vaddr, bss_size, prot, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-            //if (bss_map == MAP_FAILED)
-            //  fprintf(stderr,"bss Section mapping failed");
-			//padzero(bss_vaddr);
         }
-
-
-
-   }
-	
-	//Create BSS Mmap 
+	}
 
    fprintf(stderr, "Entry Point address: %x\n", entry_addr );
    return entry_addr;
@@ -140,45 +143,57 @@ void* load_image(char *file_exe, void* stack) {
 
 
 void* create_stack_from_loader(char** envp, void* stack, char **argv, int argc){    
-	printf("Getting into Create stack");
+	printf("Getting into Create stack\n");
+	argv++;
 	char *exec_name = *argv;
-    printf("Exe name : %s", exec_name);
+    printf("Exe name : %s\n", exec_name);
 
-    while(*envp++ != NULL)
-		; 
+	size_t count = 0;
+    while(*envp != NULL){
+		count = count + sizeof(char*); 
+		printf("envp:%s", *envp);
+		envp++;
+	}
+	envp++;
+	count = count + sizeof(char*);
 	Elf64_auxv_t *auxv;
 	auxv = (Elf64_auxv_t *) envp;
-	for ( ; auxv->a_type != AT_NULL; auxv++)
-		;
+	int auxv_count = 0;
+	for ( ; auxv->a_type != AT_NULL; auxv++, auxv_count++){
+		count = count + sizeof(Elf64_auxv_t *);
+		printf("auxv:%d", auxv->a_type);
+	}
 	auxv++;//crossing the auxv when it is = AT_NULL
-	char *cur_stack = (char*)auxv;
+	count =  count + sizeof(Elf64_auxv_t *);
+	void *cur_stack = (void*)auxv;
     int i=0;
-	for(i =0; i < 16; i++){
+	//For reading the data after the Auxiliary vector
+	/*for(i =0; i < 16; i++){
         cur_stack++;
     }
+	count = count + 16;
     for(;*cur_stack !=NULL; cur_stack++)
-		;	
-	char* stackTop =(char*) stack;
+		count++;	
+	*/
 
-	while(cur_stack != argv){
+	/*while(cur_stack != argv){
 		*stackTop = *cur_stack; 
 		cur_stack--; 
 		stackTop--;
-		printf("stack:%x  newStack:%x  value:%s", cur_stack, stackTop, *cur_stack);
-	}
-	//need to push the argc onto the stack.. 
-    
-	char* new_envp = stackTop;
-	while(*new_envp++ !=NULL)//Going over the agrv
-		;
-	new_envp++;
-    while(*new_envp++ !=NULL)//Going over the envp
-        ;
-
-    auxv = (Elf64_auxv_t *) new_envp;
+		//printf("stack:%x  newStack:%x  value:", cur_stack, stackTop);
+	}*/
+	
+	printf( "\nCount: %x, stack:%x, cur_stack:%x, envp:%x", count, stack, cur_stack, envp); 
+	memcpy(stack, cur_stack, count); 
+	//TODO:need to push the argc  and argv onto the stack.. 
+	
+    //auxv = (Elf64_auxv_t *) stack;
     printf("\nEditing the auxv\n");
-    for ( ; auxv->a_type != AT_NULL; auxv++) {
-        printf("stack:0x%08x  type : %d\n", auxv, auxv->a_type);
+    for ( i=0; i <= auxv_count; i++) {
+        //auxv = (Elf64_auxv_t *) cur_stack;
+		auxv = (Elf64_auxv_t *) stack;
+	    auxv = auxv - auxv_count + i - 1; 	
+		printf("\nstack:0x%08x  auxv_type : %d", auxv, auxv->a_type);
 		switch (auxv->a_type) {
 			case AT_PHENT : auxv->a_un.a_val = auxv_phent;
 				break;
@@ -193,11 +208,25 @@ void* create_stack_from_loader(char** envp, void* stack, char **argv, int argc){
 			default:
 				break;
 		}
+		//auxv++;
     }
-	return stackTop;
+
+    /*char** new_envp = (char**) (Elf64_auxv_t *)cur_stack - auxv_count);
+	new_envp++;
+    printf("\nenvp:%s, stack_ptr", *new_envp, new_envp );
+
+    while(*new_envp-- !=NULL)//Going over the anvp
+        printf("\nenvp:%s, stack_ptr", *new_envp, new_envp );
+    new_envp--;
+    while(*new_envp-- !=NULL)//Going over the argv
+        printf("\nargv:%s, stack_ptr", *new_envp, new_envp );
+	*/
+	int *new_envp = argv;
+	new_envp = argc;
+	return new_envp;
 }
 
-/*
+
 void* create_auxv_down(char** envp, void* stack, char **argv, int argc){
     int* stackTopInt = (int*) stack;
 	*stackTopInt = argc;
@@ -274,7 +303,7 @@ void* create_auxv_down(char** envp, void* stack, char **argv, int argc){
 	*stackTopvoid = NULL;
 	return stackTop;
 }
-*/
+
 
 void* create_auxv(char** envp, void* stack, char **argv, int argc){
     int* stackTopInt = (int*) stack;
@@ -364,21 +393,21 @@ int main(int argc, char** argv, char** envp)
     if(elf_version(EV_CURRENT) == EV_NONE){
 	fprintf(stderr,"Unable to determine the ELF version stored..%s\n", elf_errmsg(-1));
     }
-    void *stack = mmap(0, STACK_SIZE, PROT_WRITE|PROT_READ, MAP_PRIVATE|MAP_GROWSDOWN|MAP_ANONYMOUS, 0, 0);
+    void *stack = mmap(0, STACK_SIZE, PROT_WRITE|PROT_READ, MAP_PRIVATE|MAP_GROWSDOWN|MAP_ANONYMOUS, -1, 0);
     if (stack == NULL)
         fprintf(stderr, "Unable to allocate memeory for the stack using malloc");
-    fprintf(stderr, "Stack top : 0x%08x\n", stack);
+    fprintf(stderr, "Stack top : 0x%08x, nextaddress in stack : 0x%08x\n", stack, stack + 1);
     printf("argv_1 : %s\n", argv[1]);
     char* ptr=load_image(argv[1], stack);
 	argc = argc-1;
-	//stack = stack + (STACK_SIZE);
+	//stack = stack + (STACK_SIZE)/2;
     fprintf(stderr, "Stack top : 0x%08x\n", stack);
-	char *stack_bottom = create_auxv(envp, stack, argv, argc);
+	//char *stack_bottom = create_auxv(envp, stack, argv, argc);
 	//char *stack_bottom = create_auxv_down(envp, stack, argv, argc);
-	//char *stack_top = create_stack_from_loader(envp, stack, argv[1], argc);
+	stack = create_stack_from_loader(envp, stack, argv, argc);
 	//printf("CONFIG_STACK_GROWSUP %d\n",CONFIG_STACK_GROWSUP);
     //fprintf(stderr, "Main starting with test program at 0x%08x\n", ptr);
-    fprintf(stderr,"ENTRY POINT:0x%08x\n",ptr); 
+    printf("ENTRY POINT:0x%08x\n",ptr); 
    
 
 	__asm__("xor %%rdx, %%rdx" : : :"%rdx"); 
@@ -397,7 +426,7 @@ int main(int argc, char** argv, char** envp)
     __asm__("xor %%rsi, %%rsi" : : :"%rsi");
 	__asm__("xor %%rdi, %%rdi" : : :"%rdi");
 	__asm__("movq %0, %%rsp;": :"r"(stack):"%rsp");
-	//ptr = "000000000200105e";
+	//ptr = 0X00000200105e;
     __asm__("jmp *%0": :"a"(ptr):);
     
 	return 0; // ptr(argc, argv+1, envp);
