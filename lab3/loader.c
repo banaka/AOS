@@ -277,6 +277,54 @@ void auxv_new(char **envp, char *exec_name){
 }
 
 
+char* get_buildId(char *fileName){
+    Elf* elf;
+    Elf64_Ehdr elfHdr;
+    Elf64_Phdr pHdr;
+    Elf64_Nhdr *nHdr;
+    unsigned char * buildId;
+	int i=0, fd=0;
+
+    if((fd = open(fileName,  O_RDWR, 0)) < 0){
+        fprintf(stderr, "Unable to open the executable\n");
+    }
+
+    if ((elf = elf_begin(fd, ELF_C_READ, NULL)) == NULL){
+        fprintf(stderr, "Unable to create Elf: %s\n", elf_errmsg(-1));
+    }
+
+    if ((gelf_getehdr(elf, &elfHdr)) == NULL){
+         fprintf(stderr, "Unable to create Elf Header \n");
+    }
+
+    for( i=0; i < elfHdr.e_phnum ; i++){
+        if (gelf_getphdr(elf, i, &pHdr) != &pHdr){
+            fprintf(stderr, "Unable to get program Header no %d \n", i);
+        }
+
+        if(pHdr.p_type != PT_NOTE){
+            continue;
+        }
+        nHdr = (Elf64_Nhdr*)(pHdr.p_offset);
+        while (nHdr->n_type != NT_GNU_BUILD_ID)
+        {
+            nHdr = (Elf64_Nhdr*)((size_t)nHdr + sizeof(Elf32_Nhdr) + nHdr->n_namesz + nHdr->n_descsz);
+        }
+        buildId = (unsigned char *)malloc(nHdr->n_descsz);
+        memcpy(buildId, (void *)((size_t)nHdr + sizeof(Elf32_Nhdr) + nHdr->n_namesz), nHdr->n_descsz);
+        printf("Build ID:");
+        int i = 0;
+        for (i = 0 ; i < nHdr->n_descsz ; ++i)
+        {
+            printf("%02x",buildId[i]);
+        }
+        break;
+    }
+    printf("\n");
+    close(fd);
+	return buildId;
+}
+
 int main(int argc, char** argv, char** envp)
 {
     if(argc < 2 ){
@@ -286,7 +334,19 @@ int main(int argc, char** argv, char** envp)
     if(elf_version(EV_CURRENT) == EV_NONE){
 		fprintf(stderr,"Unable to determine the ELF version stored..%s\n", elf_errmsg(-1));
     }
+
+	//Get the build id of both the loader and the input program
+	char *loader = get_buildId(argv[0]);
+	char *test = get_buildId(argv[1]);
 	
+	if( strcmp(loader,test) == 0 ){
+		printf("Entered strings are equal.\n");
+		return 0;
+	}
+	else
+		printf("Entered strings are not equal.\n");
+ 
+		
 	//unsigned long *stack = (unsigned long *)(&argv[0]);
 	//*((int *)(stack)) = argc - 1;
 
