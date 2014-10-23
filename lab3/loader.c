@@ -134,78 +134,115 @@ void* load_image(char *file_exe) {
    return entry_addr;
 }
 
+
+void print_stack( unsigned long *stack, char **argv){
+    printf("\nArgc : %d ", *stack);
+    while((*argv != NULL) &&( *stack != NULL)){
+        stack++;
+		argv++;
+		printf("\nargv:%s, *argv: %s", *stack, *argv);
+    }
+	argv++;
+	stack++;
+    while((*argv != NULL) && (*stack != NULL)){
+		printf("\nenvp : %s, %s", *stack, *argv);
+        stack++;
+		argv++;
+    }
+
+    Elf64_auxv_t *auxv;
+	argv++;
+    auxv = (Elf64_auxv_t *) argv;
+    stack++;
+	Elf64_auxv_t *stackTop_auxv = (Elf64_auxv_t *) stack;
+    printf("\nCreating auxv\n");
+    for ( ; auxv->a_type != AT_NULL; auxv++) {
+        printf("\nstack:0x%08x  type : %d value: %x, type:%d value: %x", stackTop_auxv, stackTop_auxv->a_type, stackTop_auxv->a_un.a_val, auxv->a_type, auxv->a_un.a_val );
+        stackTop_auxv++;
+    }
+	auxv++;
+	stackTop_auxv++;
+	int *pad = stackTop_auxv;
+	printf("padding at the bottomm -> %d\n", *pad);
+	return ;
+}
+
 unsigned long *create_auxv_new(char** envp, unsigned long *stack, char **argv, int argc){
      unsigned long *stackTop =  stack;
 	*stackTop = argc;
-    printf("\nHAHDHDHDHHDDH%d\n", *stackTop);
-	stackTop++;
-	//char* stackTopChar = (char*)stackTopInt;
-	//*stackTop = "dhfdhdf";
-    //printf("\nHAHDHDHidgndDHHDDH%s\n", *stackTop);
-	*argv++;
-    char *exec_name = *argv;
-	printf("Exe name : %s", exec_name);
+    printf("\nArgc : %d", *stackTop);
+    char *exec_name = argv[1];
+	printf("\nExe name : %s, stackTop:%d", exec_name, *stackTop);
     while(*argv++ != NULL){
         stackTop++;
         *stackTop = *argv;
-		printf("\n%x", stackTop);
+		printf("\nargv:%s", *stackTop);
     }
-    stackTop++;
+    //stackTop+;
     *stackTop = NULL;
 
-    while(*envp++ != NULL){
+    while(*envp != NULL){
         stackTop++;
         *stackTop = *envp;
-		printf("\n%x envp : %s", stackTop, *envp);
+		printf("\nstack:%x envp : %s", stackTop, *stackTop);
+		envp++;
     }
     stackTop++;
-    *stackTop = NULL;
-
+	*stackTop = NULL;
+	envp++;
     Elf64_auxv_t *auxv;
-    // and find ELF auxiliary vectors (if this was an ELF binary) 
     auxv = (Elf64_auxv_t *) envp;
     stackTop++;
-	Elf64_auxv_t *stackTop_auxv = (Elf64_auxv_t *) stackTop;
-
+    printf("\nstack:%x envp : %s", stackTop, *stackTop);
+	Elf64_auxv_t *stackTop_auxv;
+	stackTop_auxv =  stackTop;
+/*	*stackTop_auxv = *auxv;
+    printf("\nstack:%x auxv : %d", stackTop_auxv, stackTop_auxv->a_type);
+	stackTop_auxv++;
+    printf("\nstack:%x auxv : %d", stackTop_auxv, stackTop_auxv->a_type);
+*/
     printf("\nCreating auxv\n");
     for ( ; auxv->a_type != AT_NULL; auxv++) {
-        printf("stack:0x%08x  type : %d\n", stackTop_auxv ,auxv->a_type);
-        stackTop_auxv++;
-        stackTop_auxv->a_type = auxv->a_type; 
+        *stackTop_auxv = *auxv; 
 		switch (auxv->a_type) {
 			case AT_PHENT : stackTop_auxv->a_un.a_val = auxv_phent;
-				printf("AT_PHENT = %d\n", stackTop_auxv->a_un.a_val);
+				printf("\nAT_PHENT = %d", stackTop_auxv->a_un.a_val);
 				break;
 			case AT_PHNUM : stackTop_auxv->a_un.a_val = auxv_phnum;
-				printf("AT_Phnum = %d\n", stackTop_auxv->a_un.a_val);
+				printf("\nAT_Phnum = %d", stackTop_auxv->a_un.a_val);
 				break;
 			case AT_BASE : stackTop_auxv->a_un.a_val = base ;
-				printf("AT_base = %x\n", stackTop_auxv->a_un.a_val);
+				printf("\nAT_base = %x", stackTop_auxv->a_un.a_val);
 				break;
 			case AT_ENTRY : stackTop_auxv->a_un.a_val = auxv_entry;
-				printf("AT_entry = %x\n", stackTop_auxv->a_un.a_val);
+				printf("\nAT_entry = %x", stackTop_auxv->a_un.a_val);
 				break;
 			case AT_EXECFN : stackTop_auxv->a_un.a_val = exec_name;
-				printf("AT_execfn = %s\n", stackTop_auxv->a_un.a_val);
+				printf("\nAT_execfn = %s", stackTop_auxv->a_un.a_val);
 				break;
 			default: stackTop_auxv->a_un.a_val = auxv->a_un.a_val;
 				break;
 		}
-
+        printf("\nstack:%x  type : %d value: %x", stackTop_auxv, stackTop_auxv->a_type, stackTop_auxv->a_un.a_val );
+        stackTop_auxv++;
     }
-	stackTop_auxv++;
+	//stackTop_auxv++;
     stackTop_auxv->a_type = AT_NULL;
     stackTop_auxv->a_un.a_val = NULL;
 	auxv++;
 	stackTop_auxv++;
-	int *pad = stackTop_auxv;
+	int *pad;
+	pad = stackTop_auxv;
 	*pad = 0;
 	
 	printf("padding at the bottomm -> %d\n", *pad);
-	char *cur_stack = pad;
+	++pad;
+	char *cur_stack;
+    cur_stack  = pad;
 	*cur_stack = "";
-	*(cur_stack++) = "";
-
+	++cur_stack;
+	*cur_stack ="";
+    printf("\nRETURNING ++++++> %x\n", stack);
 	return stack;
 }
 
@@ -250,29 +287,26 @@ int main(int argc, char** argv, char** envp)
 		fprintf(stderr,"Unable to determine the ELF version stored..%s\n", elf_errmsg(-1));
     }
 	
-	unsigned long *stack_orig = (unsigned long *)(&argv[0]);
-	*((int *)(stack_orig)) = argc - 1;
-/*
-    unsigned long *stack = mmap(0, 1200, PROT_WRITE|PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_GROWSDOWN|MAP_ANONYMOUS, -1, 0);
+	//unsigned long *stack = (unsigned long *)(&argv[0]);
+	//*((int *)(stack)) = argc - 1;
+
+    unsigned long *stack = mmap(0, STACK_SIZE, PROT_WRITE|PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0);
     if (stack == MAP_FAILED)
         fprintf(stderr, "Unable to allocate memeory for the stack using malloc");
-	printf("\n Stack Value : %d\n", *(stack+1));
 	*stack = argc;
-	printf("\n Value in stack with argv : %d\n", *(stack));
+	printf("\n Stack Value : %d\n", *(stack));
     printf("Stack top : 0x%08x, nextaddress in stack : 0x%08x\n", stack, stack + 1);
-	unsigned long* stack_new =  stack;
-*/
-    void* ptr;
-	printf("Value in Stack ->%d\n\n", *(stack_orig)); 
-	ptr = load_image(argv[1]);
-	auxv_new(envp, argv[1]);
-	//fprintf(stderr, "Stack top : 0x%08x\n", stack);
-	//unsigned long *stack_bottom = create_auxv_new(envp, stack, argv, argc);
-	//char *stack_bottom = create_auxv_down(envp, stack, argv, argc);
-	//stack = create_stack_from_loader(envp, stack, argv, argc);
+	unsigned long* stack_new;
+	stack_new =  stack;
 
+    void* ptr;
+	ptr = load_image(argv[1]);
+	//auxv_new(envp, argv[1]);
+	//fprintf(stderr, "Stack top : 0x%08x\n", stack);
+	unsigned long *stack_bottom = create_auxv_new(envp, stack, argv, argc);
+	print_stack(stack, argv);
     printf("ENTRY ptr:0x%08x\n",ptr); 
-    printf("STACK ptr:%x\n",stack_orig); 
+    printf("STACK ptr:%x\n",stack); 
    
 	__asm__("xor %%rdx, %%rdx" : : :"%rdx"); 
 	__asm__("xor %%rax, %%rax" : : :"%rax"); 
@@ -289,7 +323,7 @@ int main(int argc, char** argv, char** envp)
 	__asm__("xor %%rdi, %%rdi" : : :"%rdi"); 
     __asm__("xor %%rsi, %%rsi" : : :"%rsi");
 	__asm__("xor %%rdi, %%rdi" : : :"%rdi");
-	__asm__("movq %0, %%rsp;": :"a"(stack_orig):"%rsp");
+	__asm__("movq %0, %%rsp;": :"a"(stack_new):"%rsp");
 	__asm__("xor %%rax, %%rax" : : :"%rax"); 
 	__asm__("xor %%rdx, %%rdx" : : :"%rdx"); 
     __asm__("jmp *%0": :"a"(ptr):);
