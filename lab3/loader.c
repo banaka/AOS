@@ -21,7 +21,7 @@
 #define STACK_SIZE (PAGE_SIZE * 2)
 	
 void* entry_point;
-void* base;
+void* auxv_base;
 unsigned int auxv_phnum, auxv_phdr, auxv_entry, auxv_phent, pHdr_count;
 
 static int padzero(unsigned long elf_bss, unsigned long nbyte){
@@ -37,12 +37,9 @@ void* load_image(char *file_exe) {
     GElf_Ehdr elfHdr;
     GElf_Phdr pHdr;
     GElf_Shdr sHdr;
-    char *strings      = NULL;
-    unsigned long start_addr   = NULL;
     unsigned long dest_addr;
     unsigned long entry_addr;
     int i = 0;
-    char *exec_mem = NULL;
     int fd = 0;
     unsigned long bss = NULL;
     int pcount = 0;
@@ -104,9 +101,10 @@ void* load_image(char *file_exe) {
 		unsigned long offsetadjustment = ELF_PAGEOFFSET(pHdr.p_vaddr);
 		//Instead of for the filesz call this for memsz.. and then set the values after address to 0 
 		//char* exev_mem = mmap(dest_addr, (pHdr.p_memsz + offsetadjustment), pbits, MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - offsetadjustment));
+		printf("\ndest_addr:%x pHdr.p_filesz:%x offsetadjustment:%x pHdr.p_offset:%x",dest_addr, pHdr.p_filesz, offsetadjustment, pHdr.p_offset );
         char* exev_mem = mmap(dest_addr, (pHdr.p_filesz + offsetadjustment), pbits, MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - offsetadjustment));
         if (k == 0) {
-			base = exec_mem;
+			auxv_base = exev_mem;
 			k = 1;	
 		}
         if(exev_mem == MAP_FAILED)
@@ -211,7 +209,7 @@ unsigned long *create_auxv_new(char** envp, unsigned long *stack, char **argv, i
 			case AT_PHNUM : stackTop_auxv->a_un.a_val = auxv_phnum;
 				printf("\nAT_Phnum = %d", stackTop_auxv->a_un.a_val);
 				break;
-			case AT_BASE : stackTop_auxv->a_un.a_val = base ;
+			case AT_BASE : stackTop_auxv->a_un.a_val = auxv_base ;
 				printf("\nAT_base = %x", stackTop_auxv->a_un.a_val);
 				break;
 			case AT_ENTRY : stackTop_auxv->a_un.a_val = auxv_entry;
@@ -261,7 +259,7 @@ void auxv_new(char **envp, char *exec_name){
 			case AT_PHNUM : auxv->a_un.a_val = auxv_phnum;
 				printf("AT_Phnum = %d\n", auxv->a_un.a_val);
 				break;
-			case AT_BASE : auxv->a_un.a_val = base ;
+			case AT_BASE : auxv->a_un.a_val = auxv_base ;
 				printf("AT_base = %x\n", auxv->a_un.a_val);
 				break;
 			case AT_ENTRY : auxv->a_un.a_val = auxv_entry;
@@ -336,7 +334,7 @@ int main(int argc, char** argv, char** envp)
     }
 
 	//Get the build id of both the loader and the input program
-	char *loader = get_buildId(argv[0]);
+	/*char *loader = get_buildId(argv[0]);
 	char *test = get_buildId(argv[1]);
 	
 	if( strcmp(loader,test) == 0 ){
@@ -345,7 +343,7 @@ int main(int argc, char** argv, char** envp)
 	}
 	else
 		printf("Entered strings are not equal.\n");
- 
+ 	*/
 		
 	//unsigned long *stack = (unsigned long *)(&argv[0]);
 	//*((int *)(stack)) = argc - 1;

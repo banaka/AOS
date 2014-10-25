@@ -9,6 +9,9 @@
 #include <sys/ptrace.h>
 #include <gelf.h>
 #include <fcntl.h>
+//#include<libsigsegv.h>
+#include <signal.h>
+#include <errno.h>
 
 #define BUF_SIZE 1048576
 
@@ -18,11 +21,31 @@
 #define ELF_PAGEOFFSET(_v) ((_v) & (PAGE_SIZE-1))
 #define ELF_PAGEALIGN(_v) (((_v) + PAGE_SIZE -1) & ~(PAGE_SIZE - 1))
 
-#define STACK_SIZE (PAGE_SIZE * 2)
+#define STACK_SIZE (PAGE_SIZE * 4)
+#define handler_error(msg) do { perror(msg); exit(-1); } while (0)
+
+typedef int bool;
+#define true 1
+#define false 0
 	
 void* entry_point;
 void* base;
 unsigned int auxv_phnum, auxv_phdr, auxv_entry, auxv_phent, pHdr_count;
+
+struct load_details{
+    unsigned long vaddr;
+    unsigned long offset;
+    size_t size;
+    int prot; //Protection bits
+};
+
+struct map_contents {
+	int fd; 
+	struct load_details *text;
+	struct load_details *data; 
+	struct load_details *bss;
+}map_contents;
+
 
 static int padzero(unsigned long elf_bss, unsigned long nbyte){
 	if (nbyte) {
@@ -31,18 +54,56 @@ static int padzero(unsigned long elf_bss, unsigned long nbyte){
 	return 0;
 }
 
+char* get_page(struct load_details *ptr, unsigned long addr, int fd, bool bss){
+	unsigned long* dest_addr;
+	dest_addr = ELF_PAGESTART(addr);
+	unsigned long offsetadjustment = ELF_PAGESTART((addr - ptr->vaddr)); //the offset that was added to the start of the page..
+	//fprintf(stderr,"\naddr:%x, dest_addr:%x,offsetadjustment:%x, prot:%d, offset:%x, fd:%d", addr, dest_addr, offsetadjustment, ptr->prot, ptr->offset, fd);
+	char* exev_mem ;
+	if(bss){
+		exev_mem = mmap(dest_addr, PAGE_SIZE, ptr->prot, MAP_ANONYMOUS| MAP_FIXED | MAP_PRIVATE, fd, (ptr->offset + offsetadjustment));
+	}
+	else{
+		exev_mem = mmap(dest_addr, PAGE_SIZE, ptr->prot, MAP_FIXED | MAP_PRIVATE, fd, (ptr->offset + offsetadjustment));
+	}
+	if(exev_mem == MAP_FAILED)
+		;//fprintf(stderr,"\nMapping failed:%s",strerror(errno));
+	else
+		;//fprintf(stderr,"\nSuccesful mapping 0x%x", exev_mem);
+	return exev_mem;
+}
+
+
+int demand_paging(unsigned long fault_addr){
+	//1. Check which region the address belongs to
+	//2. Map the region 
+	//3. If bss Set the memory to zero..
+	unsigned long page;
+	if (((map_contents.text)->vaddr < fault_addr) && (fault_addr < ((map_contents.text)->vaddr + (map_contents.text)->size ))){
+		//fprintf(stderr,"\nText Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.text)->vaddr ,(map_contents.text)->size );
+		page = get_page(map_contents.text, fault_addr, map_contents.fd, false);		
+	}
+	else if (((map_contents.data)->vaddr < fault_addr) && (fault_addr < ((map_contents.data)->vaddr + (map_contents.data)->size ))){
+        //fprintf(stderr,"\nData Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.data)->vaddr ,(map_contents.data)->size );
+		page = get_page(map_contents.data, fault_addr, map_contents.fd, false);
+    }
+	else if (((map_contents.bss)->vaddr < fault_addr) && (fault_addr < ((map_contents.bss)->vaddr + (map_contents.text)->size ))){
+        //fprintf(stderr,"\nBSS Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.bss)->vaddr ,(map_contents.bss)->size);
+		page = get_page(map_contents.bss, fault_addr, map_contents.fd, true);
+		//Call pad_zero
+		padzero(page, PAGE_SIZE);
+    }  
+	return 0;
+}
 
 void* load_image(char *file_exe) {
     Elf* elf;
     GElf_Ehdr elfHdr;
     GElf_Phdr pHdr;
     GElf_Shdr sHdr;
-    char *strings      = NULL;
-    unsigned long start_addr   = NULL;
     unsigned long dest_addr;
     unsigned long entry_addr;
     int i = 0;
-    char *exec_mem = NULL;
     int fd = 0;
     unsigned long bss = NULL;
     int pcount = 0;
@@ -51,12 +112,13 @@ void* load_image(char *file_exe) {
     //1. Create the file descriptor 
     printf("Exce given as argument : %s\n", file_exe);
     if((fd = open(file_exe,  O_RDWR, 0)) < 0){
-	fprintf(stderr, "Unable to open the executable\n");
+		fprintf(stderr, "Unable to open the executable\n");
     }
-	
+	map_contents.fd = fd;
+
     //2. Create the Elf Variable
     if ((elf = elf_begin(fd, ELF_C_READ, NULL)) == NULL){
-	 fprintf(stderr, "Unable to create Elf: %s\n", elf_errmsg(-1));
+		fprintf(stderr, "Unable to create Elf: %s\n", elf_errmsg(-1));
     }
 	//3. Get the Elf header
     if (gelf_getehdr(elf, &elfHdr) == NULL){
@@ -93,45 +155,61 @@ void* load_image(char *file_exe) {
 	    	continue;
 		}
     
-        int pbits = PROT_READ;
-        if (pHdr.p_flags & PF_W)
-            pbits = pbits | PROT_WRITE;
-
-        if (pHdr.p_flags & PF_X)
-            pbits = pbits | PROT_EXEC;
-
-
 		unsigned long offsetadjustment = ELF_PAGEOFFSET(pHdr.p_vaddr);
+        struct load_details *segment = (struct load_details *)malloc(sizeof(struct load_details));
+        segment->vaddr = dest_addr;
+        segment->size = pHdr.p_filesz + offsetadjustment;
+        segment->offset = pHdr.p_offset;
+
+        int pbits = PROT_READ;
+        if (pHdr.p_flags & PF_W){
+            pbits = pbits | PROT_WRITE;
+			segment->prot = pbits;
+			map_contents.data = segment;
+		}
+        if (pHdr.p_flags & PF_X){
+            pbits = pbits | PROT_EXEC;
+			segment->prot = pbits;
+			map_contents.text = segment;
+		}
 		//Instead of for the filesz call this for memsz.. and then set the values after address to 0 
 		//char* exev_mem = mmap(dest_addr, (pHdr.p_memsz + offsetadjustment), pbits, MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - offsetadjustment));
-        //char* exev_mem = mmap(dest_addr, (pHdr.p_filesz + offsetadjustment), pbits, MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - offsetadjustment));
-		char* exev_mem = mmap(dest_addr, PAGE_SIZE, pbits, MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - offsetadjustment));
-        if (k == 0) {
-			base = exec_mem;
+		//char* exev_mem = mmap(dest_addr, (pHdr.p_filesz + offsetadjustment), pbits, MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - offsetadjustment));
+		//TODO NOT SURE WHY THIS DOESNT WORK IF ONLY 1 OR 0 PAGE IS LOADED
+		char* exev_mem = mmap(dest_addr, PAGE_SIZE *2, pbits, MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - offsetadjustment));
+		printf("\ndest_addr:%x pHdr.p_filesz:%x offsetadjustment:%x pHdr.p_offset:%x",dest_addr, pHdr.p_filesz, offsetadjustment, pHdr.p_offset );
+		if (k == 0) {
+			base = exev_mem;
 			k = 1;	
 		}
         if(exev_mem == MAP_FAILED)
-            fprintf(stderr, "Mapping failed\n");
+            fprintf(stderr, "\nMapping failed:%s",strerror(errno));
 		else
-	    	printf("Succesful mapping 0x%x\n", exev_mem);
+	    	printf("\nSuccesful mapping 0x%x", exev_mem);
 
         if (pHdr.p_memsz > pHdr.p_filesz) {
             // We have a .bss segment
             dest_addr = pHdr.p_vaddr + pHdr.p_filesz;
 			dest_addr = ELF_PAGESTART(( dest_addr + PAGE_SIZE - 1));
+
+			struct load_details *bss_segment = (struct load_details *)malloc(sizeof(struct load_details));
+        	bss_segment->vaddr = dest_addr;
+        	bss_segment->size = pHdr.p_filesz + offsetadjustment;
+        	bss_segment->prot = pbits;
+        	segment->offset = 0;
+			map_contents.bss = segment;
+
 			char *bss_mem = mmap(dest_addr, (pHdr.p_memsz - pHdr.p_filesz), pbits, MAP_PRIVATE | MAP_ANONYMOUS, -1 , 0);
 			if(bss_mem == MAP_FAILED)
-				fprintf(stderr, "Mapping for bss segment failed\n");
+				fprintf(stderr, "\nMapping for bss segment failed:%s",strerror(errno));
 		    else{
-				printf("Succesful mapping of bss 0x%x\n", bss_mem);
+				printf("\nSuccesful mapping of bss 0x%x", bss_mem);
 				padzero(bss_mem, (pHdr.p_memsz - pHdr.p_filesz));
-				//memset(bss_mem, 0x0, (pHdr.p_memsz - pHdr.p_filesz));
 			}
-			//Maybe the allocation needs to be done for the whole of memzize and not for filesz.. 
+			//Maybe the allocation can be done for the whole of memsize and not for filesz.. 
         }
 	}
-
-   fprintf(stderr, "Entry Point address: %x\n", entry_addr );
+   fprintf(stderr, "\nEntry Point address: %x", entry_addr );
    return entry_addr;
 }
 
@@ -164,24 +242,25 @@ void print_stack( unsigned long *stack, char **argv){
 	auxv++;
 	stackTop_auxv++;
 	int *pad = stackTop_auxv;
-	printf("padding at the bottomm -> %d\n", *pad);
+	printf("\npadding at the bottomm -> %d", *pad);
 	return ;
 }
 
 unsigned long *create_auxv_new(char** envp, unsigned long *stack, char **argv, int argc){
-     unsigned long *stackTop =  stack;
+    unsigned long *stackTop =  stack;
+	//Moving Argc to the top of the stack
 	*stackTop = argc;
     printf("\nArgc : %d", *stackTop);
     char *exec_name = argv[1];
 	printf("\nExe name : %s, stackTop:%d", exec_name, *stackTop);
+	//Copying the argv's to the new Stack
     while(*argv++ != NULL){
         stackTop++;
         *stackTop = *argv;
 		printf("\nargv:%s", *stackTop);
     }
-    //stackTop+;
     *stackTop = NULL;
-
+	//Copying the envp's to the new Stack
     while(*envp != NULL){
         stackTop++;
         *stackTop = *envp;
@@ -191,18 +270,14 @@ unsigned long *create_auxv_new(char** envp, unsigned long *stack, char **argv, i
     stackTop++;
 	*stackTop = NULL;
 	envp++;
+	//Copying the Auxliary vectors from the Loader and then changing the relevant fields..
     Elf64_auxv_t *auxv;
     auxv = (Elf64_auxv_t *) envp;
     stackTop++;
     printf("\nstack:%x envp : %s", stackTop, *stackTop);
 	Elf64_auxv_t *stackTop_auxv;
 	stackTop_auxv =  stackTop;
-/*	*stackTop_auxv = *auxv;
-    printf("\nstack:%x auxv : %d", stackTop_auxv, stackTop_auxv->a_type);
-	stackTop_auxv++;
-    printf("\nstack:%x auxv : %d", stackTop_auxv, stackTop_auxv->a_type);
-*/
-    printf("\nCreating auxv\n");
+    printf("\nCopying auxv\n");
     for ( ; auxv->a_type != AT_NULL; auxv++) {
         *stackTop_auxv = *auxv; 
 		switch (auxv->a_type) {
@@ -236,21 +311,22 @@ unsigned long *create_auxv_new(char** envp, unsigned long *stack, char **argv, i
 	pad = stackTop_auxv;
 	*pad = 0;
 	
-	printf("padding at the bottomm -> %d\n", *pad);
+	printf("\nPadding at the bottomm -> %d", *pad);
 	++pad;
 	char *cur_stack;
     cur_stack  = pad;
 	*cur_stack = "";
 	++cur_stack;
 	*cur_stack ="";
-    printf("\nRETURNING ++++++> %x\n", stack);
+    printf("\nRetrun Value ++++++> %x", stack);
 	return stack;
 }
 
+//DEPRECATED :)
+/*Using the stack of the loader */
 void auxv_new(char **envp, char *exec_name){
 	while(*envp++ != NULL)
 		;
-
 	Elf64_auxv_t *auxv;
 	auxv = (Elf64_auxv_t *) envp;
 
@@ -278,7 +354,7 @@ void auxv_new(char **envp, char *exec_name){
 }
 
 
-
+/*Methid to extract the build Id from the input file and the loader file*/
 char* get_buildId(char *fileName){
     Elf* elf;
     Elf64_Ehdr elfHdr;
@@ -288,20 +364,20 @@ char* get_buildId(char *fileName){
 	int i=0, fd=0;
 
     if((fd = open(fileName,  O_RDWR, 0)) < 0){
-        fprintf(stderr, "Unable to open the executable\n");
+        fprintf(stderr, "\nUnable to open the executable");
     }
 
     if ((elf = elf_begin(fd, ELF_C_READ, NULL)) == NULL){
-        fprintf(stderr, "Unable to create Elf: %s\n", elf_errmsg(-1));
+        fprintf(stderr, "\nUnable to create Elf: %s", elf_errmsg(-1));
     }
 
     if ((gelf_getehdr(elf, &elfHdr)) == NULL){
-         fprintf(stderr, "Unable to create Elf Header \n");
+         fprintf(stderr, "\nUnable to create Elf Header:%s ",elf_errmsg(-1));
     }
 
     for( i=0; i < elfHdr.e_phnum ; i++){
         if (gelf_getphdr(elf, i, &pHdr) != &pHdr){
-            fprintf(stderr, "Unable to get program Header no %d \n", i);
+            fprintf(stderr, "\nUnable to get program Header no %d ", i);
         }
 
         if(pHdr.p_type != PT_NOTE){
@@ -322,29 +398,29 @@ char* get_buildId(char *fileName){
         }
         break;
     }
-    printf("\n");
     close(fd);
 	return buildId;
 }
 
+//Any flags to be used by the function need to be volatile -- To ensure that the values aree handeled atomically.. otherwise we might have concurrent acces...
 static void handler(int sig, siginfo_t *si, void *unused) {
-  printf("Got SIGSEGV at address: %lx\n", (unsigned long) si->si_addr);
-  printf("implements the handler only\n");
-  flag=1;
+	printf("\nGot SIGSEGV at address: %lx", (unsigned long) si->si_addr);
+	demand_paging(si->si_addr);
+	return;
 }
 
 int main(int argc, char** argv, char** envp)
 {
     if(argc < 2 ){
-        fprintf(stderr, "No File provided in as argument\n");
+        fprintf(stderr, "\nNo File provided in as argument\n");
 		return 0;
     }
     if(elf_version(EV_CURRENT) == EV_NONE){
-		fprintf(stderr,"Unable to determine the ELF version stored..%s\n", elf_errmsg(-1));
+		fprintf(stderr,"\nUnable to determine the ELF version stored..%s", elf_errmsg(-1));
     }
 
 	//Get the build id of both the loader and the input program
-	char *loader = get_buildId(argv[0]);
+	/*char *loader = get_buildId(argv[0]);
 	char *test = get_buildId(argv[1]);
 	
 	if( strcmp(loader,test) == 0 ){
@@ -353,14 +429,13 @@ int main(int argc, char** argv, char** envp)
 	}
 	else
 		printf("Entered strings are not equal.\n");
-		
+	*/	
 
     unsigned long *stack = mmap(0, STACK_SIZE, PROT_WRITE|PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0);
     if (stack == MAP_FAILED)
-        fprintf(stderr, "Unable to allocate memeory for the stack using malloc");
+        fprintf(stderr, "\nUnable to allocate memeory for the stack:%s",strerror(errno));
 	*stack = argc;
-	printf("\n Stack Value : %d\n", *(stack));
-    printf("Stack top : 0x%08x, nextaddress in stack : 0x%08x\n", stack, stack + 1);
+    printf("Stack top : 0x%08x, tpop value in stack : %d\n", stack, *stack );
 	unsigned long* stack_new;
 	stack_new =  stack;
 
@@ -371,13 +446,19 @@ int main(int argc, char** argv, char** envp)
 	unsigned long *stack_bottom = create_auxv_new(envp, stack, argv, argc);
 	print_stack(stack, argv);
     printf("ENTRY ptr:0x%08x\n",ptr); 
-    printf("STACK ptr:%x\n",stack); 
+    printf("STACK ptr:0x%08x\n",stack); 
   
 	/* set up signal handler */
 	struct sigaction sa;
+	//To restart functions if interrupted by handler (as handlers called asynchronously)
+	//sa.sa_flags = SA_RESTART; 
 	sa.sa_flags = SA_SIGINFO;
+	//Set zero 
 	sigemptyset(&sa.sa_mask);
+	//If want to block some signals while current one is executing. 
+	//sigaddset( &sa.sa_mask, SIGSEGV );
 	sa.sa_sigaction = handler;
+	//Register signals
 	if (sigaction(SIGSEGV, &sa, NULL) == -1)
 		handler_error("sigaction");
  
@@ -397,9 +478,6 @@ int main(int argc, char** argv, char** envp)
     __asm__("xor %%rsi, %%rsi" : : :"%rsi");
 	__asm__("xor %%rdi, %%rdi" : : :"%rdi");
 	__asm__("movq %0, %%rsp;": :"a"(stack_new):"%rsp");
-	//__asm__("xor %%rax, %%rax" : : :"%rax"); 
-	//__asm__("xor %%rdx, %%rdx" : : :"%rdx"); 
     __asm__("jmp *%0": :"a"(ptr):);
 	return 0; 
-	// ptr(argc, argv+1, envp);
 }
