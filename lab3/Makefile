@@ -1,10 +1,10 @@
 all: clean test loader demand_loader
 
 clean:
-	-rm test loader demand
+	-rm test loader demand err.txt
 
 test: test.c
-	gcc -static -Wl,-Ttext-segment=2000000 -o test test.c
+	gcc -static -Wl,-Ttext-segment=2000000 -o test test3.c
 
 loader: loader.c
 	gcc -static -Wall -I /u/bansal/modules/install/include/  -L /u/bansal/modules/install/lib/  -o loader loader.c -lelf -ldl -w
