@@ -30,6 +30,7 @@ typedef int bool;
 void* entry_point;
 void* base;
 unsigned int auxv_phnum, auxv_phdr, auxv_entry, auxv_phent, pHdr_count;
+unsigned long memory;
 
 struct load_details{
     unsigned long vaddr;
@@ -68,12 +69,12 @@ static int get_page(struct load_details *ptr, unsigned long addr,  bool bss){
 	if( dest_addr < ptr->vaddr){
 		page_offset = ptr->offset - ELF_PAGEOFFSET(ptr->vaddr);
 	}
-	fprintf(stderr,"\nAddr:%x, dest_addr:%x, prot:%d, offset:%x, page_offset:%x ", addr, dest_addr, ptr->prot, ptr->offset, page_offset);
+	//fprintf(stderr,"\nAddr:%x, dest_addr:%x, prot:%d, offset:%x, page_offset:%x ", addr, dest_addr, ptr->prot, ptr->offset, page_offset);
 	char* exev_mem ;
 	if(bss){
 		exev_mem = mmap(dest_addr, PAGE_SIZE, ptr->prot, MAP_ANONYMOUS | MAP_FIXED | MAP_PRIVATE, -1, 0);
-		fprintf(stderr,"\nBS___________________________Mapping failed:%s",strerror(errno));
-        printf("\nBSS____________________________Mapping failed:%s",strerror(errno));
+		//fprintf(stderr,"\nBS___________________________Mapping failed:%s",strerror(errno));
+        //printf("\nBSS____________________________Mapping failed:%s",strerror(errno));
 		if(dest_addr < ptr->vaddr)
 			padzero(ptr->vaddr, PAGE_SIZE - ELF_PAGEOFFSET(ptr->vaddr));
 		else
@@ -88,7 +89,8 @@ static int get_page(struct load_details *ptr, unsigned long addr,  bool bss){
 		close(fd);
 		return EXIT_FAILURE;
 	}
-	fprintf(stderr,"\nSuccesful mapping 0x%x", exev_mem);
+	//fprintf(stderr,"\nSuccesful mapping 0x%x", exev_mem);
+	memory = memory + PAGE_SIZE;
 	close(fd);
 	return EXIT_SUCCESS;
 }
@@ -100,15 +102,15 @@ static int demand_paging(unsigned long fault_addr){
 	//3. If bss Set the memory to zero..
 	//fprintf(stderr,"\nBSS Segment Page fault: fault address:%x, vaddr:%x, size:%x, last add :%x", fault_addr, (map_contents.bss)->vaddr ,(map_contents.bss)->size, ((map_contents.bss)->vaddr + (map_contents.bss)->size ));	
 	if (((map_contents.text)->vaddr <= fault_addr) && (fault_addr <= ((map_contents.text)->vaddr + (map_contents.text)->size ))){
-		fprintf(stderr,"\nText Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.text)->vaddr ,(map_contents.text)->size );
+		//fprintf(stderr,"\nText Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.text)->vaddr ,(map_contents.text)->size );
 		return get_page(map_contents.text, fault_addr, false);		
 	}
 	else if (((map_contents.data)->vaddr <= fault_addr) && (fault_addr <= ((map_contents.data)->vaddr + (map_contents.data)->size ))){
-        fprintf(stderr,"\nData Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.data)->vaddr ,(map_contents.data)->size );
+        //fprintf(stderr,"\nData Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.data)->vaddr ,(map_contents.data)->size );
 		return get_page(map_contents.data, fault_addr, false);
     }
 	else if (((map_contents.bss)->vaddr <= fault_addr) && (fault_addr <= ((map_contents.bss)->vaddr + (map_contents.bss)->size ))){
-        fprintf(stderr,"\nBSS Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.bss)->vaddr ,(map_contents.bss)->size);
+        //fprintf(stderr,"\nBSS Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.bss)->vaddr ,(map_contents.bss)->size);
 		return  get_page(map_contents.bss, fault_addr, true);
     }
 	return EXIT_FAILURE;
@@ -195,6 +197,7 @@ void* load_image(char *file_exe) {
 		//char* exev_mem = mmap(dest_addr, (pHdr.p_filesz + offsetadjustment), pbits, MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - offsetadjustment));
 		//TODO NOT SURE WHY THIS DOESNT WORK IF ONLY 1 OR 0 PAGE IS LOADED
 		char* exev_mem = mmap(dest_addr, PAGE_SIZE * 1, pbits, MAP_FIXED | MAP_PRIVATE, fd, (pHdr.p_offset - offsetadjustment));
+		memory = memory + PAGE_SIZE;
 		printf("\ndest_addr:%x pHdr.p_filesz:%x offsetadjustment:%x pHdr.p_offset:%x",dest_addr, pHdr.p_filesz, offsetadjustment, pHdr.p_offset );
 		if (k == 0) {
 			//base = exev_mem;
@@ -464,9 +467,17 @@ char* get_buildId(char* fileName){
 
 //Any flags to be used by the function need to be volatile -- To ensure that the values aree handeled atomically.. otherwise we might have concurrent acces...
 static void handler(int sig, siginfo_t *si, void *unused) {
-	printf("\nGot SIGSEGV at address: %lx", (unsigned long) si->si_addr);
+	//printf("\nGot SIGSEGV at address: %lx", (unsigned long) si->si_addr);
+	/*if(si->si_addr == NULL){
+		printf("\nTrying to access NULL Memory Location\n");
+		exit(-1);
+	}*/
 	int ret = demand_paging(si->si_addr);
-	printf("\n RETURN : %d", ret);
+	printf("\nSeg fualt at: %x, memory usage:%x",(unsigned long) si->si_addr, memory );
+	if(ret == EXIT_FAILURE){
+		printf("\nIllegal memory access\n", strerror(errno));
+        exit(-1);
+	}
 	return;
 }
 

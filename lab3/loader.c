@@ -18,11 +18,13 @@
 #define ELF_PAGEOFFSET(_v) ((_v) & (PAGE_SIZE-1))
 #define ELF_PAGEALIGN(_v) (((_v) + PAGE_SIZE -1) & ~(PAGE_SIZE - 1))
 
-#define STACK_SIZE (PAGE_SIZE * 2)
+#define STACK_SIZE (PAGE_SIZE * 1000)
 	
 void* entry_point;
 void* auxv_base;
 unsigned int auxv_phnum, auxv_phdr, auxv_entry, auxv_phent, pHdr_count;
+
+unsigned long memory;
 
 static int padzero(unsigned long elf_bss, unsigned long nbyte){
 	if (nbyte) {
@@ -109,19 +111,21 @@ void* load_image(char *file_exe) {
 		}
         if(exev_mem == MAP_FAILED)
             fprintf(stderr, "Mapping failed\n");
-		else
+		else{
 	    	printf("Succesful mapping 0x%x\n", exev_mem);
-
+			memory = memory + pHdr.p_filesz + offsetadjustment;
+		}
         if (pHdr.p_memsz > pHdr.p_filesz) {
             // We have a .bss segment
             dest_addr = pHdr.p_vaddr + pHdr.p_filesz;
 			dest_addr = ELF_PAGESTART(( dest_addr + PAGE_SIZE - 1));
-			char *bss_mem = mmap(dest_addr, (pHdr.p_memsz - pHdr.p_filesz), pbits, MAP_PRIVATE | MAP_ANONYMOUS, -1 , 0);
+			char *bss_mem = mmap(dest_addr, (pHdr.p_memsz - pHdr.p_filesz), pbits, MAP_FIXED | MAP_PRIVATE | MAP_ANONYMOUS, -1 , 0);
 			if(bss_mem == MAP_FAILED)
 				fprintf(stderr, "Mapping for bss segment failed\n");
 		    else{
 				printf("Succesful mapping of bss 0x%x\n", bss_mem);
 				padzero(bss_mem, (pHdr.p_memsz - pHdr.p_filesz));
+				memory = memory + (unsigned long )(pHdr.p_memsz - pHdr.p_filesz);
 				//memset(bss_mem, 0x0, (pHdr.p_memsz - pHdr.p_filesz));
 			}
 			//Maybe the allocation needs to be done for the whole of memzize and not for filesz.. 
@@ -362,10 +366,10 @@ int main(int argc, char** argv, char** envp)
 	//auxv_new(envp, argv[1]);
 	//fprintf(stderr, "Stack top : 0x%08x\n", stack);
 	unsigned long *stack_bottom = create_auxv_new(envp, stack, argv, argc);
-	print_stack(stack, argv);
-    printf("ENTRY ptr:0x%08x\n",ptr); 
-    printf("STACK ptr:%x\n",stack); 
-   
+	//print_stack(stack, argv);
+    printf("\nENTRY ptr:0x%08x",ptr); 
+    printf("\nSTACK ptr___________________________:%x pages :%x",stack, memory); 
+
 	__asm__("xor %%rdx, %%rdx" : : :"%rdx"); 
 	__asm__("xor %%rax, %%rax" : : :"%rax"); 
 	__asm__("xor %%rbx, %%rbx" : : :"%rbx"); 
