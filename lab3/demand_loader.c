@@ -382,7 +382,8 @@ static void handler(int sig, siginfo_t *si, void *unused) {
 	printf("\nSeg fualt at: %x, memory usage:%x",(unsigned long) si->si_addr, memory );
 	if(ret == EXIT_FAILURE){
 		printf("\nIllegal memory access\n", strerror(errno));
-        exit(-1);
+		signal(sig, SIG_DFL);
+        //exit(-1);
 	}
 	return;
 }

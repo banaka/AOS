@@ -19,6 +19,8 @@
 #define EXIT_SUCCESS 1
 #define EXIT_FAILURE 0
 #define STACK_SIZE (PAGE_SIZE * 1000)
+#define PAGE_LOAD_SIZE PAGE_SIZE *2
+
 
 #define handler_error(msg) do { perror(msg); exit(-1); } while (0)
 typedef int bool;
@@ -65,18 +67,18 @@ static int demand_paging(unsigned long fault_addr){
     	fprintf(stderr,"\nAddr:%x, dest_addr:%x, prot:%d, offset:%x, page_offset:%x ", fault_addr, dest_addr, (map_contents.bss)->prot, (map_contents.bss)->offset, page_offset);
     	char* exev_mem ;
         //for bss segment, we do not need to load the page from the File but need to call memset(0);
-        exev_mem = mmap(dest_addr, PAGE_SIZE * 2, (map_contents.bss)->prot, MAP_ANONYMOUS | MAP_FIXED | MAP_PRIVATE, -1, 0);
+        exev_mem = mmap(dest_addr, PAGE_LOAD_SIZE, (map_contents.bss)->prot, MAP_ANONYMOUS | MAP_FIXED | MAP_PRIVATE, -1, 0);
     	if(exev_mem == MAP_FAILED){
         	fprintf(stderr,"\nMapping failed:%s",strerror(errno));
         	printf("\nMapping failed:%s",strerror(errno));
         	return EXIT_FAILURE;
     	}
 		if(dest_addr < (map_contents.bss)->vaddr)
-            padzero((map_contents.bss)->vaddr, PAGE_SIZE*2 - ELF_PAGEOFFSET((map_contents.bss)->vaddr));
+            padzero((map_contents.bss)->vaddr, PAGE_LOAD_SIZE - ELF_PAGEOFFSET((map_contents.bss)->vaddr));
         else
-            padzero(exev_mem, PAGE_SIZE*2);
+            padzero(exev_mem, PAGE_LOAD_SIZE);
     	//fprintf(stderr,"\nSuccesful mapping 0x%x", exev_mem);
-    	memory = memory + PAGE_SIZE*2;
+    	memory = memory + PAGE_LOAD_SIZE;
     	return EXIT_SUCCESS;
     }
     return EXIT_FAILURE;
@@ -299,7 +301,8 @@ static void handler(int sig, siginfo_t *si, void *unused) {
     printf("\nSeg fault at: %x, memory usage:%d",(unsigned long) si->si_addr, memory );
     if(ret == EXIT_FAILURE){
         printf("\nIllegal memory access\n", strerror(errno));
-        exit(-1);
+       	signal(sig, SIG_DFL);
+		//exit(-1);
     }
     return;
 }
