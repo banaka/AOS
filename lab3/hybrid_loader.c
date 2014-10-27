@@ -10,6 +10,7 @@
 #include <gelf.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <signal.h>
 
 #define PAGE_SIZE getpagesize()
 #define ELF_PAGESTART(_v) ((_v) & ~(unsigned long)(PAGE_SIZE-1))
@@ -18,18 +19,67 @@
 #define EXIT_SUCCESS 1
 #define EXIT_FAILURE 0
 #define STACK_SIZE (PAGE_SIZE * 1000)
+
+#define handler_error(msg) do { perror(msg); exit(-1); } while (0)
+typedef int bool;
+#define true 1
+#define false 0
 	
 void* entry_point;
 void* auxv_base;
 unsigned int auxv_phnum, auxv_phdr, auxv_entry, auxv_phent, pHdr_count;
 
-unsigned long memory=0;
+unsigned long memory = 0;
+
+struct load_details{
+    unsigned long vaddr;    //Start Virtual Address
+    unsigned long offset;   //offset in the file
+    size_t size;            //size of the segment
+    int prot;               //Protection bits for the segment
+};
+
+struct map_contents {
+    char* fileName;             //Saving the File name in order to be able to open the File on demand and load a page from it
+    struct load_details *bss;
+}map_contents;
 
 static int padzero(unsigned long elf_bss, unsigned long nbyte){
 	if (nbyte) {
 		memset((void*)elf_bss, 0x0, nbyte);
 	}
 	return 0;
+}
+
+static int demand_paging(unsigned long fault_addr){
+    //1. Check which region the address belongs to
+    //2. Map the region
+    if (((map_contents.bss)->vaddr <= fault_addr) && (fault_addr <= ((map_contents.bss)->vaddr + (map_contents.bss)->size ))){
+        fprintf(stderr,"\nBSS Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.bss)->vaddr ,(map_contents.bss)->size);
+    	unsigned long dest_addr;
+    	dest_addr = ELF_PAGESTART(fault_addr);
+    	//the offset that needs to be added to be able to load the page from the file..
+    	unsigned long page_offset = (map_contents.bss)->offset + dest_addr - (map_contents.bss)->vaddr ;
+    	if( dest_addr < (map_contents.bss)->vaddr){
+        	page_offset = (map_contents.bss)->offset - ELF_PAGEOFFSET((map_contents.bss)->vaddr);
+    	}
+    	fprintf(stderr,"\nAddr:%x, dest_addr:%x, prot:%d, offset:%x, page_offset:%x ", fault_addr, dest_addr, (map_contents.bss)->prot, (map_contents.bss)->offset, page_offset);
+    	char* exev_mem ;
+        //for bss segment, we do not need to load the page from the File but need to call memset(0);
+        exev_mem = mmap(dest_addr, PAGE_SIZE * 2, (map_contents.bss)->prot, MAP_ANONYMOUS | MAP_FIXED | MAP_PRIVATE, -1, 0);
+    	if(exev_mem == MAP_FAILED){
+        	fprintf(stderr,"\nMapping failed:%s",strerror(errno));
+        	printf("\nMapping failed:%s",strerror(errno));
+        	return EXIT_FAILURE;
+    	}
+		if(dest_addr < (map_contents.bss)->vaddr)
+            padzero((map_contents.bss)->vaddr, PAGE_SIZE*2 - ELF_PAGEOFFSET((map_contents.bss)->vaddr));
+        else
+            padzero(exev_mem, PAGE_SIZE*2);
+    	//fprintf(stderr,"\nSuccesful mapping 0x%x", exev_mem);
+    	memory = memory + PAGE_SIZE*2;
+    	return EXIT_SUCCESS;
+    }
+    return EXIT_FAILURE;
 }
 
 
@@ -81,7 +131,7 @@ void* load_image(char *file_exe) {
 	   		continue;
 
 		if(pHdr.p_filesz > pHdr.p_memsz){
-			printf("load_image: p_filesz > p_memsz\n");
+			printf("\nload_image: p_filesz > p_memsz");
 	    	continue;
 		}
     
@@ -104,62 +154,25 @@ void* load_image(char *file_exe) {
 			k = 1;	
 		}
         if(exev_mem == MAP_FAILED)
-            fprintf(stderr, "Mapping failed\n");
+            fprintf(stderr, "\nMapping failed");
 		else{
-	    	printf("Succesful mapping 0x%x\n", exev_mem);
-			memory = memory + pHdr.p_memsz;
+	    	printf("\nSuccesful mapping 0x%x", exev_mem);
+			memory = memory + pHdr.p_filesz;
 		}
         if (pHdr.p_memsz > pHdr.p_filesz) {
-            // We have a .bss segment
-            dest_addr = pHdr.p_vaddr + pHdr.p_filesz;
-			dest_addr = ELF_PAGESTART(( dest_addr + PAGE_SIZE - 1)); 
-			char *bss_mem = mmap(dest_addr, (pHdr.p_memsz - pHdr.p_filesz), pbits, MAP_FIXED | MAP_PRIVATE | MAP_ANONYMOUS, -1 , 0);
-			if(bss_mem == MAP_FAILED)
-				fprintf(stderr, "\nMapping for bss segment failed");
-		    else{
-				printf("\nSuccesful mapping of bss 0x%x\n", bss_mem);
-				padzero(bss_mem, (pHdr.p_memsz - pHdr.p_filesz));
-				//memory = memory + pHdr.p_memsz - pHdr.p_filesz;
-				//memset(bss_mem, 0x0, (pHdr.p_memsz - pHdr.p_filesz));
-			}
+          	// We have a .bss segment
+            struct load_details *bss_segment = (struct load_details *)malloc(sizeof(struct load_details));
+            bss_segment->vaddr = pHdr.p_vaddr + pHdr.p_filesz;
+            bss_segment->size = pHdr.p_memsz - pHdr.p_filesz ; // pHdr.p_filesz + offsetadjustment;
+            bss_segment->prot = pbits;
+            bss_segment->offset = pHdr.p_offset + pHdr.p_filesz;
+            map_contents.bss = bss_segment;
         }
 	}
    //fprintf(stderr, "\nEntry Point address: %x", entry_addr );
    return entry_addr;
 }
 
-/*Used this function to debug the stack*/
-void print_stack( unsigned long *stack, char **argv){
-    printf("\nArgc : %d ", *stack);
-    while((*argv != NULL) &&( *stack != NULL)){
-        stack++;
-		argv++;
-		printf("\nargv:%s, *argv: %s", *stack, *argv);
-    }
-	argv++;
-	stack++;
-    while((*argv != NULL) && (*stack != NULL)){
-		printf("\nenvp : %s, %s", *stack, *argv);
-        stack++;
-		argv++;
-    }
-
-    Elf64_auxv_t *auxv;
-	argv++;
-    auxv = (Elf64_auxv_t *) argv;
-    stack++;
-	Elf64_auxv_t *stackTop_auxv = (Elf64_auxv_t *) stack;
-    printf("\nCreating auxv\n");
-    for ( ; auxv->a_type != AT_NULL; auxv++) {
-        printf("\nstack:0x%08x  type : %d value: %x, type:%d value: %x", stackTop_auxv, stackTop_auxv->a_type, stackTop_auxv->a_un.a_val, auxv->a_type, auxv->a_un.a_val );
-        stackTop_auxv++;
-    }
-	auxv++;
-	stackTop_auxv++;
-	int *pad = stackTop_auxv;
-	printf("\nPadding at the bottomm -> %d", *pad);
-	return ;
-}
 
 unsigned long *create_auxv_new(char** envp, unsigned long *stack, char **argv, int argc){
      unsigned long *stackTop =  stack;
@@ -239,36 +252,6 @@ unsigned long *create_auxv_new(char** envp, unsigned long *stack, char **argv, i
     //printf("\nRETURNING ++++++> %x\n", stack);
 	return stack;
 }
-/*Used this function to Test the Memory allocation. Basically makes use of the Loader stack for the tst program*/
-void auxv_new(char **envp, char *exec_name){
-	while(*envp++ != NULL)
-		;
-	Elf64_auxv_t *auxv;
-	auxv = (Elf64_auxv_t *) envp;
-
-    printf("\nModifying auxv\n");
-    for ( ; auxv->a_type != AT_NULL; auxv++) {
-		switch (auxv->a_type) {
-			case AT_PHENT : auxv->a_un.a_val = auxv_phent;
-				break;
-			case AT_PHNUM : auxv->a_un.a_val = auxv_phnum;
-				printf("AT_Phnum = %d\n", auxv->a_un.a_val);
-				break;
-			case AT_BASE : auxv->a_un.a_val = auxv_base ;
-				printf("AT_base = %x\n", auxv->a_un.a_val);
-				break;
-			case AT_ENTRY : auxv->a_un.a_val = auxv_entry;
-				printf("AT_entry = %x\n", auxv->a_un.a_val);
-				break;
-			case AT_EXECFN : auxv->a_un.a_val = exec_name;
-				printf("AT_execfn = %s\n", auxv->a_un.a_val);
-				break;
-			default:
-				break;
-		}
-    }
-}
-
 
 /*Method to extract the build Id from the input file and the loader file*/
 char* get_buildId(char* fileName){
@@ -310,6 +293,17 @@ char* get_buildId(char* fileName){
     return buildId;
 }
 
+static void handler(int sig, siginfo_t *si, void *unused) {
+    //printf("\nGot SIGSEGV at address: %lx", (unsigned long) si->si_addr);
+    int ret = demand_paging(si->si_addr);
+    printf("\nSeg fault at: %x, memory usage:%d",(unsigned long) si->si_addr, memory );
+    if(ret == EXIT_FAILURE){
+        printf("\nIllegal memory access\n", strerror(errno));
+        exit(-1);
+    }
+    return;
+}
+
 int main(int argc, char** argv, char** envp)
 {
     if(argc < 2 ){
@@ -346,6 +340,20 @@ int main(int argc, char** argv, char** envp)
 	//print_stack(stack, argv);
     printf("\nENTRY ptr:0x%08x",ptr); 
     printf("\nSTACK ptr:%x pages :%d\n",stack, memory); 
+
+    /* set up signal handler */
+    struct sigaction sa;
+    //To restart functions if interrupted by handler (as handlers called asynchronously)
+    //sa.sa_flags = SA_RESTART;
+    sa.sa_flags = SA_SIGINFO;
+    //Set zero
+    sigemptyset(&sa.sa_mask);
+    //If want to block some signals while current one is executing.
+    //sigaddset( &sa.sa_mask, SIGSEGV );
+    sa.sa_sigaction = handler;
+    //Register signals
+    if (sigaction(SIGSEGV, &sa, NULL) == -1)
+        handler_error("sigaction");
 
 	__asm__("xor %%rdx, %%rdx" : : :"%rdx"); 
 	__asm__("xor %%rax, %%rax" : : :"%rax"); 
