@@ -154,10 +154,6 @@ void* load_image(char *file_exe) {
             fprintf(stderr, "\nUnable to get program Header no %d:%s", i);
 		}
 		
-		if(pHdr.p_type == PT_NOTE){
-			//Check the build id matches the build Id of the loader
-			fprintf(stderr, "\nCan be used to get the build Id of the process.... ");
-		}
 		if(pHdr.p_type != PT_LOAD){
 	   		continue;
 		}
@@ -411,7 +407,7 @@ int main(int argc, char** argv, char** envp)
     if (stack == MAP_FAILED)
         fprintf(stderr, "\nUnable to allocate memeory for the stack:%s",strerror(errno));
 	*stack = argc;
-    printf("Stack top : 0x%08x, tpop value in stack : %d\n", stack, *stack );
+    //printf("Stack top : 0x%08x, tpop value in stack : %d\n", stack, *stack );
 	unsigned long* stack_new;
 	stack_new =  stack;
 

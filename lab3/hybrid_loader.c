@@ -19,7 +19,7 @@
 #define EXIT_SUCCESS 1
 #define EXIT_FAILURE 0
 #define STACK_SIZE (PAGE_SIZE * 1000)
-#define PAGE_LOAD_SIZE PAGE_SIZE *2
+#define PAGE_LOAD_SIZE PAGE_SIZE * 4 
 
 
 #define handler_error(msg) do { perror(msg); exit(-1); } while (0)
@@ -56,7 +56,7 @@ static int demand_paging(unsigned long fault_addr){
     //1. Check which region the address belongs to
     //2. Map the region
     if (((map_contents.bss)->vaddr <= fault_addr) && (fault_addr <= ((map_contents.bss)->vaddr + (map_contents.bss)->size ))){
-        fprintf(stderr,"\nBSS Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.bss)->vaddr ,(map_contents.bss)->size);
+        //fprintf(stderr,"\nBSS Segment Page fault: fault address:%x, vaddr:%x, size:%x", fault_addr, (map_contents.bss)->vaddr ,(map_contents.bss)->size);
     	unsigned long dest_addr;
     	dest_addr = ELF_PAGESTART(fault_addr);
     	//the offset that needs to be added to be able to load the page from the file..
@@ -64,7 +64,7 @@ static int demand_paging(unsigned long fault_addr){
     	if( dest_addr < (map_contents.bss)->vaddr){
         	page_offset = (map_contents.bss)->offset - ELF_PAGEOFFSET((map_contents.bss)->vaddr);
     	}
-    	fprintf(stderr,"\nAddr:%x, dest_addr:%x, prot:%d, offset:%x, page_offset:%x ", fault_addr, dest_addr, (map_contents.bss)->prot, (map_contents.bss)->offset, page_offset);
+    	//fprintf(stderr,"\nAddr:%x, dest_addr:%x, prot:%d, offset:%x, page_offset:%x ", fault_addr, dest_addr, (map_contents.bss)->prot, (map_contents.bss)->offset, page_offset);
     	char* exev_mem ;
         //for bss segment, we do not need to load the page from the File but need to call memset(0);
         exev_mem = mmap(dest_addr, PAGE_LOAD_SIZE, (map_contents.bss)->prot, MAP_ANONYMOUS | MAP_FIXED | MAP_PRIVATE, -1, 0);
@@ -268,7 +268,7 @@ char* get_buildId(char* fileName){
     file = fopen(fileName,"rb");
     fd = fileno(file);
     if (fd <= 0) {
-        fprintf(stderr, "unable to open the file:%s", strerror(errno));
+        fprintf(stderr, "\nUnable to open the file:%s", strerror(errno));
         return EXIT_FAILURE;
     }
     fstat(fd, &sb);
@@ -331,7 +331,7 @@ int main(int argc, char** argv, char** envp)
     if (stack == MAP_FAILED)
         fprintf(stderr, "\nUnable to allocate memeory for the stack using mmap");
 	*stack = argc;
-	printf("Stack top : 0x%08x, tpop value in stack : %d\n", stack, *stack );
+	//printf("Stack top : 0x%08x, tpop value in stack : %d\n", stack, *stack );
 	unsigned long* stack_new;
 	stack_new =  stack;
 

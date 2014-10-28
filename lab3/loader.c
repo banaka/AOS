@@ -104,9 +104,9 @@ void* load_image(char *file_exe) {
 			k = 1;	
 		}
         if(exev_mem == MAP_FAILED)
-            fprintf(stderr, "Mapping failed\n");
+            fprintf(stderr, "\nMapping failed");
 		else{
-	    	printf("Succesful mapping 0x%x\n", exev_mem);
+	    	printf("\nSuccesful mapping 0x%x", exev_mem);
 			memory = memory + pHdr.p_memsz;
 		}
         if (pHdr.p_memsz > pHdr.p_filesz) {
@@ -334,7 +334,7 @@ int main(int argc, char** argv, char** envp)
     if (stack == MAP_FAILED)
         fprintf(stderr, "\nUnable to allocate memeory for the stack using mmap");
 	*stack = argc;
-	printf("Stack top : 0x%08x, tpop value in stack : %d\n", stack, *stack );
+	//printf("Stack top : 0x%08x, top value in stack : %d\n", stack, *stack );
 	unsigned long* stack_new;
 	stack_new =  stack;
 
@@ -345,7 +345,7 @@ int main(int argc, char** argv, char** envp)
 	unsigned long *stack_bottom = create_auxv_new(envp, stack, argv, argc);
 	//print_stack(stack, argv);
     printf("\nENTRY ptr:0x%08x",ptr); 
-    printf("\nSTACK ptr:%x pages :%d\n",stack, memory); 
+    printf("\nSTACK ptr:%x Memory used :%d\n",stack, memory); 
 
 	__asm__("xor %%rdx, %%rdx" : : :"%rdx"); 
 	__asm__("xor %%rax, %%rax" : : :"%rax"); 
