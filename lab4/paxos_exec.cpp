@@ -5,6 +5,11 @@
 #include "paxserver.h"
 #include "log.h"
 
+bool my_trim_func(const std::unique_ptr<Paxlog::tup>& myTup){
+	  const Paxlog::tup *tup = myTup.get();
+	    return tup->executed;
+}
+
 void paxserver::execute_arg(const struct execute_arg& ex_arg) {
 	std::cout << id_str() << " Execute Argument" << ex_arg << " Vc_sate"<< vc_state <<std::endl;
 	//Another way to check Check if the request is already been taken care of
@@ -65,6 +70,7 @@ void paxserver::replicate_arg(const struct replicate_arg& repl_arg) {
 			}
 		}
 		vc_state.latest_seen = repl_arg.committed;
+		paxlog.trim_front(my_trim_func);
 
 		if(vc_state.latest_seen < repl_arg.vs) {
 			int total_server_count = get_serv_cnt(vc_state.view);//(get_other_servers(vc_state.view)).size() + 1;
@@ -77,20 +83,21 @@ void paxserver::replicate_arg(const struct replicate_arg& repl_arg) {
 	}
 }
 
+
 void paxserver::replicate_res(const struct replicate_res& repl_res) {
 	//1. Log the respone only primary should be getting these messages.
 	//2. When the count of the response is more than half the server count Send Accept_arg message to all
 	
 	std::cout << id_str() << " Replicate response" << repl_res << std::endl;
 	if(primary()) {
-		//update the log.
+		//update the log
 		if(!paxlog.incr_resp(repl_res.vs)){
-			std::cout << "Got request for already executed and then truncated from log" << std::endl;
+			std::cout << " Got request for already executed request and then truncated from log" << std::endl;
 			return;
 		}
 								      
 		for(auto it = paxlog.begin(); it != paxlog.end(); ++it) {
-			if(((*it)->vs == repl_res.vs) && ((*it)->resp_cnt > (*it)->serv_cnt/2 ) && !(*it)->executed) {
+			if(((*it)->vs.ts == (vc_state.latest_seen.ts + 1)) && ((*it)->resp_cnt > (*it)->serv_cnt/2 ) && !(*it)->executed) {
 				paxlog.execute(*it);
 				std::string result = paxop_on_paxobj(*it);
 				std::cout<< result <<"\n"; 
@@ -104,9 +111,10 @@ void paxserver::replicate_res(const struct replicate_res& repl_res) {
 					auto new_acc_arg = std::make_unique<struct accept_arg>(repl_res.vs);
 					net->send(this, server, std::move(new_acc_arg)); 	
 				}
-				break;
+				//break;
 			}
 		}
+		paxlog.trim_front(my_trim_func);
 	}
    //MASSERT(0, "replicate_res not implemented\n");
 }
@@ -115,15 +123,15 @@ void paxserver::accept_arg(const struct accept_arg& acc_arg) {
 	//Recieved Response from more than half send this msg to every 
 	//Generate a string and send to replicate 
 	//Find the tuple and if it is not there then add it to the paxlog 
-
 	std::cout << id_str() <<" Accept response" << acc_arg << std::endl;	
 	for(auto it = paxlog.begin(); it != paxlog.end(); ++it) {
-		if(((*it)->vs == acc_arg.committed) && (!(*it)->executed )) {
+		if(((*it)->vs <= acc_arg.committed) && (!(*it)->executed ) ) {
 			paxlog.execute(*it);
 			//std::string result = paxop_on_paxobj(*it);
-			break;
+			//break;
 		}
 	}
-	
+	paxlog.trim_front(my_trim_func);
   // MASSERT(0, "accept_arg not implemented\n");
 }
+
