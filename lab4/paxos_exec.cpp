@@ -125,9 +125,9 @@ void paxserver::accept_arg(const struct accept_arg& acc_arg) {
 	//Find the tuple and if it is not there then add it to the paxlog 
 	std::cout << id_str() <<" Accept response" << acc_arg << std::endl;	
 	for(auto it = paxlog.begin(); it != paxlog.end(); ++it) {
-		if(((*it)->vs <= acc_arg.committed) && (!(*it)->executed ) ) {
+		if(((*it)->vs <= acc_arg.committed) && paxlog.next_to_exec(it) ) {
 			paxlog.execute(*it);
-			//std::string result = paxop_on_paxobj(*it);
+			vc_state.latest_seen.ts += 1;
 			//break;
 		}
 	}
