@@ -46,7 +46,7 @@ void paxserver::execute_arg(const struct execute_arg& ex_arg) {
 			net->send(this, serv, std::move(new_rep_arg));
 		}
 		LOG(l::DEBUG, id_str() << " Logged and sent for Vote for Request:" << ex_arg.request <<"\n" );
-	}else{
+	}else {
 		//Send execute_fail to the client so that it can send request to the correct Primary
 		auto new_execute_fail = std::make_unique<struct execute_fail>(vc_state.view.vid, vc_state.view.primary, ex_arg.rid);
 		net->send(this, ex_arg.nid, std::move(new_execute_fail));
@@ -97,8 +97,9 @@ void paxserver::replicate_res(const struct replicate_res& repl_res) {
 			LOG(l::DEBUG, id_str() << " Got request for already executed request and then truncated from log"  <<"\n" );
 			return;
 		}
-								      
+							      
 		for(auto it = paxlog.begin(); it != paxlog.end(); ++it) {
+			//This if condition will only pass for the message which has been passed to the function. 
 			if(((*it)->resp_cnt > (*it)->serv_cnt/2 ) && paxlog.next_to_exec(it) ) {
 				paxlog.execute(*it);
 				std::string result = paxop_on_paxobj(*it);
@@ -113,9 +114,9 @@ void paxserver::replicate_res(const struct replicate_res& repl_res) {
 		if(paxlog.empty()){//(paxlog.begin() == paxlog.end()){
 			//send Accept messages to rest of the servers
 			std::set<node_id_t> servers = get_other_servers(vc_state.view);
-			for(const auto& server:servers) {		
+			for(const auto& serv:servers) {		
 				auto new_acc_arg = std::make_unique<struct accept_arg>(repl_res.vs);
-				net->send(this, server, std::move(new_acc_arg)); 	
+				net->send(this, serv, std::move(new_acc_arg)); 	
 			}
 		}
 	}
